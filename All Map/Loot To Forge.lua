@@ -892,15 +892,35 @@ end
 ---@param amount number  rolls, tickets or tokens wanted
 ---@return number        claims sent, 0 when the game no longer pays them
 function PatipanStudio.Bonus.Spawn(kind, amount)
-    if not PatipanStudio.Bonus.Works() then return 0 end
     local reward = Config.BonusRewards[kind]
+    if not reward then error("Unknown reward type", 0) end
+    local function count()
+        if kind == "Race" then
+            return PatipanStudio.GameLib.Need(ReplicatedStorage.LocalData.ClassData).GetLuckTimes()
+        elseif kind == "Season" then
+            local season = PatipanStudio.Season.Current()
+            return season and tonumber(season.SeasonTicket)
+        elseif kind == "Token" then
+            local profile = PatipanStudio.Data.Get()
+            return profile.Token and tonumber(profile.Token.value)
+        end
+    end
+    local before = count()
+    if type(before) ~= "number" then error("Cannot read the selected reward balance", 0) end
     local claim = PatipanStudio.Util.Remote("UpdateLog", "TryClaimUPDRewardRE")
-    local times = math.clamp(math.ceil(amount / reward.per), 1, Config.BonusMaxClaims)
-    for i = 1, times do
+    local times = math.clamp(math.ceil((tonumber(amount) or 1) / reward.per), 1, Config.BonusMaxClaims)
+    -- Test the selected reward once; never cache a failed result permanently.
+    claim:FireServer(PatipanStudio.Bonus.Key(reward.id))
+    local deadline = os.clock() + 8
+    repeat task.wait(0.2) until (count() or before) > before or os.clock() >= deadline
+    if (count() or before) <= before then return 0 end
+    for i = 2, times do
         claim:FireServer(PatipanStudio.Bonus.Key(reward.id))
         if i % Config.BonusBatch == 0 then task.wait() end
     end
-    return times
+    task.wait(2)
+    -- Preserve the existing caller's multiplier, but report observed inventory change.
+    return math.max(0, (count() or before) - before) / reward.per
 end
 
 ---@return number  goods bought this call
@@ -3192,8 +3212,8 @@ local function BuildInterface()
         bonusBox:AddButton({ Text = T("Spawn", "เสก"), Style = "Primary", Func = LongAction("Spawn", function()
             return PatipanStudio.Bonus.Spawn(opt.BonusKind, opt.BonusAmount) * Config.BonusRewards[opt.BonusKind].per
         end, function(added)
-            if (added or 0) <= 0 then return "Patched by the latest game update" end
-            return ("+%s %s (stay 1 min so it saves)"):format(PatipanStudio.Util.Abbreviate(added), opt.BonusKind)
+            if (added or 0) <= 0 then return "ไม่พบยอดเพิ่มภายใน 8 วินาที • อาจรับแล้ว หรือเซิร์ฟเวอร์ไม่อนุมัติ" end
+            return ("ยอดเพิ่มที่ตรวจพบ: +%s %s"):format(PatipanStudio.Util.Abbreviate(added), opt.BonusKind)
         end) })
 
         local tokenBox = tab:AddRightGroupbox(T("Token Shop", "ร้าน Token"), nil, "OP")
