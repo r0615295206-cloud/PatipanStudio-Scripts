@@ -1,0 +1,16 @@
+PatipanStudio source customization
+
+Display names in Lua files were changed from Mario Hub to PatipanStudio.
+Original developer names, source comments, README, credits, image assets,
+internal identifiers, and source URLs were preserved.
+Original project: xDTaraZz/Roblox-Scripts (Mario Hub).
+
+IMPORTANT: This is an edited source package, not a new hosted loader.
+The original GitHub loader still downloads the original project's files.
+To use your edited files, host this package under your own repository and
+update the original repository URLs in loader.lua and all Lua files to your
+own repository, preserving folder structure. Do not change external dependency
+URLs unless you also host those dependencies.
+
+Existing logo images and ASCII banners remain original artwork.
+No Roblox runtime testing was performed.
