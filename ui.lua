@@ -20,17 +20,17 @@ local Library = {
 }
 
 local Config = {
-    GuiAttribute = "MarioHubUI",
-    Root = "mariohub",
-    AssetDir = "mariohub/assets",
-    ConfigRoot = "mariohub/configs",
-    KeyCache = "mariohub/key.txt",
+    GuiAttribute = "PatipanStudioUI",
+    Root = "patipanstudio",
+    AssetDir = "patipanstudio/assets",
+    ConfigRoot = "patipanstudio/configs",
+    KeyCache = "patipanstudio/key.txt",
     DefaultAssets = {
-        logo = "https://raw.githubusercontent.com/xDTaraZz/Roblox-Scripts/main/logo.png",
-        logo_halloween = "https://raw.githubusercontent.com/xDTaraZz/Roblox-Scripts/main/logo_halloween.png",
+        logo = "https://raw.githubusercontent.com/r0615295206-cloud/PatipanStudio-Scripts/main/logo.png",
+        logo_halloween = "https://raw.githubusercontent.com/r0615295206-cloud/PatipanStudio-Scripts/main/logo_halloween.png",
     },
-    SeasonTheme = "Halloween",
-    FontDir = "mariohub/fonts",
+    SeasonTheme = "PatipanStudio",
+    FontDir = "patipanstudio/fonts",
     HttpTimeout = 8,
     FontTimeout = 20,
     PreloadTimeout = 5,
@@ -43,19 +43,19 @@ local Config = {
     ThaiSizeBonus = { Body = 2, Desc = 2, Display = 1, Strong = 1 },
     Text = { Title = 26, Header = 22, Group = 16, Label = 15, Desc = 13, Small = 12, Button = 15, Watermark = 13, Section = 13 },
     Window = {
-        Width = 820, Height = 560, MinWidth = 520, MinHeight = 360,
+        Width = 940, Height = 620, MinWidth = 520, MinHeight = 360,
         TouchMinWidth = 320, TouchMinHeight = 260,
-        Topbar = 56, Sidebar = 196, SidebarCompact = 64, Header = 62, Ground = 24, UserCard = 58,
+        Topbar = 64, Sidebar = 220, SidebarCompact = 64, Header = 62, Ground = 4, UserCard = 58,
         CompactBreakpoint = 640, TwoColumnMin = 540, Margin = 24, TouchMargin = 10,
-        Radius = 12, Stroke = 3, Shadow = 6,
+        Radius = 16, Stroke = 1, Shadow = 2,
     },
     Metrics = {
         Desktop = { Row = 32, Box = 32, Item = 30, Track = 10, Knob = 18, Switch = Vector2.new(42, 22), SwitchKnob = 16, Tab = 38, Check = 22 },
         Touch = { Row = 38, Box = 36, Item = 36, Track = 12, Knob = 24, Switch = Vector2.new(50, 26), SwitchKnob = 20, Tab = 44, Check = 26 },
     },
-    Group = { Header = 36, PadX = 12, PadY = 10, Shadow = 4, Radius = 12, Stroke = 2 },
-    Gap = { X = 8, Y = 6, Column = 12 },
-    Page = { Pad = 14, ScrollBar = 6 },
+    Group = { Header = 36, PadX = 12, PadY = 10, Shadow = 1, Radius = 12, Stroke = 1 },
+    Gap = { X = 10, Y = 8, Column = 16 },
+    Page = { Pad = 18, ScrollBar = 3 },
     Dropdown = { MaxVisible = 7, SearchThreshold = 8, MinWidth = 170 },
     ColorPicker = { Field = 150, Hue = 14 },
     Notify = { Width = 300, TouchWidth = 260, Duration = 4, Gap = 8 },
@@ -76,13 +76,13 @@ local Config = {
     TooltipDelay = 0.45,
     TitleWaveInterval = 9,
     ScaleRange = { Min = 0.7, Max = 1.4 },
-    Particles = { Count = 10, MinTime = 7, MaxTime = 13 },
+    Particles = { Count = 0, MinTime = 7, MaxTime = 13 },
     MouseNames = {
         [Enum.UserInputType.MouseButton1] = "MB1",
         [Enum.UserInputType.MouseButton2] = "MB2",
         [Enum.UserInputType.MouseButton3] = "MB3",
     },
-    TitleColors = { "Accent", "Coin", "Good", "Blue" },
+    TitleColors = { "Accent", "Accent", "Accent", "Accent" },
 }
 
 local function rgb(hex)
@@ -217,6 +217,23 @@ local Themes = {
     }),
 }
 
+-- PatipanStudio visual system: original API preserved.
+do
+    local colors = {Backdrop = "100D17", BackdropAlt = "171220", Topbar = "171220", TopbarText = "F5F0FF", Sidebar = "120F1A", SidebarAlt = "1B1526", SidebarText = "EDE5FA", SidebarMuted = "A49AB3", TabActive = "342447", TabActiveText = "E4CDFF", Panel = "1C1626", PanelHeader = "241B30", Element = "292033", Hover = "372943", Pressed = "21192B", Outline = "493557", Shadow = "08060D", Text = "F1EBFA", SubText = "BFB2CF", Muted = "91859F", Track = "3A2F46", Accent = "B796F6", AccentDark = "8057BF", AccentText = "130D1C", OnAccent = "130D1C", Grass = "241B30", GrassDark = "1B1526", Brick = "241B30", BrickDark = "1B1526", Cloud = "C7ACF5", Glow = "B796F6", Ink = "140D1C", HeroInk = "140D1C", Coin = "D9BB86", CoinDark = "AC8C56", Good = "80C8AB", GoodDark = "477E69", Info = "9CBDEB", Blue = "9CBDEB", BlueDark = "5C7EA9", Warn = "E3BA80", Bad = "E897AA", Danger = "E897AA", Risky = "E3BA80"}
+    for name, palette in pairs(Themes) do
+        if name ~= "Order" and type(palette) == "table" then
+            for token, hex in pairs(colors) do
+                palette[token] = Color3.fromRGB(tonumber(hex:sub(1,2),16), tonumber(hex:sub(3,4),16), tonumber(hex:sub(5,6),16))
+            end
+            palette.CloudAlpha = 1
+            palette.Decor = "None"
+            palette.Logo = "logo"
+        end
+    end
+    Themes.PatipanStudio = Themes.Dark
+    Themes.Order = {"PatipanStudio"}
+end
+
 local State = {
     Gui = nil,
     Overlay = nil,
@@ -225,7 +242,7 @@ local State = {
     Drag = nil,
     Binding = nil,
     MenuKey = "LeftControl",
-    ThemeName = "Overworld",
+    ThemeName = "PatipanStudio",
     Language = "EN",
     UserScale = 1,
     Touch = false,
@@ -243,7 +260,7 @@ local Draw = {}
 local Sprite = {}
 local Assets = { Overrides = {}, Cache = {} }
 local Fonts = { Texts = {}, Thai = nil }
-local Particles = { Pool = {}, Enabled = true }
+local Particles = { Pool = {}, Enabled = false }
 local Lang = { Bound = {}, Listeners = setmetatable({}, { __mode = "k" }), InstanceListeners = {} }
 local Theme = { Colors = {}, Bound = {}, Renderers = setmetatable({}, { __mode = "k" }), InstanceRenderers = {} }
 local Layout = { Dirty = {}, All = setmetatable({}, { __mode = "k" }), Measured = {}, MeasuredCount = 0 }
@@ -789,8 +806,8 @@ function Lang.Set(code)
 end
 
 Fonts.Latin = {
-    Display = Enum.Font.LuckiestGuy, Body = Enum.Font.FredokaOne, Desc = Enum.Font.BuilderSansMedium,
-    Strong = Enum.Font.BuilderSansBold, Logo = Enum.Font.LuckiestGuy, Glyph = Enum.Font.BuilderSansBold,
+    Display = Enum.Font.GothamBold, Body = Enum.Font.GothamMedium, Desc = Enum.Font.BuilderSansMedium,
+    Strong = Enum.Font.BuilderSansBold, Logo = Enum.Font.GothamBold, Glyph = Enum.Font.BuilderSansBold,
 }
 Fonts.ThaiWeights = { Display = Enum.FontWeight.SemiBold, Body = Enum.FontWeight.Medium, Desc = Enum.FontWeight.Regular, Strong = Enum.FontWeight.SemiBold }
 Fonts.ThaiFallback = { Display = Enum.Font.BuilderSansBold, Body = Enum.Font.BuilderSansBold, Desc = Enum.Font.BuilderSansMedium, Strong = Enum.Font.BuilderSansBold }
@@ -1070,7 +1087,7 @@ function Draw.Emblem(parent, size)
         drawn.Visible = content == nil
         picture.Size = UDim2.fromScale(Theme.Colors.Logo and 1.25 or 1, Theme.Colors.Logo and 1.25 or 1)
     end)
-    Anim.Tween(picture, { Rotation = 6 }, 1.6, "Sine", -1, true)
+    picture.Rotation = 0
     return holder
 end
 
@@ -1085,12 +1102,12 @@ function Draw.DrawnEmblem(parent, size)
     Draw.Corner(ring, UDim.new(1, 0))
     Theme.Bind(ring, { BackgroundColor3 = "White" })
     local letter = Draw.Text({
-        Text = "M",
+        Text = "PS",
         Size = UDim2.fromScale(1, 1),
         TextXAlignment = Enum.TextXAlignment.Center,
         Position = UDim2.fromOffset(0, 1),
         Parent = ring,
-    }, "Logo", math.floor(size * 0.5), "Accent")
+    }, "Logo", math.floor(size * 0.32), "Accent")
     letter.TextScaled = false
     return emblem
 end
@@ -3273,11 +3290,11 @@ end
 
 function Gui.ClearPrevious(parent)
     local env = type(getgenv) == "function" and getgenv() or nil
-    if env and type(env.MarioHub) == "table" and env.MarioHub ~= Library and not env.MarioHub.Unloaded then
-        Util.Try(env.MarioHub.Unload, env.MarioHub)
+    if env and type(env.PatipanStudio) == "table" and env.PatipanStudio ~= Library and not env.PatipanStudio.Unloaded then
+        Util.Try(env.PatipanStudio.Unload, env.PatipanStudio)
     end
     if env then
-        env.MarioHub = Library
+        env.PatipanStudio = Library
     end
     for _, child in ipairs(parent:GetChildren()) do
         if child:GetAttribute(Config.GuiAttribute) then
@@ -3293,7 +3310,7 @@ function Gui.Setup()
     local parent = Util.GuiParent()
     Gui.ClearPrevious(parent)
     State.Gui = Draw.New("ScreenGui", {
-        Name = "MarioHub",
+        Name = "PatipanStudio",
         ResetOnSpawn = false,
         IgnoreGuiInset = true,
         ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
@@ -5416,8 +5433,8 @@ function Compat.Probes.FileSystem()
         return false
     end
     local stamp = tostring(os.clock())
-    local wrote = pcall(writefile, "mariohub_probe.txt", stamp)
-    local ok, read = pcall(readfile, "mariohub_probe.txt")
+    local wrote = pcall(writefile, "patipanstudio_probe.txt", stamp)
+    local ok, read = pcall(readfile, "patipanstudio_probe.txt")
     return wrote and ok and read == stamp
 end
 

@@ -16,83 +16,9 @@ local MarioBanner = {
 }
 
 function MarioBanner.Show()
-    local ok, executor = pcall(identifyexecutor)
-    if not ok or type(executor) ~= "string" then executor = "Unknown" end
-    local rule = string.rep("=", 54)
-    MarioBanner.Print(table.concat({
-        "",
-        [[
-                                                                     @%@
-                                                                    @*-#@
-                                          @@@@@@@@@@@@@          @@#+.:-*%@@      @@
-                                   @@@@@%##***********##%@@@@@   @*--:-==+*@@@@#*+==+*%@@
-                              @@@@#+=+==---==++++++++++++**+++#@@@@@%==+@@@@#:.......:::=%@@
-                          @@%#+---::-=++++++++++************+***++#%@%+@@@#:..-+*****+-:::+%@
-                      @@@#=-::.:-==++++++++++*************************#@@+::=*-:.:+-::-+:.:=#@
-                    @@%-:...:-===+++++**#################****************%%*+::::+*++::-+..:=#@
-                 @@%*-:...:--==++*########**+==--===+**#######************+#%+::-*==-:::=-::=+@@
-               @@%+=-::---===+*###%#+-:...................:=+#####***********#@+++==----==:-+*@@
-             @@%++=-======+*###%+:............................::+####**********#@*+=----=---**@@
-            @%=++=++++++*####=:...................................:+###**********%@==--==--+**@@
-          @@*+++++++++*###*:........................................:-*##**********%*==+--=**@@@
-         @%+++++++++*##%+:............................................::*##*********%%+--=##%@+%@
-       @@#+++++++++###*:.....-+==+*#-......................:**+**#+:....:=###********%%+*##%@*:+@@
-      @@*++++++++*###:......-+:.:-=*#*-..................:+*--+**#%*:.....:+##********#@#%%+:.:--+#@
-     @@+++++++++*##+:......-*::-=++++*##:...............=#=-++****#%*:.....:-##********#@@@%+=-++#@@
-    @@+=-=+++++*##+.......:*-:==++++++*##+............-*+-=+*******#%+:.....:-##********#@  @#=#@@
-    @*=:.=++++*##-.......:*=:=++++++++*+*##=........:**==+**********##=:.....::*#********%@  @#@
-   @#+-.-++*+*##=........*+-++++++*********##-....:+*==+*************#%-:.....:-**********%@
-  @@++-=++***##+........*+-++++++***********#%*::=#+-+****************#%-:.....:=**********@@
- @@*++=++***###........+*-+++++***************###+-=+*****************###-:.....:+*********%@
- @%++=+*****#%:.......=*-++++*******************==+********************#%*-:....:-#********#@@
-@@**+++****##+.......=*=+++*********************************************#%+::....:+*********@@
-@%**++*****##-......=#=++**********#%#********************%%*************#%+:....:-#********%@
-@%**++*****#*:.....-*=++**********#%%%#*****************#%%%**************#%=:....-********##@@
-@#**++*****#*:....:*++************%%%%%%#*************#%%%%%#**************##-:...-+*******#*@@
-@#**+******#+:...:#++************#%%%@@%%##*********#%%%%%@%#**************#%#-:..:+*+*****#*@@
-@#**+******#+:..:#+=************#%%%%%*%%%##*******%%%%%%#%%##**************#%#::.-+*+*****#*@@
-@#*********#+:.:+*=*************%%%%%+==*%%###***#%%%%%#++*%##***************#%*::-+*+*****#*@@
-@%*#*******#*:.+*=*************%%%%%*=----*%###%%%%%%#+====*###**************##%+--*++****###@@
-@%*#********#-:####***********#%%%%#=-::.::=###%%%%#+==--:::####************#%%%#==*+*****###@@
-@@##********#+:#%%%%#********#%%%%%=--:....::=%%%%+==--::..:-%###********#%%%%%%#=#++*****##%@
-@@###********#-=#%%%%%%##****%%%%%*=-:.......::-==---::.....:+###*****##%%%%%%%#++#++****###@@
- @%###*******##::=+%%%%%%%##%%%%%#=-:...........:::::........:####*#%%%%%%%%%*+=+*+=*****##%@
- @@###********#+:.:-=*%%%%%%%%%%%+--:.........................=###%%%%%%%%*+====*=.=****###@@
-  @@###********#+:..::-=*%%%%%%%*=-:..:::-------------::::...::*#%%%%%%*+==---=*+-=+***###%@
-   @%###*******#%#*+-..::-=#%@@%#**++==----------------===+++**#%@@@#+===---+*#*++****####@@
-    @%###**#%#=::-=+##*##+-:...:::-=+**---*###*=--++++=--=++++=--:::-=+#%**#-:..:=#%##%##@@
-    @@%#%#+:...:-=++=:..::=*####+#=:..=@#%:....%@*....*%%#...:--=*##+------=+=:::::-=#%%@@
-     @@%*=--::::-*::::::-%=...:%@#:...:@@#.....%@+....=@@=.........:*#=-----=+=:::-==++%@@
-  @@%+--+==--:::-#=-::::-%+....+%%-....%@#....:@@+....+@@:...:%%....-@*---==+*+:::-=+++*=+#@@
- @%-:-==*+==-:::-+*--:::-*#:...........*@#....:@@+....+@%..........-%%+---==+*=::-=+++#*=-:-*@@
- @@#+===+*+==-::-=*=--::-=%-......:....+@%:....:-....:#@*....=+:...-%#=--==+**-:--=++#*+=-=*%@
-   @@#*=++#+=-:::-+*------#+....+@%....-@@#:.......::*@@+....+#=.:::=%+-===+#+-:-=++***++*%@@
-     @@#+++*==-::-=*=-----+%:...-@@-::-=@%%@#+=--==*%@%%=:::::::::::#%+===+**----=++#**#%@@
-     @@*-=+*+=-::-=*+=----=%#+*#%@%@@@@@#+-=*%%@@@%#*==*@@%%%##*+*#@@*====+#+-:-=++***++%@
-    @@*--=+++===++*#*=------#%%#+=-----===============----==+*#%%%#+=-===+*#*+++=++**+==*@@
-    @%=:-==+***%%@@@#=-=====++*##%%%@@@@@@@@@@%%@@@@@@@@@%%%##**++=======+*@@@@%#*+#+=--=#@
-    @*:---==+*###%@@@#*#%%@%%%%%%######*****++++++++***######%%%%%%%%%%#*#%@@@####**+=---+@@
-   @@+--=**#%@@@@@  @@@%%%%%%%#*******************************####%%%%%%@@@  @@@@@%#**=--+%@
-    @@%%@@@@@          @@@@%%%%%%###**********************####%%%%%%%@@@          @@@@@%%%@@
-      @@                  @@@@@%%%%%%%%%###############%%%%%%%%%@@@@@                  @@@
-                               @@@@@@%%%%%%%%%%%%%%%%%%%%%%@@@@@
-                                    @@@@@@@@@@@@@@@@@@@@@@@
-]],
-        [[
-  __  __    _    ____  ___ ___    _   _ _   _ ____
- |  \/  |  / \  |  _ \|_ _/ _ \  | | | | | | | __ )
- | |\/| | / _ \ | |_) || | | | | | |_| | | | |  _ \
- | |  | |/ ___ \|  _ < | | |_| | |  _  | |_| | |_) |
- |_|  |_/_/   \_\_| \_\___\___/  |_| |_|\___/|____/
-]],
-        rule,
-        "   DRIVING EMPIRE  //  by xDTaraZ  //  discord.gg/FHVfmeSceA",
-        "   executor: " .. executor .. "   //   player: " .. game:GetService("Players").LocalPlayer.Name,
-        rule,
-    }, "\n"))
+    MarioBanner.Print("[PS] PatipanStudio | UI customized by PatipanStudio")
 end
 
----@param label string  what just finished loading
 function MarioBanner.Step(label)
     local now = os.clock()
     MarioBanner.Done = math.min(MarioBanner.Done + 1, MarioBanner.Total)
@@ -140,18 +66,18 @@ local UserInputService = game:GetService("UserInputService")
 
 local LocalPlayer = Players.LocalPlayer
 
-local xDTaraZ = setmetatable({}, {
+local PatipanStudio = setmetatable({}, {
     __newindex = function(self, key, value)
         rawset(self, key, type(value) == "function" and LPH_JIT(value) or value)
     end,
 })
 
-xDTaraZ.Config = {
+PatipanStudio.Config = {
     Discord = "https://discord.gg/FHVfmeSceA",
     UpdateLog = {
         { "2026-10-03", "Classic PatipanStudio UI is back\nBetter executor support\nFixed Noclip restore\nAuto-detect Jobs & Teleports" },
     },
-    UiSource = "https://raw.githubusercontent.com/xDTaraZz/Roblox-Scripts/refs/heads/main/ui.lua",
+    UiSource = "https://raw.githubusercontent.com/r0615295206-cloud/PatipanStudio-Scripts/refs/heads/main/ui.lua",
     SaveFolder = "Driving Empire",
     LoadTimeout = 10,
     AlertTries = 20,
@@ -208,9 +134,9 @@ xDTaraZ.Config = {
     CodeDelay = 1.5,
 }
 
-local Config = xDTaraZ.Config
+local Config = PatipanStudio.Config
 
-xDTaraZ.State = {
+PatipanStudio.State = {
     Alive = true,
     Messages = {},
     Halted = {},
@@ -254,13 +180,13 @@ xDTaraZ.State = {
     },
 }
 
-local State = xDTaraZ.State
+local State = PatipanStudio.State
 
 for _, name in ipairs({ "Util", "Player", "Vehicle", "Jobs", "Atm", "Drive", "Rewards", "Teleport", "Esp", "Movement", "Session", "Scheduler" }) do
-    xDTaraZ[name] = {}
+    PatipanStudio[name] = {}
 end
 
-function xDTaraZ.Util.Try(fn, ...)
+function PatipanStudio.Util.Try(fn, ...)
     local ok, err = pcall(fn, ...)
     if not ok then
         warn("[Driving Empire]", err)
@@ -269,7 +195,7 @@ function xDTaraZ.Util.Try(fn, ...)
 end
 
 ---@return string?  body, nil when every way to fetch failed
-function xDTaraZ.Util.HttpGet(url)
+function PatipanStudio.Util.HttpGet(url)
     local ok, body = pcall(game.HttpGet, game, url)
     if ok and type(body) == "string" then
         return body
@@ -287,7 +213,7 @@ function xDTaraZ.Util.HttpGet(url)
 end
 
 ---@param text string  shown as a Roblox notification, works before the menu exists
-function xDTaraZ.Util.Alert(text)
+function PatipanStudio.Util.Alert(text)
     warn("[Driving Empire] " .. text)
     task.spawn(function()
         local starterGui = game:GetService("StarterGui")
@@ -301,27 +227,27 @@ function xDTaraZ.Util.Alert(text)
 end
 
 ---@return table?  UI library, nil after telling the player why
-function xDTaraZ.Util.LoadLibrary()
-    local source = xDTaraZ.Util.HttpGet(Config.UiSource)
+function PatipanStudio.Util.LoadLibrary()
+    local source = PatipanStudio.Util.HttpGet(Config.UiSource)
     if not source or not source:sub(-64):find("return Library%s*$") then
-        xDTaraZ.Util.Alert("Could not download the menu. Check your connection and run it again.")
+        PatipanStudio.Util.Alert("Could not download the menu. Check your connection and run it again.")
         return nil
     end
     local chunk, err = loadstring(source)
     if not chunk then
-        xDTaraZ.Util.Alert("The menu failed to load on this executor: " .. tostring(err))
+        PatipanStudio.Util.Alert("The menu failed to load on this executor: " .. tostring(err))
         return nil
     end
     local ok, library = pcall(chunk)
     if not ok or type(library) ~= "table" then
-        xDTaraZ.Util.Alert("The menu failed to load on this executor: " .. tostring(library))
+        PatipanStudio.Util.Alert("The menu failed to load on this executor: " .. tostring(library))
         return nil
     end
     return library
 end
 
 ---@param instance Instance  parented to gethui, then CoreGui, then PlayerGui
-function xDTaraZ.Util.Mount(instance)
+function PatipanStudio.Util.Mount(instance)
     local ok, hui = pcall(gethui)
     if ok and typeof(hui) == "Instance" and pcall(function() instance.Parent = hui end) then
         return
@@ -332,21 +258,21 @@ function xDTaraZ.Util.Mount(instance)
     instance.Parent = LocalPlayer:FindFirstChildOfClass("PlayerGui") or LocalPlayer:WaitForChild("PlayerGui", Config.LoadTimeout)
 end
 
-function xDTaraZ.Util.Stats()
+function PatipanStudio.Util.Stats()
     if State.Stats and State.Stats.Parent then return State.Stats end
     local folder = LocalPlayer:FindFirstChild("PlayerGui") and LocalPlayer.PlayerGui:FindFirstChild(LocalPlayer.Name .. "'s Stats")
-    local data = xDTaraZ.GameLib.Data
+    local data = PatipanStudio.GameLib.Data
     State.Stats = folder or (data and data.GetLoadedStatsFolder(LocalPlayer))
     return State.Stats
 end
 
-function xDTaraZ.Util.Cash()
-    local stats = xDTaraZ.Util.Stats()
+function PatipanStudio.Util.Cash()
+    local stats = PatipanStudio.Util.Stats()
     local cash = stats and stats:FindFirstChild("Cash")
     return cash and cash.Value or 0
 end
 
-function xDTaraZ.Util.Commas(number)
+function PatipanStudio.Util.Commas(number)
     local text = tostring(math.floor(number))
     repeat
         local count
@@ -355,8 +281,8 @@ function xDTaraZ.Util.Commas(number)
     return text
 end
 
-xDTaraZ.GameLib = {}
-local GameLib = xDTaraZ.GameLib
+PatipanStudio.GameLib = {}
+local GameLib = PatipanStudio.GameLib
 
 ---@return Instance?  child at the end of the path, nil when any step is missing
 function GameLib.Find(root, ...)
@@ -457,7 +383,7 @@ function GameLib.AtmSpawners()
     return folder and folder:GetChildren() or {}
 end
 
-function xDTaraZ.Player.Character()
+function PatipanStudio.Player.Character()
     local character = LocalPlayer.Character
     if character and character.Parent and character:FindFirstChild("HumanoidRootPart") then
         return character
@@ -465,23 +391,23 @@ function xDTaraZ.Player.Character()
     return nil
 end
 
-function xDTaraZ.Player.Humanoid()
-    local character = xDTaraZ.Player.Character()
+function PatipanStudio.Player.Humanoid()
+    local character = PatipanStudio.Player.Character()
     return character and character:FindFirstChildOfClass("Humanoid")
 end
 
-function xDTaraZ.Player.Root()
-    local character = xDTaraZ.Player.Character()
+function PatipanStudio.Player.Root()
+    local character = PatipanStudio.Player.Character()
     return character and character.HumanoidRootPart
 end
 
-function xDTaraZ.Player.TeleportTo(cframe)
-    local root = xDTaraZ.Player.Root()
+function PatipanStudio.Player.TeleportTo(cframe)
+    local root = PatipanStudio.Player.Root()
     if not root then
         return false
     end
-    if xDTaraZ.Vehicle.IsSeated() then
-        xDTaraZ.Vehicle.Despawn()
+    if PatipanStudio.Vehicle.IsSeated() then
+        PatipanStudio.Vehicle.Despawn()
         task.wait(1)
     end
     root.CFrame = cframe
@@ -489,20 +415,20 @@ function xDTaraZ.Player.TeleportTo(cframe)
     return true
 end
 
-function xDTaraZ.Vehicle.Current()
+function PatipanStudio.Vehicle.Current()
     if not GameLib.VehicleController then return nil end
     local vehicle = GameLib.VehicleController.getVehicle()
     return vehicle and vehicle.Object
 end
 
-function xDTaraZ.Vehicle.IsSeated()
-    local humanoid = xDTaraZ.Player.Humanoid()
+function PatipanStudio.Vehicle.IsSeated()
+    local humanoid = PatipanStudio.Player.Humanoid()
     return humanoid ~= nil and humanoid.SeatPart ~= nil
 end
 
-function xDTaraZ.Vehicle.Owned()
+function PatipanStudio.Vehicle.Owned()
     local owned = {}
-    local stats = xDTaraZ.Util.Stats()
+    local stats = PatipanStudio.Util.Stats()
     if not stats then
         return owned
     end
@@ -517,7 +443,7 @@ function xDTaraZ.Vehicle.Owned()
     return owned
 end
 
-function xDTaraZ.Vehicle.Spawn(vehicleId)
+function PatipanStudio.Vehicle.Spawn(vehicleId)
     if not vehicleId or not GameLib.VehicleEvent then
         return nil
     end
@@ -525,27 +451,27 @@ function xDTaraZ.Vehicle.Spawn(vehicleId)
     local deadline = os.clock() + Config.SpawnWait
     repeat
         task.wait(0.25)
-    until xDTaraZ.Vehicle.Current() or os.clock() > deadline
-    return xDTaraZ.Vehicle.Current()
+    until PatipanStudio.Vehicle.Current() or os.clock() > deadline
+    return PatipanStudio.Vehicle.Current()
 end
 
-function xDTaraZ.Vehicle.Despawn()
+function PatipanStudio.Vehicle.Despawn()
     if not GameLib.VehicleEvent then return end
     GameLib.VehicleEvent:FireServer("Despawn")
 end
 
 ---@return boolean  moved the car, or the character when on foot
-function xDTaraZ.Vehicle.TeleportTo(cframe)
-    local car = xDTaraZ.Vehicle.Current()
-    if not car or not xDTaraZ.Vehicle.IsSeated() then
-        local root = xDTaraZ.Player.Root()
+function PatipanStudio.Vehicle.TeleportTo(cframe)
+    local car = PatipanStudio.Vehicle.Current()
+    if not car or not PatipanStudio.Vehicle.IsSeated() then
+        local root = PatipanStudio.Player.Root()
         if root then
             root.CFrame = cframe
         end
         return root ~= nil
     end
     if not GameLib.TeleportGuard then
-        return xDTaraZ.Player.TeleportTo(cframe)
+        return PatipanStudio.Player.TeleportTo(cframe)
     end
     GameLib.TeleportGuard.AuthorizeNextTeleport()
     car:PivotTo(cframe)
@@ -555,10 +481,10 @@ function xDTaraZ.Vehicle.TeleportTo(cframe)
     return true
 end
 
-function xDTaraZ.Vehicle.ApplySpeed()
-    local car = xDTaraZ.Vehicle.Current()
+function PatipanStudio.Vehicle.ApplySpeed()
+    local car = PatipanStudio.Vehicle.Current()
     local boost = State.Opt.CarSpeed
-    if not car or not car.PrimaryPart or boost <= 0 or not xDTaraZ.Vehicle.IsSeated() then
+    if not car or not car.PrimaryPart or boost <= 0 or not PatipanStudio.Vehicle.IsSeated() then
         return
     end
     if not UserInputService:IsKeyDown(Enum.KeyCode.W) then
@@ -575,12 +501,12 @@ function xDTaraZ.Vehicle.ApplySpeed()
     root.AssemblyLinearVelocity = flat.Unit * target + Vector3.new(0, velocity.Y, 0)
 end
 
-function xDTaraZ.Jobs.Current()
+function PatipanStudio.Jobs.Current()
     return LocalPlayer:GetAttribute("JobId")
 end
 
 ---@return string[]  job ids the game defines plus any job pad on the map, sorted
-function xDTaraZ.Jobs.List()
+function PatipanStudio.Jobs.List()
     local seen, list = {}, {}
     local function Add(jobId)
         if type(jobId) ~= "string" or seen[jobId] then return end
@@ -598,8 +524,8 @@ function xDTaraZ.Jobs.List()
     return list
 end
 
-function xDTaraZ.Jobs.Start(jobId)
-    if xDTaraZ.Jobs.Current() == jobId then
+function PatipanStudio.Jobs.Start(jobId)
+    if PatipanStudio.Jobs.Current() == jobId then
         return true
     end
     if not GameLib.JobsController then
@@ -609,17 +535,17 @@ function xDTaraZ.Jobs.Start(jobId)
     local deadline = os.clock() + 4
     repeat
         task.wait(0.2)
-    until xDTaraZ.Jobs.Current() == jobId or os.clock() > deadline
-    return xDTaraZ.Jobs.Current() == jobId
+    until PatipanStudio.Jobs.Current() == jobId or os.clock() > deadline
+    return PatipanStudio.Jobs.Current() == jobId
 end
 
-function xDTaraZ.Jobs.Leave()
-    if xDTaraZ.Jobs.Current() and GameLib.JobsController then
+function PatipanStudio.Jobs.Leave()
+    if PatipanStudio.Jobs.Current() and GameLib.JobsController then
         GameLib.JobsController.RequestEndJobSession("jobPad")
     end
 end
 
-function xDTaraZ.Atm.LoadCache()
+function PatipanStudio.Atm.LoadCache()
     local read, text = pcall(function()
         return isfile(Config.SpawnerCacheFile) and readfile(Config.SpawnerCacheFile)
     end)
@@ -635,7 +561,7 @@ function xDTaraZ.Atm.LoadCache()
     end
 end
 
-function xDTaraZ.Atm.SaveCache()
+function PatipanStudio.Atm.SaveCache()
     local encoded = {}
     for id, position in pairs(State.Spawners) do
         encoded[id] = { position.X, position.Y, position.Z }
@@ -651,7 +577,7 @@ function xDTaraZ.Atm.SaveCache()
     end
 end
 
-function xDTaraZ.Atm.SpawnerCount()
+function PatipanStudio.Atm.SpawnerCount()
     local count = 0
     for _ in pairs(State.Spawners) do
         count += 1
@@ -668,19 +594,19 @@ local function RecordStreamedSpawners()
     end
 end
 
-function xDTaraZ.Atm.Sweep()
-    local root = xDTaraZ.Player.Root()
+function PatipanStudio.Atm.Sweep()
+    local root = PatipanStudio.Player.Root()
     if not root then
         return 0
     end
-    if xDTaraZ.Vehicle.IsSeated() then
-        xDTaraZ.Vehicle.Despawn()
+    if PatipanStudio.Vehicle.IsSeated() then
+        PatipanStudio.Vehicle.Despawn()
         task.wait(1)
     end
     for x = Config.SweepMin.X, Config.SweepMax.X, Config.SweepStep do
         for z = Config.SweepMin.Z, Config.SweepMax.Z, Config.SweepStep do
             if not State.Alive then
-                return xDTaraZ.Atm.SpawnerCount()
+                return PatipanStudio.Atm.SpawnerCount()
             end
             root.CFrame = CFrame.new(x, Config.SweepHeight, z)
             root.AssemblyLinearVelocity = Vector3.zero
@@ -688,8 +614,8 @@ function xDTaraZ.Atm.Sweep()
             RecordStreamedSpawners()
         end
     end
-    xDTaraZ.Atm.SaveCache()
-    return xDTaraZ.Atm.SpawnerCount()
+    PatipanStudio.Atm.SaveCache()
+    return PatipanStudio.Atm.SpawnerCount()
 end
 
 local function FindAtm(spawnerId)
@@ -701,7 +627,7 @@ local function FindAtm(spawnerId)
     return nil
 end
 
-function xDTaraZ.Atm.IsAvailable(atm)
+function PatipanStudio.Atm.IsAvailable(atm)
     if not atm or atm:GetAttribute("State") ~= "Normal" then
         return false
     end
@@ -709,7 +635,7 @@ function xDTaraZ.Atm.IsAvailable(atm)
     return engaging == nil or engaging == LocalPlayer.UserId
 end
 
-function xDTaraZ.Atm.CopNearby(position)
+function PatipanStudio.Atm.CopNearby(position)
     for _, other in ipairs(Players:GetPlayers()) do
         local character = other ~= LocalPlayer and other.Character
         if character and other:GetAttribute("JobId") == "Security" then
@@ -730,17 +656,17 @@ local function WaitForDebounce(character)
 end
 
 ---@return boolean, string?  robbed, else the server's reason
-function xDTaraZ.Atm.Bust(atm)
-    local character = xDTaraZ.Player.Character()
+function PatipanStudio.Atm.Bust(atm)
+    local character = PatipanStudio.Player.Character()
     if not GameLib.Remotes then
         return false, "Not available on this executor"
     end
-    if not character or not xDTaraZ.Atm.IsAvailable(atm) then
+    if not character or not PatipanStudio.Atm.IsAvailable(atm) then
         return false, "Unavailable"
     end
     local attachment = atm:FindFirstChild("PromptAttachment")
     local target = attachment and attachment.WorldPosition or atm:GetPivot().Position
-    if State.Opt.AvoidCops and xDTaraZ.Atm.CopNearby(target) then
+    if State.Opt.AvoidCops and PatipanStudio.Atm.CopNearby(target) then
         return false, "CopNearby"
     end
     WaitForDebounce(character)
@@ -764,7 +690,7 @@ function xDTaraZ.Atm.Bust(atm)
     return true
 end
 
-function xDTaraZ.Atm.DropOffPositions()
+function PatipanStudio.Atm.DropOffPositions()
     local positions = {}
     for _, point in ipairs(CollectionService:GetTagged("CriminalDropOffPoint")) do
         table.insert(positions, point:GetPivot().Position)
@@ -775,10 +701,10 @@ function xDTaraZ.Atm.DropOffPositions()
     return positions
 end
 
-function xDTaraZ.Atm.NearestDropOff()
-    local root = xDTaraZ.Player.Root()
+function PatipanStudio.Atm.NearestDropOff()
+    local root = PatipanStudio.Player.Root()
     local best, bestDistance = nil, math.huge
-    for _, position in ipairs(xDTaraZ.Atm.DropOffPositions()) do
+    for _, position in ipairs(PatipanStudio.Atm.DropOffPositions()) do
         local distance = root and (position - root.Position).Magnitude or 0
         if distance < bestDistance then
             best, bestDistance = position, distance
@@ -787,60 +713,60 @@ function xDTaraZ.Atm.NearestDropOff()
     return best
 end
 
-function xDTaraZ.Atm.Crimes()
-    local character = xDTaraZ.Player.Character()
+function PatipanStudio.Atm.Crimes()
+    local character = PatipanStudio.Player.Character()
     return character and character:GetAttribute("CrimesCommitted") or 0
 end
 
 ---@return boolean        paid
 ---@return number|string  cash gained, or why it did not pay
-function xDTaraZ.Atm.CashOut()
-    if xDTaraZ.Atm.Crimes() < Config.CashOutCrimes then
+function PatipanStudio.Atm.CashOut()
+    if PatipanStudio.Atm.Crimes() < Config.CashOutCrimes then
         return false, "Need 5 stars first"
     end
-    local seed = xDTaraZ.Atm.NearestDropOff()
+    local seed = PatipanStudio.Atm.NearestDropOff()
     if not seed then return false, "No drop-off found" end
 
     local stage = Vector3.new(0, 3, Config.DropOffStage)
-    local cashBefore = xDTaraZ.Util.Cash()
+    local cashBefore = PatipanStudio.Util.Cash()
     State.Banking = true
-    xDTaraZ.Player.TeleportTo(CFrame.new(seed + stage))
+    PatipanStudio.Player.TeleportTo(CFrame.new(seed + stage))
     task.wait(Config.StreamWait)
-    local target = xDTaraZ.Atm.NearestDropOff() or seed
+    local target = PatipanStudio.Atm.NearestDropOff() or seed
 
     for _ = 1, Config.DropOffTries do
-        xDTaraZ.Player.TeleportTo(CFrame.new(target + stage))
+        PatipanStudio.Player.TeleportTo(CFrame.new(target + stage))
         task.wait(Config.DropOffSettle)
-        xDTaraZ.Player.TeleportTo(CFrame.new(target + Vector3.new(0, 3, 0)))
+        PatipanStudio.Player.TeleportTo(CFrame.new(target + Vector3.new(0, 3, 0)))
         local deadline = os.clock() + Config.DropOffPayWait
         repeat
             task.wait(0.25)
-        until xDTaraZ.Util.Cash() > cashBefore or os.clock() > deadline
-        if xDTaraZ.Util.Cash() > cashBefore or xDTaraZ.Atm.Crimes() < Config.CashOutCrimes then break end
+        until PatipanStudio.Util.Cash() > cashBefore or os.clock() > deadline
+        if PatipanStudio.Util.Cash() > cashBefore or PatipanStudio.Atm.Crimes() < Config.CashOutCrimes then break end
     end
     State.Banking = false
 
-    local gained = xDTaraZ.Util.Cash() - cashBefore
+    local gained = PatipanStudio.Util.Cash() - cashBefore
     if gained <= 0 then return false, "The drop-off did not pay" end
     State.AtmSession.CashedOut += gained
     return true, gained
 end
 
-function xDTaraZ.Atm.RunPass()
-    if not xDTaraZ.Jobs.Start("Criminal") then
+function PatipanStudio.Atm.RunPass()
+    if not PatipanStudio.Jobs.Start("Criminal") then
         State.AtmWarn = "Could not start the Criminal job"
         error(State.AtmWarn, 0)
     end
     State.AtmWarn = nil
-    if xDTaraZ.Atm.SpawnerCount() == 0 then
-        xDTaraZ.Atm.Sweep()
+    if PatipanStudio.Atm.SpawnerCount() == 0 then
+        PatipanStudio.Atm.Sweep()
     end
     local busted = 0
     for id, position in pairs(State.Spawners) do
         if not State.Opt.AtmFarm or not State.Alive then
             break
         end
-        xDTaraZ.Player.TeleportTo(CFrame.new(position + Vector3.new(0, 6, 0)))
+        PatipanStudio.Player.TeleportTo(CFrame.new(position + Vector3.new(0, 6, 0)))
         local atm
         local deadline = os.clock() + Config.StreamWait
         repeat
@@ -848,43 +774,43 @@ function xDTaraZ.Atm.RunPass()
             atm = FindAtm(id)
         until atm or os.clock() > deadline
         RecordStreamedSpawners()
-        if xDTaraZ.Atm.IsAvailable(atm) and xDTaraZ.Atm.Bust(atm) then
+        if PatipanStudio.Atm.IsAvailable(atm) and PatipanStudio.Atm.Bust(atm) then
             busted += 1
         end
-        local crimes = xDTaraZ.Atm.Crimes()
-        if crimes >= State.Opt.CashOutCrimes or (crimes >= Config.CashOutCrimes and xDTaraZ.Atm.WantedLeft() < Config.WantedSafety) then
-            xDTaraZ.Atm.CashOut()
+        local crimes = PatipanStudio.Atm.Crimes()
+        if crimes >= State.Opt.CashOutCrimes or (crimes >= Config.CashOutCrimes and PatipanStudio.Atm.WantedLeft() < Config.WantedSafety) then
+            PatipanStudio.Atm.CashOut()
         end
     end
     return busted
 end
 
-function xDTaraZ.Atm.WantedLeft()
-    local character = xDTaraZ.Player.Character()
+function PatipanStudio.Atm.WantedLeft()
+    local character = PatipanStudio.Player.Character()
     local expire = character and character:GetAttribute("CriminalExpireEpoch")
     return expire and expire - workspace:GetServerTimeNow() or math.huge
 end
 
-function xDTaraZ.Atm.FarmStep()
-    local busted = xDTaraZ.Atm.RunPass()
+function PatipanStudio.Atm.FarmStep()
+    local busted = PatipanStudio.Atm.RunPass()
     if not State.Opt.AtmFarm then
         return
     end
-    if xDTaraZ.Atm.Crimes() >= State.Opt.CashOutCrimes then
-        xDTaraZ.Atm.CashOut()
+    if PatipanStudio.Atm.Crimes() >= State.Opt.CashOutCrimes then
+        PatipanStudio.Atm.CashOut()
     end
-    if busted == 0 and State.Opt.HopWhenEmpty and xDTaraZ.Atm.Crimes() == 0 then
-        xDTaraZ.Session.Hop()
+    if busted == 0 and State.Opt.HopWhenEmpty and PatipanStudio.Atm.Crimes() == 0 then
+        PatipanStudio.Session.Hop()
     end
 end
 
-function xDTaraZ.Atm.NearestAvailable()
-    local root = xDTaraZ.Player.Root()
+function PatipanStudio.Atm.NearestAvailable()
+    local root = PatipanStudio.Player.Root()
     if not root then return nil end
     local best, bestDistance
     for _, spawner in ipairs(GameLib.AtmSpawners()) do
         local atm = spawner:FindFirstChild("CriminalATM")
-        if xDTaraZ.Atm.IsAvailable(atm) then
+        if PatipanStudio.Atm.IsAvailable(atm) then
             local distance = (spawner.Position - root.Position).Magnitude
             if not bestDistance or distance < bestDistance then
                 best, bestDistance = atm, distance
@@ -895,19 +821,19 @@ function xDTaraZ.Atm.NearestAvailable()
 end
 
 ---@return boolean, string?  robbed, else why not
-function xDTaraZ.Atm.RobNearest()
-    if not xDTaraZ.Jobs.Start("Criminal") then
+function PatipanStudio.Atm.RobNearest()
+    if not PatipanStudio.Jobs.Start("Criminal") then
         return false, "Could not start the Criminal job"
     end
-    local atm = xDTaraZ.Atm.NearestAvailable()
+    local atm = PatipanStudio.Atm.NearestAvailable()
     if not atm then
         return false, "No ATM nearby"
     end
-    return xDTaraZ.Atm.Bust(atm)
+    return PatipanStudio.Atm.Bust(atm)
 end
 
 ---@return table?  Center, Axis, Half, Top of the longest flat asphalt road; nil if none is loaded
-function xDTaraZ.Drive.FindRoad()
+function PatipanStudio.Drive.FindRoad()
     local road = State.DriveRoad
     if road and road.Part.Parent then return road end
     local best, bestLength = nil, Config.DriveRoadMin
@@ -933,28 +859,28 @@ function xDTaraZ.Drive.FindRoad()
 end
 
 ---@return table?  road, streamed in when it is not loaded yet
-function xDTaraZ.Drive.LoadRoad()
-    local road = xDTaraZ.Drive.FindRoad()
+function PatipanStudio.Drive.LoadRoad()
+    local road = PatipanStudio.Drive.FindRoad()
     if road then return road end
     pcall(LocalPlayer.RequestStreamAroundAsync, LocalPlayer, Config.DriveRoadSeed, Config.LoadTimeout)
     task.wait(Config.StreamWait)
-    return xDTaraZ.Drive.FindRoad()
+    return PatipanStudio.Drive.FindRoad()
 end
 
-function xDTaraZ.Drive.Warp(road)
+function PatipanStudio.Drive.Warp(road)
     local start = road.Center - road.Axis * road.Half
     local spot = Vector3.new(start.X, road.Top, start.Z)
-    xDTaraZ.Vehicle.TeleportTo(CFrame.lookAt(spot, spot + road.Axis))
+    PatipanStudio.Vehicle.TeleportTo(CFrame.lookAt(spot, spot + road.Axis))
 end
 
-function xDTaraZ.Drive.Step(road)
-    local car = xDTaraZ.Vehicle.Current()
+function PatipanStudio.Drive.Step(road)
+    local car = PatipanStudio.Vehicle.Current()
     local root = car and car.PrimaryPart
-    if not root or not xDTaraZ.Vehicle.IsSeated() then return end
+    if not root or not PatipanStudio.Vehicle.IsSeated() then return end
     local offset = root.Position - road.Center
     local along = offset:Dot(road.Axis)
     if along > road.Half then
-        xDTaraZ.Drive.Warp(road)
+        PatipanStudio.Drive.Warp(road)
         return
     end
     local side = offset - road.Axis * along
@@ -963,48 +889,48 @@ function xDTaraZ.Drive.Step(road)
     root.AssemblyLinearVelocity = road.Axis * Config.DriveSpeed - side * Config.DriveAlign + Vector3.new(0, fall, 0)
 end
 
-function xDTaraZ.Drive.Board()
-    local carId = State.Opt.DriveCar or xDTaraZ.Vehicle.Owned()[1]
+function PatipanStudio.Drive.Board()
+    local carId = State.Opt.DriveCar or PatipanStudio.Vehicle.Owned()[1]
     for _ = 1, Config.SpawnTries do
-        local car = xDTaraZ.Vehicle.Spawn(carId)
+        local car = PatipanStudio.Vehicle.Spawn(carId)
         if car then return car end
     end
     return nil
 end
 
 ---@return boolean, string?  started, else why not
-function xDTaraZ.Drive.Start()
+function PatipanStudio.Drive.Start()
     if State.DriveConn then return true end
-    xDTaraZ.Jobs.Leave()
-    local road = xDTaraZ.Drive.LoadRoad()
+    PatipanStudio.Jobs.Leave()
+    local road = PatipanStudio.Drive.LoadRoad()
     if not road then return false, "No paved road found" end
-    local car = xDTaraZ.Vehicle.Current()
-    if not car or not xDTaraZ.Vehicle.IsSeated() then
-        car = xDTaraZ.Drive.Board()
+    local car = PatipanStudio.Vehicle.Current()
+    if not car or not PatipanStudio.Vehicle.IsSeated() then
+        car = PatipanStudio.Drive.Board()
     end
     if not car then return false, "No car to drive" end
     task.wait(1)
-    xDTaraZ.Drive.Warp(road)
+    PatipanStudio.Drive.Warp(road)
     task.wait(1)
     if not State.Opt.DriveFarm or State.DriveConn then return true end
     State.DriveConn = RunService.Heartbeat:Connect(function()
-        xDTaraZ.Drive.Step(road)
+        PatipanStudio.Drive.Step(road)
     end)
     return true
 end
 
-function xDTaraZ.Drive.Stop()
+function PatipanStudio.Drive.Stop()
     if State.DriveConn then
         State.DriveConn:Disconnect()
         State.DriveConn = nil
     end
-    local car = xDTaraZ.Vehicle.Current()
+    local car = PatipanStudio.Vehicle.Current()
     if car and car.PrimaryPart then
         car.PrimaryPart.AssemblyLinearVelocity = Vector3.zero
     end
 end
 
-function xDTaraZ.Rewards.ClaimPlaytime()
+function PatipanStudio.Rewards.ClaimPlaytime()
     local ok, unclaimed = pcall(function()
         local pending = GameLib.PlayRewardUtil.getUnclaimedRewards(LocalPlayer)
         if type(pending) == "table" and pending.expect then
@@ -1024,38 +950,38 @@ function xDTaraZ.Rewards.ClaimPlaytime()
     return count
 end
 
-function xDTaraZ.Rewards.ClaimMisc()
+function PatipanStudio.Rewards.ClaimMisc()
     if not GameLib.Remotes then return end
     GameLib.Remotes.fireServer("ClaimRewards")
     GameLib.Remotes.fireServer("RaceLeaderboardClaimRewards")
 end
 
-function xDTaraZ.Rewards.Redeemed()
-    local stats = xDTaraZ.Util.Stats()
+function PatipanStudio.Rewards.Redeemed()
+    local stats = PatipanStudio.Util.Stats()
     local codes = stats and stats:FindFirstChild("Codes")
     local ok, decoded = pcall(HttpService.JSONDecode, HttpService, codes and codes.Value or "")
     return ok and type(decoded) == "table" and decoded or {}
 end
 
 ---@return number, number  new codes redeemed, cash gained
-function xDTaraZ.Rewards.RedeemCodes(codes)
+function PatipanStudio.Rewards.RedeemCodes(codes)
     if not GameLib.CodeRemote then return 0, 0 end
-    local redeemedBefore = xDTaraZ.Rewards.Redeemed()
-    local cashBefore = xDTaraZ.Util.Cash()
+    local redeemedBefore = PatipanStudio.Rewards.Redeemed()
+    local cashBefore = PatipanStudio.Util.Cash()
     local success = 0
     for _, code in ipairs(codes) do
         if not redeemedBefore[code] then
             GameLib.CodeRemote:FireServer(code)
             task.wait(Config.CodeDelay)
-            if xDTaraZ.Rewards.Redeemed()[code] then
+            if PatipanStudio.Rewards.Redeemed()[code] then
                 success += 1
             end
         end
     end
-    return success, xDTaraZ.Util.Cash() - cashBefore
+    return success, PatipanStudio.Util.Cash() - cashBefore
 end
 
-function xDTaraZ.Teleport.Destinations()
+function PatipanStudio.Teleport.Destinations()
     local destinations = {}
     local names = {}
     local function Add(name, position)
@@ -1075,7 +1001,7 @@ function xDTaraZ.Teleport.Destinations()
     for name, position in pairs(Config.PlaceSeeds) do
         Add(name, position)
     end
-    for index, position in ipairs(xDTaraZ.Atm.DropOffPositions()) do
+    for index, position in ipairs(PatipanStudio.Atm.DropOffPositions()) do
         Add(("Criminal Drop-off %d"):format(index), position)
     end
     local heist = GameLib.Find(workspace, "Game", "Heists", "BankHeist")
@@ -1097,30 +1023,30 @@ function xDTaraZ.Teleport.Destinations()
     return names, destinations
 end
 
-function xDTaraZ.Teleport.Go(position)
+function PatipanStudio.Teleport.Go(position)
     if not position then
         return
     end
     LocalPlayer:RequestStreamAroundAsync(position, 5)
-    xDTaraZ.Vehicle.TeleportTo(CFrame.new(position + Vector3.new(0, 5, 0)))
+    PatipanStudio.Vehicle.TeleportTo(CFrame.new(position + Vector3.new(0, 5, 0)))
 end
 
-function xDTaraZ.Teleport.ToPlayer(name)
+function PatipanStudio.Teleport.ToPlayer(name)
     local target = Players:FindFirstChild(name)
     local root = target and target.Character and target.Character:FindFirstChild("HumanoidRootPart")
     if root then
-        xDTaraZ.Teleport.Go(root.Position + Vector3.new(0, 0, 4))
+        PatipanStudio.Teleport.Go(root.Position + Vector3.new(0, 0, 4))
     end
 end
 
-function xDTaraZ.Movement.Step()
+function PatipanStudio.Movement.Step()
     local opt = State.Opt
-    local character = xDTaraZ.Player.Character()
-    local humanoid = xDTaraZ.Player.Humanoid()
+    local character = PatipanStudio.Player.Character()
+    local humanoid = PatipanStudio.Player.Humanoid()
     if not character or not humanoid then
         return
     end
-    if opt.SpeedEnabled and not xDTaraZ.Vehicle.IsSeated() then
+    if opt.SpeedEnabled and not PatipanStudio.Vehicle.IsSeated() then
         humanoid.WalkSpeed = opt.WalkSpeed
         humanoid.UseJumpPower = true
         humanoid.JumpPower = opt.JumpPower
@@ -1133,10 +1059,10 @@ function xDTaraZ.Movement.Step()
             end
         end
     end
-    xDTaraZ.Vehicle.ApplySpeed()
+    PatipanStudio.Vehicle.ApplySpeed()
 end
 
-function xDTaraZ.Movement.SetNoclip(enabled)
+function PatipanStudio.Movement.SetNoclip(enabled)
     if enabled then return end
     for part, original in pairs(State.CollideBackup) do
         if part.Parent then
@@ -1146,15 +1072,15 @@ function xDTaraZ.Movement.SetNoclip(enabled)
     table.clear(State.CollideBackup)
 end
 
-function xDTaraZ.Movement.ResetSpeed()
-    local humanoid = xDTaraZ.Player.Humanoid()
+function PatipanStudio.Movement.ResetSpeed()
+    local humanoid = PatipanStudio.Player.Humanoid()
     if humanoid then
         humanoid.WalkSpeed = 16
         humanoid.JumpPower = 50
     end
 end
 
-function xDTaraZ.Movement.SetFullbright(enabled)
+function PatipanStudio.Movement.SetFullbright(enabled)
     if enabled then
         State.LightingBackup = State.LightingBackup or {
             Brightness = Lighting.Brightness,
@@ -1176,12 +1102,12 @@ function xDTaraZ.Movement.SetFullbright(enabled)
     end
 end
 
-function xDTaraZ.Movement.Bind()
+function PatipanStudio.Movement.Bind()
     table.insert(State.Conns, RunService.Stepped:Connect(function()
-        xDTaraZ.Scheduler.Run(xDTaraZ.Scheduler.MovementJob)
+        PatipanStudio.Scheduler.Run(PatipanStudio.Scheduler.MovementJob)
     end))
     table.insert(State.Conns, UserInputService.JumpRequest:Connect(function()
-        local humanoid = xDTaraZ.Player.Humanoid()
+        local humanoid = PatipanStudio.Player.Humanoid()
         if State.Opt.InfiniteJump and humanoid then
             humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
         end
@@ -1204,13 +1130,13 @@ local function EspMark(key, adornee, text, color)
     highlight.OutlineColor = color
     highlight.Adornee = adornee
     highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-    xDTaraZ.Util.Mount(highlight)
+    PatipanStudio.Util.Mount(highlight)
     local billboard = Instance.new("BillboardGui")
     billboard.Size = UDim2.fromOffset(160, 28)
     billboard.StudsOffset = Vector3.new(0, 5, 0)
     billboard.AlwaysOnTop = true
     billboard.Adornee = adornee
-    xDTaraZ.Util.Mount(billboard)
+    PatipanStudio.Util.Mount(billboard)
     local label = Instance.new("TextLabel")
     label.Size = UDim2.fromScale(1, 1)
     label.BackgroundTransparency = 1
@@ -1223,9 +1149,9 @@ local function EspMark(key, adornee, text, color)
     State.EspObjects[key] = { Highlight = highlight, Billboard = billboard, Label = label }
 end
 
-function xDTaraZ.Esp.Refresh()
+function PatipanStudio.Esp.Refresh()
     local opt = State.Opt
-    local root = xDTaraZ.Player.Root()
+    local root = PatipanStudio.Player.Root()
     local alive = {}
     local function Distance(position)
         return root and math.floor((position - root.Position).Magnitude) or 0
@@ -1233,7 +1159,7 @@ function xDTaraZ.Esp.Refresh()
     if opt.EspAtm then
         for _, spawner in ipairs(GameLib.AtmSpawners()) do
             local atm = spawner:FindFirstChild("CriminalATM")
-            if xDTaraZ.Atm.IsAvailable(atm) then
+            if PatipanStudio.Atm.IsAvailable(atm) then
                 local key = "atm" .. tostring(spawner:GetAttribute("ComponentServerId"))
                 alive[key] = true
                 EspMark(key, atm, ("ATM %s · %dm"):format(tostring(atm:GetAttribute("Rarity")), Distance(spawner.Position)), Color3.fromRGB(90, 220, 120))
@@ -1268,7 +1194,7 @@ function xDTaraZ.Esp.Refresh()
     end
 end
 
-function xDTaraZ.Session.Bind()
+function PatipanStudio.Session.Bind()
     table.insert(State.Conns, LocalPlayer.Idled:Connect(function()
         if State.Opt.AntiAfk then
             VirtualUser:CaptureController()
@@ -1284,8 +1210,8 @@ function xDTaraZ.Session.Bind()
     end))
 end
 
-function xDTaraZ.Session.Hop()
-    local body = xDTaraZ.Util.HttpGet(("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100"):format(game.PlaceId))
+function PatipanStudio.Session.Hop()
+    local body = PatipanStudio.Util.HttpGet(("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100"):format(game.PlaceId))
     local ok, decoded = pcall(HttpService.JSONDecode, HttpService, body or "")
     if not ok or type(decoded) ~= "table" then
         return false
@@ -1303,24 +1229,24 @@ function xDTaraZ.Session.Hop()
     return true
 end
 
-function xDTaraZ.Scheduler.AtmStep()
+function PatipanStudio.Scheduler.AtmStep()
     if State.Opt.AtmFarm then
-        xDTaraZ.Atm.FarmStep()
+        PatipanStudio.Atm.FarmStep()
         return
     end
     if not State.BankOnStop then return end
     State.BankOnStop = false
-    if xDTaraZ.Atm.Crimes() < Config.CashOutCrimes then return end
+    if PatipanStudio.Atm.Crimes() < Config.CashOutCrimes then return end
 
-    local ok, got = xDTaraZ.Atm.CashOut()
+    local ok, got = PatipanStudio.Atm.CashOut()
     if ok then
-        xDTaraZ.UI.Notify("Banked $" .. xDTaraZ.Util.Commas(got) .. " before stopping", "Success")
+        PatipanStudio.UI.Notify("Banked $" .. PatipanStudio.Util.Commas(got) .. " before stopping", "Success")
     else
-        xDTaraZ.UI.Notify("Wanted cash not banked: " .. got, "Warning")
+        PatipanStudio.UI.Notify("Wanted cash not banked: " .. got, "Warning")
     end
 end
 
-function xDTaraZ.Scheduler.RewardStep()
+function PatipanStudio.Scheduler.RewardStep()
     local opt = State.Opt
     local now = os.clock()
     if not (opt.AutoPlaytime or opt.AutoClaimMisc) or now - State.LastReward <= Config.RewardInterval then
@@ -1328,32 +1254,32 @@ function xDTaraZ.Scheduler.RewardStep()
     end
     State.LastReward = now
     if opt.AutoPlaytime then
-        xDTaraZ.Rewards.ClaimPlaytime()
+        PatipanStudio.Rewards.ClaimPlaytime()
     end
     if opt.AutoClaimMisc then
-        xDTaraZ.Rewards.ClaimMisc()
+        PatipanStudio.Rewards.ClaimMisc()
     end
 end
 
-function xDTaraZ.Scheduler.EspStep()
+function PatipanStudio.Scheduler.EspStep()
     local now = os.clock()
     if now - State.LastEsp > Config.EspInterval then
         State.LastEsp = now
-        xDTaraZ.Esp.Refresh()
+        PatipanStudio.Esp.Refresh()
     end
 end
 
-xDTaraZ.Scheduler.Jobs = {
-    { "ATM Farm", xDTaraZ.Scheduler.AtmStep, { "AtmFarm" } },
-    { "Rewards", xDTaraZ.Scheduler.RewardStep, { "AutoPlaytime", "AutoClaimMisc" } },
-    { "ESP", xDTaraZ.Scheduler.EspStep, { "EspAtm", "EspCops", "EspDropOff" }, Core = true },
+PatipanStudio.Scheduler.Jobs = {
+    { "ATM Farm", PatipanStudio.Scheduler.AtmStep, { "AtmFarm" } },
+    { "Rewards", PatipanStudio.Scheduler.RewardStep, { "AutoPlaytime", "AutoClaimMisc" } },
+    { "ESP", PatipanStudio.Scheduler.EspStep, { "EspAtm", "EspCops", "EspDropOff" }, Core = true },
 }
 
-xDTaraZ.Scheduler.MovementJob = { "Movement", xDTaraZ.Movement.Step, { "SpeedEnabled", "Noclip" } }
+PatipanStudio.Scheduler.MovementJob = { "Movement", PatipanStudio.Movement.Step, { "SpeedEnabled", "Noclip" } }
 
 ---@param job table  { label, step, toggle idxs }
 ---@return boolean   any of the job's features is on
-function xDTaraZ.Scheduler.Wanted(job)
+function PatipanStudio.Scheduler.Wanted(job)
     for _, idx in ipairs(job[3]) do
         if State.Opt[idx] then return true end
     end
@@ -1362,9 +1288,9 @@ end
 
 ---Turns the job's features off after Config.JobFailLimit errors spanning Config.JobFailWindow seconds; the UI pump flips the toggles (this thread has touched game modules) and their callbacks restore.
 ---@param job table  { label, step, toggle idxs, Core = never rests }
-function xDTaraZ.Scheduler.Run(job)
+function PatipanStudio.Scheduler.Run(job)
     if job.Stopped then
-        if not xDTaraZ.Scheduler.Wanted(job) then return end
+        if not PatipanStudio.Scheduler.Wanted(job) then return end
         job.Stopped = nil
     end
     local ok, err = pcall(job[2])
@@ -1382,7 +1308,7 @@ function xDTaraZ.Scheduler.Run(job)
     streak.count += 1
     if streak.count < Config.JobFailLimit or os.clock() - streak.since < Config.JobFailWindow then return end
 
-    local switched = xDTaraZ.Scheduler.Wanted(job)
+    local switched = PatipanStudio.Scheduler.Wanted(job)
     if job.Core and not switched then return end
     job.Streak = nil
     job.Stopped = not job.Core and not switched
@@ -1395,19 +1321,19 @@ function xDTaraZ.Scheduler.Run(job)
 
     local reason = tostring(err):match("^[^\n]*")
     warn("[Driving Empire] " .. job[1] .. " stopped:", reason)
-    if switched then xDTaraZ.UI.Notify(job[1] .. " stopped: " .. reason, "Warning") end
+    if switched then PatipanStudio.UI.Notify(job[1] .. " stopped: " .. reason, "Warning") end
 end
 
-function xDTaraZ.Scheduler.Boot()
-    xDTaraZ.Atm.LoadCache()
-    xDTaraZ.Movement.Bind()
-    xDTaraZ.Session.Bind()
+function PatipanStudio.Scheduler.Boot()
+    PatipanStudio.Atm.LoadCache()
+    PatipanStudio.Movement.Bind()
+    PatipanStudio.Session.Bind()
     task.spawn(function()
         while State.Alive do
             if not State.Busy then
                 State.Busy = true
-                for _, job in ipairs(xDTaraZ.Scheduler.Jobs) do
-                    xDTaraZ.Scheduler.Run(job)
+                for _, job in ipairs(PatipanStudio.Scheduler.Jobs) do
+                    PatipanStudio.Scheduler.Run(job)
                 end
                 State.Busy = false
             end
@@ -1416,48 +1342,48 @@ function xDTaraZ.Scheduler.Boot()
     end)
 end
 
-function xDTaraZ.Scheduler.Stop()
+function PatipanStudio.Scheduler.Stop()
     State.Alive = false
     for key in pairs(State.Opt) do
         if type(State.Opt[key]) == "boolean" and key ~= "AntiAfk" then
             State.Opt[key] = false
         end
     end
-    xDTaraZ.Drive.Stop()
-    xDTaraZ.Movement.SetNoclip(false)
-    xDTaraZ.Movement.ResetSpeed()
-    xDTaraZ.Movement.SetFullbright(false)
+    PatipanStudio.Drive.Stop()
+    PatipanStudio.Movement.SetNoclip(false)
+    PatipanStudio.Movement.ResetSpeed()
+    PatipanStudio.Movement.SetFullbright(false)
     for _, conn in ipairs(State.Conns) do
         conn:Disconnect()
     end
     table.clear(State.Conns)
-    xDTaraZ.Esp.Refresh()
+    PatipanStudio.Esp.Refresh()
 end
 
-xDTaraZ.UI = {}
+PatipanStudio.UI = {}
 local Library, T
 
 ---@param kind string?  Info, Success, Warning or Error
-function xDTaraZ.UI.Notify(text, kind)
+function PatipanStudio.UI.Notify(text, kind)
     State.Messages[#State.Messages + 1] = { text, kind }
 end
 
-function xDTaraZ.UI.Spawn(action)
+function PatipanStudio.UI.Spawn(action)
     return function()
-        task.spawn(xDTaraZ.Util.Try, action)
+        task.spawn(PatipanStudio.Util.Try, action)
     end
 end
 
-function xDTaraZ.UI.StartDrive()
-    local started, reason = xDTaraZ.Drive.Start()
+function PatipanStudio.UI.StartDrive()
+    local started, reason = PatipanStudio.Drive.Start()
     if started then return end
     State.Opt.DriveFarm = false
     table.insert(State.Halted, "DriveFarm")
-    xDTaraZ.UI.Notify(reason or "Could not start driving", "Warning")
+    PatipanStudio.UI.Notify(reason or "Could not start driving", "Warning")
 end
 
 ---@param onChange function?  runs after State.Opt is updated
-function xDTaraZ.UI.Toggle(group, key, text, description, onChange, risky)
+function PatipanStudio.UI.Toggle(group, key, text, description, onChange, risky)
     return group:AddToggle(key, {
         Text = text,
         Description = description,
@@ -1466,13 +1392,13 @@ function xDTaraZ.UI.Toggle(group, key, text, description, onChange, risky)
         Callback = function(value)
             State.Opt[key] = value
             if onChange then
-                xDTaraZ.Util.Try(onChange, value)
+                PatipanStudio.Util.Try(onChange, value)
             end
         end,
     })
 end
 
-function xDTaraZ.UI.Slider(group, key, text, description, min, max)
+function PatipanStudio.UI.Slider(group, key, text, description, min, max)
     local opt = State.Opt
     return group:AddSlider(key, {
         Text = text,
@@ -1484,7 +1410,7 @@ function xDTaraZ.UI.Slider(group, key, text, description, min, max)
     })
 end
 
-function xDTaraZ.UI.Panic()
+function PatipanStudio.UI.Panic()
     for idx, toggle in pairs(Library.Toggles) do
         if type(State.Opt[idx]) == "boolean" and toggle.Value == true then
             toggle:SetValue(false)
@@ -1493,66 +1419,66 @@ function xDTaraZ.UI.Panic()
 end
 
 ---@return string  one line for the status label
-function xDTaraZ.UI.AtmStatus()
+function PatipanStudio.UI.AtmStatus()
     if State.Banking then return "Cashing out" end
     if State.AtmWarn then return "Warn: " .. State.AtmWarn end
     if not State.Opt.AtmFarm then return "Off" end
-    return ("Robbing · %d stars"):format(xDTaraZ.Atm.Crimes())
+    return ("Robbing · %d stars"):format(PatipanStudio.Atm.Crimes())
 end
 
-function xDTaraZ.UI.StatusText()
+function PatipanStudio.UI.StatusText()
     local session = State.AtmSession
-    local char = xDTaraZ.Player.Character()
+    local char = PatipanStudio.Player.Character()
     local carried = char and char:GetAttribute("CurrencyEarned") or 0
     return ("ATM Farm: %s · Drive: %s\nCash $%s · Job %s · Stars %d\nATMs robbed %d · Wanted cash $%s · Cashed out $%s\nATM spots known %d"):format(
-        xDTaraZ.UI.AtmStatus(), State.Opt.DriveFarm and "Driving" or "Off",
-        xDTaraZ.Util.Commas(xDTaraZ.Util.Cash()), tostring(xDTaraZ.Jobs.Current() or "Citizen"), xDTaraZ.Atm.Crimes(),
-        session.Busted, xDTaraZ.Util.Commas(carried), xDTaraZ.Util.Commas(session.CashedOut), xDTaraZ.Atm.SpawnerCount())
+        PatipanStudio.UI.AtmStatus(), State.Opt.DriveFarm and "Driving" or "Off",
+        PatipanStudio.Util.Commas(PatipanStudio.Util.Cash()), tostring(PatipanStudio.Jobs.Current() or "Citizen"), PatipanStudio.Atm.Crimes(),
+        session.Busted, PatipanStudio.Util.Commas(carried), PatipanStudio.Util.Commas(session.CashedOut), PatipanStudio.Atm.SpawnerCount())
 end
 
-function xDTaraZ.UI.BuildAtm(farmTab)
+function PatipanStudio.UI.BuildAtm(farmTab)
     local atmBox = farmTab:AddLeftGroupbox(T("ATM Farm", "ฟาร์ม ATM"))
     local wasOn = false
-    xDTaraZ.UI.Toggle(atmBox, "AtmFarm", T("Auto ATM Farm", "ฟาร์ม ATM อัตโนมัติ"), T("Robs every ATM on the map with the full crime bonus, then cashes out", "ปล้น ATM ทุกตู้ในแมพพร้อมโบนัสอาชญากรรมเต็ม แล้วส่งเงิน"), function(on)
+    PatipanStudio.UI.Toggle(atmBox, "AtmFarm", T("Auto ATM Farm", "ฟาร์ม ATM อัตโนมัติ"), T("Robs every ATM on the map with the full crime bonus, then cashes out", "ปล้น ATM ทุกตู้ในแมพพร้อมโบนัสอาชญากรรมเต็ม แล้วส่งเงิน"), function(on)
         if on then State.AtmWarn = nil end
-        State.BankOnStop = wasOn and not on and xDTaraZ.Atm.Crimes() >= Config.CashOutCrimes
+        State.BankOnStop = wasOn and not on and PatipanStudio.Atm.Crimes() >= Config.CashOutCrimes
         wasOn = on
     end, true):AddKeyPicker("AtmFarmKey", { Default = "None", Mode = "Toggle" })
-    xDTaraZ.UI.Slider(atmBox, "CashOutCrimes", T("Cash Out At Robberies", "ส่งเงินเมื่อปล้นครบ"), T("Banks the loot after this many robberies (higher = more risk)", "ส่งเงินหลังปล้นครบจำนวนนี้ (ยิ่งมากยิ่งเสี่ยง)"), 5, 30)
+    PatipanStudio.UI.Slider(atmBox, "CashOutCrimes", T("Cash Out At Robberies", "ส่งเงินเมื่อปล้นครบ"), T("Banks the loot after this many robberies (higher = more risk)", "ส่งเงินหลังปล้นครบจำนวนนี้ (ยิ่งมากยิ่งเสี่ยง)"), 5, 30)
 
-    atmBox:AddButton({ Text = T("Rob Nearest ATM", "ปล้น ATM ที่ใกล้ที่สุด"), Style = "Primary", Func = xDTaraZ.UI.Spawn(function()
-        local ok, reason = xDTaraZ.Atm.RobNearest()
-        xDTaraZ.UI.Notify(ok and "ATM robbed" or ("Failed: " .. tostring(reason)), ok and "Success" or "Warning")
-    end) }):AddButton({ Text = T("Cash Out Now", "ส่งเงินเดี๋ยวนี้"), Func = xDTaraZ.UI.Spawn(function()
-        local ok, got = xDTaraZ.Atm.CashOut()
-        xDTaraZ.UI.Notify(ok and ("Cashed out $" .. xDTaraZ.Util.Commas(got)) or got, ok and "Success" or "Warning")
+    atmBox:AddButton({ Text = T("Rob Nearest ATM", "ปล้น ATM ที่ใกล้ที่สุด"), Style = "Primary", Func = PatipanStudio.UI.Spawn(function()
+        local ok, reason = PatipanStudio.Atm.RobNearest()
+        PatipanStudio.UI.Notify(ok and "ATM robbed" or ("Failed: " .. tostring(reason)), ok and "Success" or "Warning")
+    end) }):AddButton({ Text = T("Cash Out Now", "ส่งเงินเดี๋ยวนี้"), Func = PatipanStudio.UI.Spawn(function()
+        local ok, got = PatipanStudio.Atm.CashOut()
+        PatipanStudio.UI.Notify(ok and ("Cashed out $" .. PatipanStudio.Util.Commas(got)) or got, ok and "Success" or "Warning")
     end) })
-    atmBox:AddButton({ Text = T("Scan Map For ATMs", "สแกนหา ATM ทั้งแมพ"), Func = xDTaraZ.UI.Spawn(function()
-        xDTaraZ.UI.Notify(("Found %d ATM spots"):format(xDTaraZ.Atm.Sweep()))
+    atmBox:AddButton({ Text = T("Scan Map For ATMs", "สแกนหา ATM ทั้งแมพ"), Func = PatipanStudio.UI.Spawn(function()
+        PatipanStudio.UI.Notify(("Found %d ATM spots"):format(PatipanStudio.Atm.Sweep()))
     end) })
 end
 
-function xDTaraZ.UI.BuildAtmSafety(farmTab)
+function PatipanStudio.UI.BuildAtmSafety(farmTab)
     local safetyBox = farmTab:AddRightGroupbox(T("ATM Safety", "ความปลอดภัย ATM"))
-    xDTaraZ.UI.Toggle(safetyBox, "HopWhenEmpty", T("Server Hop When Empty", "ย้ายเซิร์ฟเมื่อ ATM หมด"), T("Moves to a new server once every ATM is taken", "ย้ายไปเซิร์ฟใหม่เมื่อ ATM ถูกปล้นหมดแล้ว"))
-    xDTaraZ.UI.Toggle(safetyBox, "AvoidCops", T("Avoid Police", "หลบตำรวจ"), T("Skips ATMs with police standing close", "ข้าม ATM ที่มีตำรวจอยู่ใกล้"))
+    PatipanStudio.UI.Toggle(safetyBox, "HopWhenEmpty", T("Server Hop When Empty", "ย้ายเซิร์ฟเมื่อ ATM หมด"), T("Moves to a new server once every ATM is taken", "ย้ายไปเซิร์ฟใหม่เมื่อ ATM ถูกปล้นหมดแล้ว"))
+    PatipanStudio.UI.Toggle(safetyBox, "AvoidCops", T("Avoid Police", "หลบตำรวจ"), T("Skips ATMs with police standing close", "ข้าม ATM ที่มีตำรวจอยู่ใกล้"))
 end
 
-function xDTaraZ.UI.BuildFarm(window)
+function PatipanStudio.UI.BuildFarm(window)
     local farmTab = window:AddTab(T("Farm", "ฟาร์ม"), "zap", T("Money farming", "ฟาร์มเงิน"))
 
     local statusBox = farmTab:AddLeftGroupbox(T("Status", "สถานะ"))
-    xDTaraZ.UI.StatusLabel = statusBox:AddLabel("Loading...", true)
-    statusBox:AddButton({ Text = T("Panic - All Off", "ฉุกเฉิน ปิดทั้งหมด"), Style = "Danger", Func = xDTaraZ.UI.Panic })
+    PatipanStudio.UI.StatusLabel = statusBox:AddLabel("Loading...", true)
+    statusBox:AddButton({ Text = T("Panic - All Off", "ฉุกเฉิน ปิดทั้งหมด"), Style = "Danger", Func = PatipanStudio.UI.Panic })
 
-    xDTaraZ.UI.BuildAtm(farmTab)
+    PatipanStudio.UI.BuildAtm(farmTab)
 
     local discordBox = farmTab:AddRightGroupbox(T("Discord", "Discord"), "link")
     discordBox:AddLabel(Config.Discord)
     discordBox:AddButton({ Text = T("Copy Discord Link", "คัดลอกลิงก์ Discord"), Style = "Primary", Func = function()
         local copy = setclipboard or toclipboard
         local copied = type(copy) == "function" and pcall(copy, Config.Discord)
-        xDTaraZ.UI.Notify(copied and "Discord link copied" or Config.Discord)
+        PatipanStudio.UI.Notify(copied and "Discord link copied" or Config.Discord)
     end })
 
     local logBox = farmTab:AddRightGroupbox(T("Update Log", "อัปเดตล่าสุด"), "bell")
@@ -1561,45 +1487,45 @@ function xDTaraZ.UI.BuildFarm(window)
         logBox:AddParagraph({ Title = entry[1], Content = entry[2] })
     end
 
-    xDTaraZ.UI.BuildAtmSafety(farmTab)
+    PatipanStudio.UI.BuildAtmSafety(farmTab)
 
     local jobBox = farmTab:AddRightGroupbox(T("Jobs", "อาชีพ"))
     local jobDropdown = jobBox:AddDropdown("JobPick", {
         Text = T("Switch Job", "เปลี่ยนอาชีพ"),
-        Values = xDTaraZ.Jobs.List(),
+        Values = PatipanStudio.Jobs.List(),
         Default = 1,
         Callback = function(value)
             State.Opt.JobPick = value
         end,
     })
-    jobBox:AddButton({ Text = T("Start Job", "เริ่มงาน"), Style = "Primary", Func = xDTaraZ.UI.Spawn(function()
-        xDTaraZ.UI.Notify(xDTaraZ.Jobs.Start(State.Opt.JobPick or "Criminal") and "Job started" or "Could not start job")
-    end) }):AddButton({ Text = T("Quit Job", "ออกจากงาน"), Func = xDTaraZ.UI.Spawn(xDTaraZ.Jobs.Leave) })
+    jobBox:AddButton({ Text = T("Start Job", "เริ่มงาน"), Style = "Primary", Func = PatipanStudio.UI.Spawn(function()
+        PatipanStudio.UI.Notify(PatipanStudio.Jobs.Start(State.Opt.JobPick or "Criminal") and "Job started" or "Could not start job")
+    end) }):AddButton({ Text = T("Quit Job", "ออกจากงาน"), Func = PatipanStudio.UI.Spawn(PatipanStudio.Jobs.Leave) })
         :AddButton({ Text = T("Refresh", "รีเฟรช"), Func = function()
-            jobDropdown:SetValues(xDTaraZ.Jobs.List())
+            jobDropdown:SetValues(PatipanStudio.Jobs.List())
         end })
 
     local driveBox = farmTab:AddRightGroupbox(T("Drive Farm", "ฟาร์มขับรถ"))
-    xDTaraZ.UI.Toggle(driveBox, "DriveFarm", T("Auto Drive", "ขับรถอัตโนมัติ"), T("Drives nonstop for passive cash", "ขับไม่หยุดเพื่อรับเงินจากการขับ"), function(on)
+    PatipanStudio.UI.Toggle(driveBox, "DriveFarm", T("Auto Drive", "ขับรถอัตโนมัติ"), T("Drives nonstop for passive cash", "ขับไม่หยุดเพื่อรับเงินจากการขับ"), function(on)
         if not on then
-            xDTaraZ.Drive.Stop()
+            PatipanStudio.Drive.Stop()
             return
         end
-        task.spawn(xDTaraZ.Util.Try, xDTaraZ.UI.StartDrive)
+        task.spawn(PatipanStudio.Util.Try, PatipanStudio.UI.StartDrive)
     end):AddKeyPicker("DriveFarmKey", { Default = "None", Mode = "Toggle" })
 end
 
-function xDTaraZ.UI.BuildRewards(window)
+function PatipanStudio.UI.BuildRewards(window)
     local rewardTab = window:AddTab(T("Rewards", "รางวัล"), "bell", T("Codes and claims", "โค้ดและรับรางวัล"))
 
     local codeBox = rewardTab:AddLeftGroupbox(T("Codes", "โค้ด"))
-    codeBox:AddButton({ Text = T("Redeem All Codes", "ใช้โค้ดทั้งหมด"), Style = "Primary", Func = xDTaraZ.UI.Spawn(function()
+    codeBox:AddButton({ Text = T("Redeem All Codes", "ใช้โค้ดทั้งหมด"), Style = "Primary", Func = PatipanStudio.UI.Spawn(function()
         if not GameLib.CodeRemote then
-            xDTaraZ.UI.Notify("The code box was not found in this game version", "Warning")
+            PatipanStudio.UI.Notify("The code box was not found in this game version", "Warning")
             return
         end
-        local count, cash = xDTaraZ.Rewards.RedeemCodes(Config.Codes)
-        xDTaraZ.UI.Notify(("Redeemed %d new codes (+$%s)"):format(count, xDTaraZ.Util.Commas(cash)))
+        local count, cash = PatipanStudio.Rewards.RedeemCodes(Config.Codes)
+        PatipanStudio.UI.Notify(("Redeemed %d new codes (+$%s)"):format(count, PatipanStudio.Util.Commas(cash)))
     end) })
     codeBox:AddInput("Code", {
         Text = T("Custom Code", "ใส่โค้ดเอง"),
@@ -1610,25 +1536,25 @@ function xDTaraZ.UI.BuildRewards(window)
             State.Opt.Code = value
         end,
     })
-    codeBox:AddButton({ Text = T("Redeem", "ใช้โค้ด"), Func = xDTaraZ.UI.Spawn(function()
-        local count = xDTaraZ.Rewards.RedeemCodes({ State.Opt.Code })
-        xDTaraZ.UI.Notify(count > 0 and "Code redeemed" or "Code invalid or already used")
+    codeBox:AddButton({ Text = T("Redeem", "ใช้โค้ด"), Func = PatipanStudio.UI.Spawn(function()
+        local count = PatipanStudio.Rewards.RedeemCodes({ State.Opt.Code })
+        PatipanStudio.UI.Notify(count > 0 and "Code redeemed" or "Code invalid or already used")
     end) })
 
     local claimBox = rewardTab:AddRightGroupbox(T("Claims", "รับรางวัล"))
-    xDTaraZ.UI.Toggle(claimBox, "AutoPlaytime", T("Auto Playtime Rewards", "รับรางวัลเวลาเล่นอัตโนมัติ"), T("Claims cash, cars and packs as soon as they unlock", "รับเงิน รถ และแพ็กทันทีที่ปลดล็อก"))
+    PatipanStudio.UI.Toggle(claimBox, "AutoPlaytime", T("Auto Playtime Rewards", "รับรางวัลเวลาเล่นอัตโนมัติ"), T("Claims cash, cars and packs as soon as they unlock", "รับเงิน รถ และแพ็กทันทีที่ปลดล็อก"))
         :AddKeyPicker("AutoPlaytimeKey", { Default = "None", Mode = "Toggle" })
-    xDTaraZ.UI.Toggle(claimBox, "AutoClaimMisc", T("Auto Claim Pending", "รับรางวัลค้างอัตโนมัติ"), T("Claims pending race and event rewards", "รับรางวัลแข่งและอีเวนต์ที่ค้างอยู่"))
-    claimBox:AddButton({ Text = T("Claim All Now", "รับทั้งหมดเดี๋ยวนี้"), Style = "Primary", Func = xDTaraZ.UI.Spawn(function()
-        local count = xDTaraZ.Rewards.ClaimPlaytime()
-        xDTaraZ.Rewards.ClaimMisc()
-        xDTaraZ.UI.Notify(("Claimed %d playtime rewards"):format(count))
+    PatipanStudio.UI.Toggle(claimBox, "AutoClaimMisc", T("Auto Claim Pending", "รับรางวัลค้างอัตโนมัติ"), T("Claims pending race and event rewards", "รับรางวัลแข่งและอีเวนต์ที่ค้างอยู่"))
+    claimBox:AddButton({ Text = T("Claim All Now", "รับทั้งหมดเดี๋ยวนี้"), Style = "Primary", Func = PatipanStudio.UI.Spawn(function()
+        local count = PatipanStudio.Rewards.ClaimPlaytime()
+        PatipanStudio.Rewards.ClaimMisc()
+        PatipanStudio.UI.Notify(("Claimed %d playtime rewards"):format(count))
     end) })
 end
 
-function xDTaraZ.UI.BuildVehicle(window)
+function PatipanStudio.UI.BuildVehicle(window)
     local carTab = window:AddTab(T("Vehicle", "รถ"), "play", T("Cars and driving", "รถและการขับ"))
-    local read, owned = pcall(xDTaraZ.Vehicle.Owned)
+    local read, owned = pcall(PatipanStudio.Vehicle.Owned)
     owned = read and owned or {}
     State.Opt.DriveCar = owned[1]
 
@@ -1642,15 +1568,15 @@ function xDTaraZ.UI.BuildVehicle(window)
             State.Opt.DriveCar = value
         end,
     })
-    carBox:AddButton({ Text = T("Spawn Car", "เรียกรถ"), Style = "Primary", Func = xDTaraZ.UI.Spawn(function()
-        xDTaraZ.UI.Notify(xDTaraZ.Vehicle.Spawn(State.Opt.DriveCar) and "Car spawned" or "Spawn failed")
-    end) }):AddButton({ Text = T("Despawn", "เก็บรถ"), Func = xDTaraZ.UI.Spawn(xDTaraZ.Vehicle.Despawn) })
+    carBox:AddButton({ Text = T("Spawn Car", "เรียกรถ"), Style = "Primary", Func = PatipanStudio.UI.Spawn(function()
+        PatipanStudio.UI.Notify(PatipanStudio.Vehicle.Spawn(State.Opt.DriveCar) and "Car spawned" or "Spawn failed")
+    end) }):AddButton({ Text = T("Despawn", "เก็บรถ"), Func = PatipanStudio.UI.Spawn(PatipanStudio.Vehicle.Despawn) })
         :AddButton({ Text = T("Refresh", "รีเฟรช"), Func = function()
-            carDropdown:SetValues(xDTaraZ.Vehicle.Owned())
+            carDropdown:SetValues(PatipanStudio.Vehicle.Owned())
         end })
 
     local tuneBox = carTab:AddRightGroupbox(T("Performance", "สมรรถนะ"))
-    xDTaraZ.UI.Slider(tuneBox, "CarSpeed", T("Car Speed Boost", "เร่งความเร็วรถ"), T("Holds this speed while pressing W (0 = off)", "คงความเร็วนี้ขณะกด W (0 = ปิด)"), 0, 600)
+    PatipanStudio.UI.Slider(tuneBox, "CarSpeed", T("Car Speed Boost", "เร่งความเร็วรถ"), T("Holds this speed while pressing W (0 = off)", "คงความเร็วนี้ขณะกด W (0 = ปิด)"), 0, 600)
 end
 
 local function PlayerNames()
@@ -1661,9 +1587,9 @@ local function PlayerNames()
     return names
 end
 
-function xDTaraZ.UI.BuildTeleport(window)
+function PatipanStudio.UI.BuildTeleport(window)
     local teleportTab = window:AddTab(T("Teleport", "วาร์ป"), "globe", T("Go anywhere", "ไปได้ทุกที่"))
-    local read, destNames, destinations = pcall(xDTaraZ.Teleport.Destinations)
+    local read, destNames, destinations = pcall(PatipanStudio.Teleport.Destinations)
     if not read then destNames, destinations = {}, {} end
 
     local placeBox = teleportTab:AddLeftGroupbox(T("Places", "สถานที่"))
@@ -1676,10 +1602,10 @@ function xDTaraZ.UI.BuildTeleport(window)
             State.Opt.Place = value
         end,
     })
-    placeBox:AddButton({ Text = T("Teleport", "วาร์ป"), Style = "Primary", Func = xDTaraZ.UI.Spawn(function()
-        xDTaraZ.Teleport.Go(destinations[State.Opt.Place or destNames[1]])
+    placeBox:AddButton({ Text = T("Teleport", "วาร์ป"), Style = "Primary", Func = PatipanStudio.UI.Spawn(function()
+        PatipanStudio.Teleport.Go(destinations[State.Opt.Place or destNames[1]])
     end) }):AddButton({ Text = T("Refresh", "รีเฟรช"), Func = function()
-        destNames, destinations = xDTaraZ.Teleport.Destinations()
+        destNames, destinations = PatipanStudio.Teleport.Destinations()
         placeDropdown:SetValues(destNames)
     end })
 
@@ -1694,51 +1620,51 @@ function xDTaraZ.UI.BuildTeleport(window)
             State.Opt.TargetPlayer = value
         end,
     })
-    playerBox:AddButton({ Text = T("Teleport To Player", "วาร์ปไปหาผู้เล่น"), Style = "Primary", Func = xDTaraZ.UI.Spawn(function()
-        xDTaraZ.Teleport.ToPlayer(State.Opt.TargetPlayer)
+    playerBox:AddButton({ Text = T("Teleport To Player", "วาร์ปไปหาผู้เล่น"), Style = "Primary", Func = PatipanStudio.UI.Spawn(function()
+        PatipanStudio.Teleport.ToPlayer(State.Opt.TargetPlayer)
     end) }):AddButton({ Text = T("Refresh", "รีเฟรช"), Func = function()
         playerDropdown:SetValues(PlayerNames())
     end })
 end
 
-function xDTaraZ.UI.BuildPlayer(window)
+function PatipanStudio.UI.BuildPlayer(window)
     local playerTab = window:AddTab(T("Player", "ผู้เล่น"), "user", T("Movement", "การเคลื่อนที่"))
 
     local moveBox = playerTab:AddLeftGroupbox(T("Movement", "การเคลื่อนที่"))
-    xDTaraZ.UI.Toggle(moveBox, "SpeedEnabled", T("Custom Speed", "ปรับความเร็วเอง"), T("Uses the speed and jump below while on foot", "ใช้ความเร็วและแรงกระโดดด้านล่างตอนเดิน"), function(on)
-        if not on then xDTaraZ.Movement.ResetSpeed() end
+    PatipanStudio.UI.Toggle(moveBox, "SpeedEnabled", T("Custom Speed", "ปรับความเร็วเอง"), T("Uses the speed and jump below while on foot", "ใช้ความเร็วและแรงกระโดดด้านล่างตอนเดิน"), function(on)
+        if not on then PatipanStudio.Movement.ResetSpeed() end
     end):AddKeyPicker("SpeedEnabledKey", { Default = "None", Mode = "Toggle" })
-    xDTaraZ.UI.Slider(moveBox, "WalkSpeed", T("Walk Speed", "ความเร็วเดิน"), nil, 16, 200)
-    xDTaraZ.UI.Slider(moveBox, "JumpPower", T("Jump Power", "แรงกระโดด"), nil, 50, 300)
+    PatipanStudio.UI.Slider(moveBox, "WalkSpeed", T("Walk Speed", "ความเร็วเดิน"), nil, 16, 200)
+    PatipanStudio.UI.Slider(moveBox, "JumpPower", T("Jump Power", "แรงกระโดด"), nil, 50, 300)
 
     local abilityBox = playerTab:AddRightGroupbox(T("Abilities", "ความสามารถ"))
-    xDTaraZ.UI.Toggle(abilityBox, "Noclip", T("Noclip", "ทะลุวัตถุ"), T("Walk through walls", "เดินทะลุกำแพง"), xDTaraZ.Movement.SetNoclip)
-    xDTaraZ.UI.Toggle(abilityBox, "InfiniteJump", T("Infinite Jump", "กระโดดไม่จำกัด"), T("Jump again in mid air", "กระโดดซ้ำกลางอากาศได้"))
+    PatipanStudio.UI.Toggle(abilityBox, "Noclip", T("Noclip", "ทะลุวัตถุ"), T("Walk through walls", "เดินทะลุกำแพง"), PatipanStudio.Movement.SetNoclip)
+    PatipanStudio.UI.Toggle(abilityBox, "InfiniteJump", T("Infinite Jump", "กระโดดไม่จำกัด"), T("Jump again in mid air", "กระโดดซ้ำกลางอากาศได้"))
 
     local worldBox = playerTab:AddRightGroupbox(T("World", "โลก"))
-    xDTaraZ.UI.Toggle(worldBox, "Fullbright", T("Fullbright", "สว่างเต็มจอ"), T("Always daylight", "กลางวันตลอด"), xDTaraZ.Movement.SetFullbright)
+    PatipanStudio.UI.Toggle(worldBox, "Fullbright", T("Fullbright", "สว่างเต็มจอ"), T("Always daylight", "กลางวันตลอด"), PatipanStudio.Movement.SetFullbright)
 end
 
-function xDTaraZ.UI.BuildVisuals(window)
+function PatipanStudio.UI.BuildVisuals(window)
     local visualTab = window:AddTab(T("Visuals", "ภาพ"), "eye", T("ESP", "ESP"))
     local espBox = visualTab:AddLeftGroupbox(T("Robbery", "การปล้น"))
-    xDTaraZ.UI.Toggle(espBox, "EspAtm", T("ATMs", "ATM"), T("Shows every ATM you can rob with its rarity", "โชว์ ATM ที่ปล้นได้ทุกตู้พร้อมระดับ"))
-    xDTaraZ.UI.Toggle(espBox, "EspDropOff", T("Drop-off Points", "จุดส่งเงิน"), T("Where outlaws cash out", "จุดที่โจรไปส่งเงิน"))
+    PatipanStudio.UI.Toggle(espBox, "EspAtm", T("ATMs", "ATM"), T("Shows every ATM you can rob with its rarity", "โชว์ ATM ที่ปล้นได้ทุกตู้พร้อมระดับ"))
+    PatipanStudio.UI.Toggle(espBox, "EspDropOff", T("Drop-off Points", "จุดส่งเงิน"), T("Where outlaws cash out", "จุดที่โจรไปส่งเงิน"))
 
     local peopleBox = visualTab:AddRightGroupbox(T("Players", "ผู้เล่น"))
-    xDTaraZ.UI.Toggle(peopleBox, "EspCops", T("Players By Job", "ผู้เล่นตามอาชีพ"), T("Blue = police, red = outlaw, orange = delivery", "น้ำเงิน = ตำรวจ, แดง = โจร, ส้ม = ส่งของ"))
+    PatipanStudio.UI.Toggle(peopleBox, "EspCops", T("Players By Job", "ผู้เล่นตามอาชีพ"), T("Blue = police, red = outlaw, orange = delivery", "น้ำเงิน = ตำรวจ, แดง = โจร, ส้ม = ส่งของ"))
 end
 
-function xDTaraZ.UI.BuildSettings(window)
+function PatipanStudio.UI.BuildSettings(window)
     local settingsTab = window:AddSettingsTab()
     local sessionBox = settingsTab:AddRightGroupbox(T("Session", "เซสชัน"))
-    xDTaraZ.UI.Toggle(sessionBox, "AntiAfk", T("Anti AFK", "กันหลุด AFK"), T("Never get kicked for idling", "ไม่โดนเตะเพราะยืนนิ่ง"))
-    xDTaraZ.UI.Toggle(sessionBox, "AutoRejoin", T("Auto Rejoin", "เข้าเกมใหม่อัตโนมัติ"), T("Rejoins after a disconnect", "หลุดแล้วเข้าเกมใหม่เอง"))
-    sessionBox:AddButton({ Text = T("Server Hop", "ย้ายเซิร์ฟ"), Func = xDTaraZ.UI.Spawn(xDTaraZ.Session.Hop) })
+    PatipanStudio.UI.Toggle(sessionBox, "AntiAfk", T("Anti AFK", "กันหลุด AFK"), T("Never get kicked for idling", "ไม่โดนเตะเพราะยืนนิ่ง"))
+    PatipanStudio.UI.Toggle(sessionBox, "AutoRejoin", T("Auto Rejoin", "เข้าเกมใหม่อัตโนมัติ"), T("Rejoins after a disconnect", "หลุดแล้วเข้าเกมใหม่เอง"))
+    sessionBox:AddButton({ Text = T("Server Hop", "ย้ายเซิร์ฟ"), Func = PatipanStudio.UI.Spawn(PatipanStudio.Session.Hop) })
 end
 
 ---Features whose game module or remote is missing refuse to turn on and say why, instead of erroring every tick.
-function xDTaraZ.UI.GateModules()
+function PatipanStudio.UI.GateModules()
     local noExecutor = T("Not available on this executor", "ใช้กับ executor นี้ไม่ได้")
     local changed = T("Not found after a game update", "หาไม่เจอหลังเกมอัปเดต")
     local en, th = {}, {}
@@ -1759,7 +1685,7 @@ function xDTaraZ.UI.GateModules()
 end
 
 ---Runs on the UI's own thread: game-module threads cannot touch widgets, so halts and messages wait here.
-function xDTaraZ.UI.Pump()
+function PatipanStudio.UI.Pump()
     while #State.Messages > 0 do
         local msg = table.remove(State.Messages, 1)
         Library:Notify("Driving Empire", msg[1], 5, msg[2])
@@ -1768,31 +1694,31 @@ function xDTaraZ.UI.Pump()
         local toggle = Library.Toggles[table.remove(State.Halted, 1)]
         if toggle and toggle.Value then toggle:SetValue(false) end
     end
-    local label = xDTaraZ.UI.StatusLabel
-    if label then label:SetText(xDTaraZ.UI.StatusText()) end
+    local label = PatipanStudio.UI.StatusLabel
+    if label then label:SetText(PatipanStudio.UI.StatusText()) end
 end
 
-function xDTaraZ.UI.Build()
+function PatipanStudio.UI.Build()
     local window = Library.Window
-    local try = xDTaraZ.Util.Try
+    local try = PatipanStudio.Util.Try
     window:AddTabSection(T("Main", "หลัก"))
-    for _, build in ipairs({ xDTaraZ.UI.BuildFarm, xDTaraZ.UI.BuildRewards, xDTaraZ.UI.BuildVehicle, xDTaraZ.UI.BuildTeleport, xDTaraZ.UI.BuildPlayer, xDTaraZ.UI.BuildVisuals, xDTaraZ.UI.BuildSettings }) do
+    for _, build in ipairs({ PatipanStudio.UI.BuildFarm, PatipanStudio.UI.BuildRewards, PatipanStudio.UI.BuildVehicle, PatipanStudio.UI.BuildTeleport, PatipanStudio.UI.BuildPlayer, PatipanStudio.UI.BuildVisuals, PatipanStudio.UI.BuildSettings }) do
         try(build, window)
     end
-    try(xDTaraZ.UI.GateModules)
-    Library:Every(1, xDTaraZ.UI.Pump)
+    try(PatipanStudio.UI.GateModules)
+    Library:Every(1, PatipanStudio.UI.Pump)
 end
 
 ---@return boolean  false when the menu could not load
 local function BuildInterface()
-    Library = xDTaraZ.Util.LoadLibrary()
+    Library = PatipanStudio.Util.LoadLibrary()
     if not Library then return false end
-    xDTaraZ.Library = Library
+    PatipanStudio.Library = Library
     pcall(MarioBanner.Step, "UI library")
     T = function(en, th) return Library:T(en, th) end
 
     Library:OnUnload(function()
-        xDTaraZ.Scheduler.Stop()
+        PatipanStudio.Scheduler.Stop()
         getgenv().DrivingEmpireUnload = nil
     end)
     getgenv().DrivingEmpireUnload = function()
@@ -1801,17 +1727,17 @@ local function BuildInterface()
 
     Library:CreateWindow({
         Title = "PatipanStudio",
-        SubTitle = "Driving Empire by xDTaraZ",
+        SubTitle = "Driving Empire by PatipanStudio",
         MenuKey = Enum.KeyCode.LeftControl,
         ConfigFolder = Config.SaveFolder,
         Language = "Auto",
         Theme = "Overworld",
         Intro = true,
         OnUnlocked = function()
-            xDTaraZ.UI.Build()
-            xDTaraZ.Util.Try(xDTaraZ.Scheduler.Boot)
-            xDTaraZ.UI.Notify("Loaded", "Success")
-            xDTaraZ.Util.Try(Library.LoadAutoloadConfig, Library)
+            PatipanStudio.UI.Build()
+            PatipanStudio.Util.Try(PatipanStudio.Scheduler.Boot)
+            PatipanStudio.UI.Notify("Loaded", "Success")
+            PatipanStudio.Util.Try(Library.LoadAutoloadConfig, Library)
         end,
     })
     return true

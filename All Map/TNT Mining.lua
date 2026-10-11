@@ -23,83 +23,9 @@ do
 end
 
 function MarioBanner.Show()
-    local ok, executor = pcall(identifyexecutor)
-    if not ok or type(executor) ~= "string" then executor = "Unknown" end
-    local rule = string.rep("=", 54)
-    MarioBanner.Print(table.concat({
-        "",
-        [[
-                                                                     @%@
-                                                                    @*-#@
-                                          @@@@@@@@@@@@@          @@#+.:-*%@@      @@
-                                   @@@@@%##***********##%@@@@@   @*--:-==+*@@@@#*+==+*%@@
-                              @@@@#+=+==---==++++++++++++**+++#@@@@@%==+@@@@#:.......:::=%@@
-                          @@%#+---::-=++++++++++************+***++#%@%+@@@#:..-+*****+-:::+%@
-                      @@@#=-::.:-==++++++++++*************************#@@+::=*-:.:+-::-+:.:=#@
-                    @@%-:...:-===+++++**#################****************%%*+::::+*++::-+..:=#@
-                 @@%*-:...:--==++*########**+==--===+**#######************+#%+::-*==-:::=-::=+@@
-               @@%+=-::---===+*###%#+-:...................:=+#####***********#@+++==----==:-+*@@
-             @@%++=-======+*###%+:............................::+####**********#@*+=----=---**@@
-            @%=++=++++++*####=:...................................:+###**********%@==--==--+**@@
-          @@*+++++++++*###*:........................................:-*##**********%*==+--=**@@@
-         @%+++++++++*##%+:............................................::*##*********%%+--=##%@+%@
-       @@#+++++++++###*:.....-+==+*#-......................:**+**#+:....:=###********%%+*##%@*:+@@
-      @@*++++++++*###:......-+:.:-=*#*-..................:+*--+**#%*:.....:+##********#@#%%+:.:--+#@
-     @@+++++++++*##+:......-*::-=++++*##:...............=#=-++****#%*:.....:-##********#@@@%+=-++#@@
-    @@+=-=+++++*##+.......:*-:==++++++*##+............-*+-=+*******#%+:.....:-##********#@  @#=#@@
-    @*=:.=++++*##-.......:*=:=++++++++*+*##=........:**==+**********##=:.....::*#********%@  @#@
-   @#+-.-++*+*##=........*+-++++++*********##-....:+*==+*************#%-:.....:-**********%@
-  @@++-=++***##+........*+-++++++***********#%*::=#+-+****************#%-:.....:=**********@@
- @@*++=++***###........+*-+++++***************###+-=+*****************###-:.....:+*********%@
- @%++=+*****#%:.......=*-++++*******************==+********************#%*-:....:-#********#@@
-@@**+++****##+.......=*=+++*********************************************#%+::....:+*********@@
-@%**++*****##-......=#=++**********#%#********************%%*************#%+:....:-#********%@
-@%**++*****#*:.....-*=++**********#%%%#*****************#%%%**************#%=:....-********##@@
-@#**++*****#*:....:*++************%%%%%%#*************#%%%%%#**************##-:...-+*******#*@@
-@#**+******#+:...:#++************#%%%@@%%##*********#%%%%%@%#**************#%#-:..:+*+*****#*@@
-@#**+******#+:..:#+=************#%%%%%*%%%##*******%%%%%%#%%##**************#%#::.-+*+*****#*@@
-@#*********#+:.:+*=*************%%%%%+==*%%###***#%%%%%#++*%##***************#%*::-+*+*****#*@@
-@%*#*******#*:.+*=*************%%%%%*=----*%###%%%%%%#+====*###**************##%+--*++****###@@
-@%*#********#-:####***********#%%%%#=-::.::=###%%%%#+==--:::####************#%%%#==*+*****###@@
-@@##********#+:#%%%%#********#%%%%%=--:....::=%%%%+==--::..:-%###********#%%%%%%#=#++*****##%@
-@@###********#-=#%%%%%%##****%%%%%*=-:.......::-==---::.....:+###*****##%%%%%%%#++#++****###@@
- @%###*******##::=+%%%%%%%##%%%%%#=-:...........:::::........:####*#%%%%%%%%%*+=+*+=*****##%@
- @@###********#+:.:-=*%%%%%%%%%%%+--:.........................=###%%%%%%%%*+====*=.=****###@@
-  @@###********#+:..::-=*%%%%%%%*=-:..:::-------------::::...::*#%%%%%%*+==---=*+-=+***###%@
-   @%###*******#%#*+-..::-=#%@@%#**++==----------------===+++**#%@@@#+===---+*#*++****####@@
-    @%###**#%#=::-=+##*##+-:...:::-=+**---*###*=--++++=--=++++=--:::-=+#%**#-:..:=#%##%##@@
-    @@%#%#+:...:-=++=:..::=*####+#=:..=@#%:....%@*....*%%#...:--=*##+------=+=:::::-=#%%@@
-     @@%*=--::::-*::::::-%=...:%@#:...:@@#.....%@+....=@@=.........:*#=-----=+=:::-==++%@@
-  @@%+--+==--:::-#=-::::-%+....+%%-....%@#....:@@+....+@@:...:%%....-@*---==+*+:::-=+++*=+#@@
- @%-:-==*+==-:::-+*--:::-*#:...........*@#....:@@+....+@%..........-%%+---==+*=::-=+++#*=-:-*@@
- @@#+===+*+==-::-=*=--::-=%-......:....+@%:....:-....:#@*....=+:...-%#=--==+**-:--=++#*+=-=*%@
-   @@#*=++#+=-:::-+*------#+....+@%....-@@#:.......::*@@+....+#=.:::=%+-===+#+-:-=++***++*%@@
-     @@#+++*==-::-=*=-----+%:...-@@-::-=@%%@#+=--==*%@%%=:::::::::::#%+===+**----=++#**#%@@
-     @@*-=+*+=-::-=*+=----=%#+*#%@%@@@@@#+-=*%%@@@%#*==*@@%%%##*+*#@@*====+#+-:-=++***++%@
-    @@*--=+++===++*#*=------#%%#+=-----===============----==+*#%%%#+=-===+*#*+++=++**+==*@@
-    @%=:-==+***%%@@@#=-=====++*##%%%@@@@@@@@@@%%@@@@@@@@@%%%##**++=======+*@@@@%#*+#+=--=#@
-    @*:---==+*###%@@@#*#%%@%%%%%%######*****++++++++***######%%%%%%%%%%#*#%@@@####**+=---+@@
-   @@+--=**#%@@@@@  @@@%%%%%%%#*******************************####%%%%%%@@@  @@@@@%#**=--+%@
-    @@%%@@@@@          @@@@%%%%%%###**********************####%%%%%%%@@@          @@@@@%%%@@
-      @@                  @@@@@%%%%%%%%%###############%%%%%%%%%@@@@@                  @@@
-                               @@@@@@%%%%%%%%%%%%%%%%%%%%%%@@@@@
-                                    @@@@@@@@@@@@@@@@@@@@@@@
-]],
-        [[
-  __  __    _    ____  ___ ___    _   _ _   _ ____
- |  \/  |  / \  |  _ \|_ _/ _ \  | | | | | | | __ )
- | |\/| | / _ \ | |_) || | | | | | |_| | | | |  _ \
- | |  | |/ ___ \|  _ < | | |_| | |  _  | |_| | |_) |
- |_|  |_/_/   \_\_| \_\___\___/  |_| |_|\___/|____/
-]],
-        rule,
-        "   TNT MINING  //  by xDTaraZ  //  discord.gg/FHVfmeSceA",
-        "   executor: " .. executor .. "   //   player: " .. game:GetService("Players").LocalPlayer.Name,
-        rule,
-    }, "\n"))
+    MarioBanner.Print("[PS] PatipanStudio | UI customized by PatipanStudio")
 end
 
----@param label string  what just finished loading
 function MarioBanner.Step(label)
     local now = os.clock()
     MarioBanner.Done = math.min(MarioBanner.Done + 1, MarioBanner.Total)
@@ -141,18 +67,18 @@ local LocalPlayer = Players.LocalPlayer
 local vector3New, cframeNew = Vector3.new, CFrame.new
 local mathMin, mathMax, mathCeil = math.min, math.max, math.ceil
 
-local xDTaraZ = setmetatable({}, {
+local PatipanStudio = setmetatable({}, {
     __newindex = function(self, key, value)
         rawset(self, key, type(value) == "function" and LPH_JIT(value) or value)
     end,
 })
 
-xDTaraZ.Config = {
+PatipanStudio.Config = {
     Discord = "https://discord.gg/FHVfmeSceA",
     UpdateLog = {
         { "2026-10-03", "Classic PatipanStudio UI is back\nBetter executor support\nBug fixes & better UI" },
     },
-    UiSource = "https://raw.githubusercontent.com/xDTaraZz/Roblox-Scripts/refs/heads/main/ui.lua",
+    UiSource = "https://raw.githubusercontent.com/r0615295206-cloud/PatipanStudio-Scripts/refs/heads/main/ui.lua",
     SaveFolder = "TNT Mining",
     LoadTimeout = 30,
     RequireTimeout = 3,
@@ -193,7 +119,7 @@ xDTaraZ.Config = {
     },
 }
 
-xDTaraZ.State = {
+PatipanStudio.State = {
     Alive = true,
     Busy = false,
     NeedRefill = true,
@@ -240,13 +166,13 @@ xDTaraZ.State = {
     },
 }
 
-local Config, State = xDTaraZ.Config, xDTaraZ.State
+local Config, State = PatipanStudio.Config, PatipanStudio.State
 
-xDTaraZ.GameLib = { Deferred = {} }
+PatipanStudio.GameLib = { Deferred = {} }
 
 ---Runs `fn` on a fresh thread switched to identity 2; game code that requires lazily fails from executor identities.
 ---@return boolean, any  pcall-style, false when the executor can't really switch or it timed out
-function xDTaraZ.GameLib.RunAsGame(timeout, fn, ...)
+function PatipanStudio.GameLib.RunAsGame(timeout, fn, ...)
     local args = table.pack(...)
     local box
     task.spawn(function()
@@ -269,7 +195,7 @@ end
 
 ---@param path string  dotted path from ReplicatedStorage
 ---@return table?      nil when it is missing or this executor can't require it
-function xDTaraZ.GameLib.Require(path)
+function PatipanStudio.GameLib.Require(path)
     local module = ReplicatedStorage
     for name in path:gmatch("[^.]+") do
         module = module and module:FindFirstChild(name)
@@ -286,15 +212,15 @@ function xDTaraZ.GameLib.Require(path)
 
     local ok, loaded = pcall(require, module)
     if ok then return loaded end
-    local okAgain, again = xDTaraZ.GameLib.RunAsGame(Config.RequireTimeout, require, module)
+    local okAgain, again = PatipanStudio.GameLib.RunAsGame(Config.RequireTimeout, require, module)
     if okAgain then return again end
     warn("[TNTMining] require", path, loaded)
     return nil
 end
 
 ---Calls a game function inline; one that hits "non-RobloxScript" moves to an identity-2 thread for good.
-function xDTaraZ.GameLib.Call(fn, ...)
-    local deferred = xDTaraZ.GameLib.Deferred
+function PatipanStudio.GameLib.Call(fn, ...)
+    local deferred = PatipanStudio.GameLib.Deferred
     if not deferred[fn] then
         local result = table.pack(pcall(fn, ...))
         if result[1] then return table.unpack(result, 2, result.n) end
@@ -302,7 +228,7 @@ function xDTaraZ.GameLib.Call(fn, ...)
         deferred[fn] = true
     end
 
-    local result = table.pack(xDTaraZ.GameLib.RunAsGame(Config.GameCallTimeout, fn, ...))
+    local result = table.pack(PatipanStudio.GameLib.RunAsGame(Config.GameCallTimeout, fn, ...))
     if not result[1] then error(result[2], 0) end
     return table.unpack(result, 2, result.n)
 end
@@ -311,7 +237,7 @@ do
     ReplicatedStorage:WaitForChild("Logic", Config.LoadTimeout)
     ReplicatedStorage:WaitForChild("ClientLogic", Config.LoadTimeout)
 
-    local GameLib = xDTaraZ.GameLib
+    local GameLib = PatipanStudio.GameLib
     GameLib.Session = GameLib.Require("Logic.Classes.PlayerSession")
     GameLib.Network = GameLib.Require("Logic.Network")
     GameLib.MineState = GameLib.Require("ClientLogic.Services.MineStateService")
@@ -326,11 +252,11 @@ do
     GameLib.Ready = GameLib.Session ~= nil and GameLib.Network ~= nil and GameLib.MineState ~= nil
 end
 
-local GameLib = xDTaraZ.GameLib
+local GameLib = PatipanStudio.GameLib
 
 ---@param need string  GameLib field path, or ":Method" on the player session
 ---@return boolean     false only when it is known to be gone
-function xDTaraZ.GameLib.Has(need, session)
+function PatipanStudio.GameLib.Has(need, session)
     local method = need:match("^:(.+)")
     if method then return session == nil or type(session[method]) == "function" end
     local node = GameLib
@@ -341,13 +267,13 @@ function xDTaraZ.GameLib.Has(need, session)
 end
 
 ---@return table  option idx -> missing needs
-function xDTaraZ.GameLib.Missing()
+function PatipanStudio.GameLib.Missing()
     local ok, session = pcall(function() return GameLib.Session.GetClient() end)
     if not ok then session = nil end
     local missing = {}
     for idx, needs in pairs(Config.Needs) do
         for _, need in ipairs(needs) do
-            if not xDTaraZ.GameLib.Has(need, session) then
+            if not PatipanStudio.GameLib.Has(need, session) then
                 missing[idx] = missing[idx] or {}
                 table.insert(missing[idx], need)
             end
@@ -356,41 +282,41 @@ function xDTaraZ.GameLib.Missing()
     return missing
 end
 
-xDTaraZ.AreaOrder = GameLib.Areas and GameLib.Areas.GetOrderedNames() or {}
+PatipanStudio.AreaOrder = GameLib.Areas and GameLib.Areas.GetOrderedNames() or {}
 
-xDTaraZ.BombOrder = {}
+PatipanStudio.BombOrder = {}
 do
     for name, bomb in pairs(GameLib.Bombs or {}) do
         if type(bomb) == "table" and not bomb.IsPremium and bomb.Price then
-            table.insert(xDTaraZ.BombOrder, name)
+            table.insert(PatipanStudio.BombOrder, name)
         end
     end
-    table.sort(xDTaraZ.BombOrder, function(a, b) return GameLib.Bombs[a].Price < GameLib.Bombs[b].Price end)
+    table.sort(PatipanStudio.BombOrder, function(a, b) return GameLib.Bombs[a].Price < GameLib.Bombs[b].Price end)
 end
 
-xDTaraZ.UpgradeNames = {}
+PatipanStudio.UpgradeNames = {}
 do
     for name, upgrade in pairs(GameLib.Upgrades or {}) do
         if type(upgrade) == "table" and not upgrade.AreaSpecific then
-            table.insert(xDTaraZ.UpgradeNames, name)
+            table.insert(PatipanStudio.UpgradeNames, name)
         end
     end
-    table.sort(xDTaraZ.UpgradeNames, function(a, b)
+    table.sort(PatipanStudio.UpgradeNames, function(a, b)
         return (GameLib.Upgrades[a].LayoutOrder or 0) < (GameLib.Upgrades[b].LayoutOrder or 0)
     end)
 end
 
 local SUFFIXES = { "", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc" }
 
-function xDTaraZ:Session()
+function PatipanStudio:Session()
     return GameLib.Session.GetClient()
 end
 
-function xDTaraZ:Invoke(action, args)
+function PatipanStudio:Invoke(action, args)
     return GameLib.Network.ClientAction.Invoke({ action, args })
 end
 
-function xDTaraZ.Format(number)
+function PatipanStudio.Format(number)
     number = tonumber(number) or 0
     local tier = 1
     while number >= 1000 and tier < #SUFFIXES do
@@ -399,26 +325,26 @@ function xDTaraZ.Format(number)
     return tier == 1 and ("%d"):format(number) or ("%.2f%s"):format(number, SUFFIXES[tier])
 end
 
-function xDTaraZ:Notify(text)
+function PatipanStudio:Notify(text)
     State.Messages[#State.Messages + 1] = text
 end
 
-function xDTaraZ:Connect(signal, handler)
+function PatipanStudio:Connect(signal, handler)
     local conn = signal:Connect(handler)
     table.insert(State.Connections, conn)
     return conn
 end
 
-function xDTaraZ.Try(fn, ...)
+function PatipanStudio.Try(fn, ...)
     local ok, err = pcall(fn, ...)
     if not ok then warn("[TNTMining]", err) end
     return ok, err
 end
 
-xDTaraZ.Util = {}
+PatipanStudio.Util = {}
 
 ---@return string?, string?  body, or nil + why every transport failed
-function xDTaraZ.Util.HttpGet(url)
+function PatipanStudio.Util.HttpGet(url)
     local ok, body = pcall(function() return game:HttpGet(url) end)
     if ok and type(body) == "string" then return body end
 
@@ -433,7 +359,7 @@ function xDTaraZ.Util.HttpGet(url)
 end
 
 ---Shows a Roblox notification even when the menu never loaded; SetCore fails for a while after joining.
-function xDTaraZ.Util.Alert(text, detail)
+function PatipanStudio.Util.Alert(text, detail)
     warn("[TNTMining] menu:", text, detail or "")
     task.spawn(function()
         for _ = 1, Config.AlertTries do
@@ -444,35 +370,35 @@ function xDTaraZ.Util.Alert(text, detail)
 end
 
 ---@return table?  the UI library, nil after telling the player why
-function xDTaraZ.Util.LoadLibrary()
-    local body, err = xDTaraZ.Util.HttpGet(Config.UiSource)
+function PatipanStudio.Util.LoadLibrary()
+    local body, err = PatipanStudio.Util.HttpGet(Config.UiSource)
     if not body or not body:sub(-64):find("return Library%s*$") then
-        xDTaraZ.Util.Alert("Could not download the menu. Check your connection and run it again.", err or "truncated body")
+        PatipanStudio.Util.Alert("Could not download the menu. Check your connection and run it again.", err or "truncated body")
         return nil
     end
 
     local chunk, compileErr = loadstring(body)
     if not chunk then
-        xDTaraZ.Util.Alert("The menu failed to load on this executor: " .. tostring(compileErr))
+        PatipanStudio.Util.Alert("The menu failed to load on this executor: " .. tostring(compileErr))
         return nil
     end
     local ok, library = pcall(chunk)
     if ok and type(library) == "table" then return library end
-    xDTaraZ.Util.Alert("The menu failed to load on this executor: " .. tostring(library))
+    PatipanStudio.Util.Alert("The menu failed to load on this executor: " .. tostring(library))
     return nil
 end
 
-function xDTaraZ:Root()
+function PatipanStudio:Root()
     local char = LocalPlayer.Character
     return char and char:FindFirstChild("HumanoidRootPart")
 end
 
-function xDTaraZ:Humanoid()
+function PatipanStudio:Humanoid()
     local char = LocalPlayer.Character
     return char and char:FindFirstChildOfClass("Humanoid")
 end
 
-function xDTaraZ:AreaModel(areaName)
+function PatipanStudio:AreaModel(areaName)
     local map = Workspace:FindFirstChild("Map")
     local areas = map and map:FindFirstChild("Areas") or Workspace:FindFirstChild("Areas", true)
     if not areas then return nil end
@@ -482,15 +408,15 @@ function xDTaraZ:AreaModel(areaName)
     return nil
 end
 
-xDTaraZ.Mine = {}
+PatipanStudio.Mine = {}
 
 ---@return string  best owned area for current damage
-function xDTaraZ.Mine.PickArea(session)
+function PatipanStudio.Mine.PickArea(session)
     local picked = State.Opt.MineArea
     if picked ~= "Best" and session.OwnedAreas[picked] then return picked end
 
-    local best = xDTaraZ.AreaOrder[1]
-    for _, name in ipairs(xDTaraZ.AreaOrder) do
+    local best = PatipanStudio.AreaOrder[1]
+    for _, name in ipairs(PatipanStudio.AreaOrder) do
         if session.OwnedAreas[name] and session.Damage >= GameLib.Areas[name].ExplosionDamage.Start then
             best = name
         end
@@ -499,18 +425,18 @@ function xDTaraZ.Mine.PickArea(session)
 end
 
 ---@return boolean  mine loaded
-function xDTaraZ.Mine.Enter(areaName)
-    local area = xDTaraZ:AreaModel(areaName)
+function PatipanStudio.Mine.Enter(areaName)
+    local area = PatipanStudio:AreaModel(areaName)
     if not area then
         GameLib.AreaRenderer.RenderArea(areaName)
-        area = xDTaraZ:AreaModel(areaName)
+        area = PatipanStudio:AreaModel(areaName)
     end
 
     local mineArea = area and area:FindFirstChild("MineArea", true)
-    local hrp = xDTaraZ:Root()
+    local hrp = PatipanStudio:Root()
     if not (mineArea and hrp) then return false end
 
-    if not State.MineOrigin and not xDTaraZ:Session():IsInMineArea() then State.MineOrigin = hrp.CFrame end
+    if not State.MineOrigin and not PatipanStudio:Session():IsInMineArea() then State.MineOrigin = hrp.CFrame end
     hrp.CFrame = cframeNew(mineArea.Position + vector3New(0, mineArea.Size.Y / 2 + Config.MineStandOffset, 0))
     hrp.AssemblyLinearVelocity = Vector3.zero
 
@@ -523,7 +449,7 @@ function xDTaraZ.Mine.Enter(areaName)
     return false
 end
 
-function xDTaraZ.Mine.BlockValue(block, shardValue)
+function PatipanStudio.Mine.BlockValue(block, shardValue)
     if block.BlockType == "EggShard" then return shardValue end
     local info = GameLib.Blocks[block.BlockType]
     return info and info.SellValue or 0
@@ -531,7 +457,7 @@ end
 
 ---@param count number  max spots
 ---@return Vector3[]    best first, no overlap
-function xDTaraZ.Mine.FindBatch(session, count)
+function PatipanStudio.Mine.FindBatch(session, count)
     local mineState = GameLib.MineState
     local damage = session.Damage
     local radius = session:GetBombExplosionRadius(session.EquippedBomb, session.EnchantedBombs > 0)
@@ -559,7 +485,7 @@ function xDTaraZ.Mine.FindBatch(session, count)
     for _, block in pairs(mineState.GetBlocks()) do
         if not block.Alive then continue end
 
-        local worth = xDTaraZ.Mine.BlockValue(block, shardValue) * mathMin(1, damage / mathMax(block.Health, 1))
+        local worth = PatipanStudio.Mine.BlockValue(block, shardValue) * mathMin(1, damage / mathMax(block.Health, 1))
         if worth > 0 then
             local gx, gy, gz = block.GridX, block.GridY, block.GridZ
             for i = 1, #offsets do
@@ -601,7 +527,7 @@ function xDTaraZ.Mine.FindBatch(session, count)
 end
 
 ---@return string?  nil if rejected
-function xDTaraZ.Mine.WaitServerId(bomb)
+function PatipanStudio.Mine.WaitServerId(bomb)
     local giveUp = os.clock() + Config.IdConfirmTimeout
     while os.clock() < giveUp and not bomb.IsDestroyed do
         if not tostring(bomb.Id):match("^P") then return bomb.Id end
@@ -611,7 +537,7 @@ function xDTaraZ.Mine.WaitServerId(bomb)
 end
 
 ---@return number  drops collected
-function xDTaraZ.Mine.Collect(session)
+function PatipanStudio.Mine.Collect(session)
     local folder = Workspace:FindFirstChild("ClientCollectibleBlocks")
     if not folder then return 0 end
 
@@ -629,7 +555,7 @@ function xDTaraZ.Mine.Collect(session)
     return got
 end
 
-function xDTaraZ.Mine.Sell(session)
+function PatipanStudio.Mine.Sell(session)
     local before = session.Money
     session:SellBlocks(nil)
 
@@ -639,7 +565,7 @@ function xDTaraZ.Mine.Sell(session)
 end
 
 ---@return number  money per minute
-function xDTaraZ.Mine.EarnRate()
+function PatipanStudio.Mine.EarnRate()
     local log, cutoff = State.EarnLog, os.clock() - Config.RateWindow
     while log[1] and log[1][1] < cutoff do
         table.remove(log, 1)
@@ -650,26 +576,26 @@ function xDTaraZ.Mine.EarnRate()
     return total * 60 / Config.RateWindow
 end
 
-function xDTaraZ.Mine.ScanSecrets()
+function PatipanStudio.Mine.ScanSecrets()
     for _, block in pairs(GameLib.MineState.GetBlocks()) do
         local info = GameLib.Blocks[block.BlockType]
         local id = block.CollectibleId
         if block.Alive and info and info.Rarity == "Secret" and not State.SecretSeen[id] then
             State.SecretSeen[id] = true
-            xDTaraZ:Notify(("Secret block spawned: %s (%s)"):format(block.BlockType, xDTaraZ.Format(info.SellValue)))
+            PatipanStudio:Notify(("Secret block spawned: %s (%s)"):format(block.BlockType, PatipanStudio.Format(info.SellValue)))
         end
     end
 end
 
 ---Brings the character back to where Auto Mine entered the mine from; keeps the origin while the character is respawning.
-function xDTaraZ.Mine.ReturnHome()
+function PatipanStudio.Mine.ReturnHome()
     local origin = State.MineOrigin
     if not origin then return end
 
-    local hrp = xDTaraZ:Root()
+    local hrp = PatipanStudio:Root()
     if not hrp then return end
 
-    local session = xDTaraZ:Session()
+    local session = PatipanStudio:Session()
     if session:IsInMineArea() then
         session:LeaveMine()
         hrp.CFrame = origin
@@ -678,13 +604,13 @@ function xDTaraZ.Mine.ReturnHome()
     State.MineOrigin = nil
 end
 
-function xDTaraZ.Mine.Cycle()
-    local session = xDTaraZ:Session()
-    local areaName = xDTaraZ.Mine.PickArea(session)
+function PatipanStudio.Mine.Cycle()
+    local session = PatipanStudio:Session()
+    local areaName = PatipanStudio.Mine.PickArea(session)
 
     if session:GetMineAreaName() ~= areaName or GameLib.MineState.GetAreaName() ~= areaName then
         State.Status = "Entering " .. areaName
-        if not xDTaraZ.Mine.Enter(areaName) then
+        if not PatipanStudio.Mine.Enter(areaName) then
             State.Status = "Could not enter " .. areaName
             return
         end
@@ -692,7 +618,7 @@ function xDTaraZ.Mine.Cycle()
 
     if State.NeedRefill or session.HeldBombs < session.MaxActiveBombs then
         State.NeedRefill = false
-        xDTaraZ.Mine.Collect(session)
+        PatipanStudio.Mine.Collect(session)
         session:LeaveMine()
     end
 
@@ -701,7 +627,7 @@ function xDTaraZ.Mine.Cycle()
     end
 
     State.Status = "Bombing " .. areaName
-    local placed = xDTaraZ.Mine.PlaceBatch(session)
+    local placed = PatipanStudio.Mine.PlaceBatch(session)
     if #placed == 0 then
         State.Status = "Resetting mine run"
         session:LeaveMine()
@@ -710,7 +636,7 @@ function xDTaraZ.Mine.Cycle()
     end
 
     for _, bomb in ipairs(placed) do
-        local serverId = xDTaraZ.Mine.WaitServerId(bomb)
+        local serverId = PatipanStudio.Mine.WaitServerId(bomb)
         if serverId then
             session:IgniteBomb(serverId)
             State.Bombs += 1
@@ -719,15 +645,15 @@ function xDTaraZ.Mine.Cycle()
         end
     end
 
-    xDTaraZ.Mine.WaitExploded(placed)
-    xDTaraZ.Mine.Collect(session)
-    if State.Opt.AutoSell then xDTaraZ.Mine.Sell(session) end
+    PatipanStudio.Mine.WaitExploded(placed)
+    PatipanStudio.Mine.Collect(session)
+    if State.Opt.AutoSell then PatipanStudio.Mine.Sell(session) end
 end
 
 ---@return table[]  placed bombs
-function xDTaraZ.Mine.PlaceBatch(session)
+function PatipanStudio.Mine.PlaceBatch(session)
     local placed = {}
-    for _, pos in ipairs(xDTaraZ.Mine.FindBatch(session, mathMin(session.HeldBombs, session.MaxActiveBombs))) do
+    for _, pos in ipairs(PatipanStudio.Mine.FindBatch(session, mathMin(session.HeldBombs, session.MaxActiveBombs))) do
         local reply = session:PlaceBomb(cframeNew(pos))
         local bomb = reply and reply.Success and session.ActiveBombs[reply.Id]
         if not bomb then break end
@@ -736,7 +662,7 @@ function xDTaraZ.Mine.PlaceBatch(session)
     return placed
 end
 
-function xDTaraZ.Mine.WaitExploded(bombs)
+function PatipanStudio.Mine.WaitExploded(bombs)
     local giveUp = os.clock() + Config.ExplodeTimeout
     local function anyLeft()
         for _, bomb in ipairs(bombs) do
@@ -751,35 +677,35 @@ function xDTaraZ.Mine.WaitExploded(bombs)
     task.wait(Config.DropSettle)
 end
 
-xDTaraZ.Progress = {}
+PatipanStudio.Progress = {}
 
-function xDTaraZ.Progress.Click()
-    local reply = xDTaraZ:Invoke("ApplyClicks", { Config.ClicksPerBatch })
+function PatipanStudio.Progress.Click()
+    local reply = PatipanStudio:Invoke("ApplyClicks", { Config.ClicksPerBatch })
     if not (reply and reply.Success) then return end
-    xDTaraZ:Session():ApplyDataUpdate({ Damage = reply.Damage, Level = reply.Level })
+    PatipanStudio:Session():ApplyDataUpdate({ Damage = reply.Damage, Level = reply.Level })
 end
 
-function xDTaraZ.Progress.StartClicking()
+function PatipanStudio.Progress.StartClicking()
     task.spawn(function()
         while State.Alive and State.Opt.AutoClick do
-            xDTaraZ.Scheduler.Run("AutoClick", xDTaraZ.Progress.Click)
+            PatipanStudio.Scheduler.Run("AutoClick", PatipanStudio.Progress.Click)
             task.wait(Config.ClickInterval)
         end
     end)
 end
 
 ---@return boolean  rebirth sent
-function xDTaraZ.Progress.Rebirth()
-    local session = xDTaraZ:Session()
+function PatipanStudio.Progress.Rebirth()
+    local session = PatipanStudio:Session()
     if session.Level < GameLib.Rebirth.GetRebirthLevelRequirement(session.Rebirths) then return false end
     session:PerformRebirth()
     return true
 end
 
-function xDTaraZ.Progress.BuyBestBomb()
-    local session = xDTaraZ:Session()
+function PatipanStudio.Progress.BuyBestBomb()
+    local session = PatipanStudio:Session()
     local target
-    for _, name in ipairs(xDTaraZ.BombOrder) do
+    for _, name in ipairs(PatipanStudio.BombOrder) do
         if session:OwnsBomb(name) or session.Money >= GameLib.Bombs[name].Price then
             target = name
         end
@@ -793,21 +719,21 @@ function xDTaraZ.Progress.BuyBestBomb()
     end
 end
 
-function xDTaraZ.Progress.BuyUpgrades()
-    local session = xDTaraZ:Session()
-    for _, name in ipairs(xDTaraZ.UpgradeNames) do
+function PatipanStudio.Progress.BuyUpgrades()
+    local session = PatipanStudio:Session()
+    for _, name in ipairs(PatipanStudio.UpgradeNames) do
         if State.Opt.Upgrades[name] then session:BuyUpgrade(name) end
     end
 end
 
-function xDTaraZ.Progress.BuyLuck()
-    local session = xDTaraZ:Session()
-    session:BuyUpgrade("MineLuck", xDTaraZ.Mine.PickArea(session))
+function PatipanStudio.Progress.BuyLuck()
+    local session = PatipanStudio:Session()
+    session:BuyUpgrade("MineLuck", PatipanStudio.Mine.PickArea(session))
 end
 
-function xDTaraZ.Progress.BuyNextArea()
-    local session = xDTaraZ:Session()
-    for _, name in ipairs(xDTaraZ.AreaOrder) do
+function PatipanStudio.Progress.BuyNextArea()
+    local session = PatipanStudio:Session()
+    for _, name in ipairs(PatipanStudio.AreaOrder) do
         if not session.OwnedAreas[name] then
             if session.Money >= GameLib.Areas[name].Price then session:PurchaseArea(name) end
             return
@@ -815,26 +741,26 @@ function xDTaraZ.Progress.BuyNextArea()
     end
 end
 
-xDTaraZ.Pets = {}
+PatipanStudio.Pets = {}
 
-function xDTaraZ.Pets.Hatch()
-    local session = xDTaraZ:Session()
+function PatipanStudio.Pets.Hatch()
+    local session = PatipanStudio:Session()
     local egg
-    for _, name in ipairs(xDTaraZ.AreaOrder) do
+    for _, name in ipairs(PatipanStudio.AreaOrder) do
         local price = GameLib.Areas[name].PetEggPrice
         if price and session.OwnedAreas[name] and session.EggShards >= price then egg = name end
     end
     if egg then session:HatchPetEgg(egg) end
 end
 
-function xDTaraZ.Pets.EquipBest()
-    local session = xDTaraZ:Session()
+function PatipanStudio.Pets.EquipBest()
+    local session = PatipanStudio:Session()
     GameLib.Call(session.EquipBestPets, session)
 end
 
 ---@return number  pets sold
-function xDTaraZ.Pets.SellExtras()
-    local session = xDTaraZ:Session()
+function PatipanStudio.Pets.SellExtras()
+    local session = PatipanStudio:Session()
     local keepRarity = State.Opt.KeepPetRarities
 
     local equipped = {}
@@ -857,90 +783,90 @@ function xDTaraZ.Pets.SellExtras()
     return #sell
 end
 
-xDTaraZ.Claim = {}
+PatipanStudio.Claim = {}
 
-function xDTaraZ.Claim.All()
-    local session = xDTaraZ:Session()
+function PatipanStudio.Claim.All()
+    local session = PatipanStudio:Session()
     pcall(session.ClaimDailyReward, session)
     pcall(session.ClaimGroupReward, session)
 
-    for _, name in ipairs(xDTaraZ.AreaOrder) do
+    for _, name in ipairs(PatipanStudio.AreaOrder) do
         if not session.ClaimedIndexRewards[name] and session:IsAreaIndexComplete(name) then
             session:ClaimIndexReward(name)
         end
     end
 end
 
-xDTaraZ.Client = {}
+PatipanStudio.Client = {}
 
-function xDTaraZ.Client.SetLowGraphics(enabled)
+function PatipanStudio.Client.SetLowGraphics(enabled)
     RunService:Set3dRenderingEnabled(not enabled)
 end
 
-function xDTaraZ.Client.Bind()
-    xDTaraZ:Connect(GuiService.ErrorMessageChanged, function(msg)
+function PatipanStudio.Client.Bind()
+    PatipanStudio:Connect(GuiService.ErrorMessageChanged, function(msg)
         if not State.Opt.AutoRejoin or msg == "" then return end
         task.delay(Config.RejoinDelay, TeleportService.Teleport, TeleportService, game.PlaceId, LocalPlayer)
     end)
 end
 
-xDTaraZ.Movement = {}
+PatipanStudio.Movement = {}
 
-function xDTaraZ.Movement.Apply()
-    local hum = xDTaraZ:Humanoid()
+function PatipanStudio.Movement.Apply()
+    local hum = PatipanStudio:Humanoid()
     if not hum then return end
-    hum.WalkSpeed = State.Opt.SpeedOn and State.Opt.WalkSpeed or xDTaraZ:Session():GetUpgradeValue("WalkSpeed")
+    hum.WalkSpeed = State.Opt.SpeedOn and State.Opt.WalkSpeed or PatipanStudio:Session():GetUpgradeValue("WalkSpeed")
 end
 
-function xDTaraZ.Movement.Bind()
-    xDTaraZ:Connect(UserInputService.JumpRequest, function()
-        local hum = xDTaraZ:Humanoid()
+function PatipanStudio.Movement.Bind()
+    PatipanStudio:Connect(UserInputService.JumpRequest, function()
+        local hum = PatipanStudio:Humanoid()
         if State.Opt.InfJump and hum then hum:ChangeState(Enum.HumanoidStateType.Jumping) end
     end)
 
-    xDTaraZ:Connect(LocalPlayer.CharacterAdded, function()
+    PatipanStudio:Connect(LocalPlayer.CharacterAdded, function()
         task.wait(1)
         if State.Opt.SpeedOn then State.Requests.Speed = true end
     end)
 
-    xDTaraZ:Connect(LocalPlayer.Idled, function()
+    PatipanStudio:Connect(LocalPlayer.Idled, function()
         VirtualUser:CaptureController()
         VirtualUser:ClickButton2(Vector2.zero)
     end)
 end
 
-xDTaraZ.Scheduler = {}
+PatipanStudio.Scheduler = {}
 
-xDTaraZ.Scheduler.RequestHandlers = {
-    Speed = xDTaraZ.Movement.Apply,
-    BombNow = xDTaraZ.Progress.BuyBestBomb,
-    UpgradeNow = xDTaraZ.Progress.BuyUpgrades,
-    AreaNow = xDTaraZ.Progress.BuyNextArea,
-    LuckNow = xDTaraZ.Progress.BuyLuck,
-    HatchNow = xDTaraZ.Pets.Hatch,
-    ClaimNow = xDTaraZ.Claim.All,
-    EquipPetsNow = xDTaraZ.Pets.EquipBest,
+PatipanStudio.Scheduler.RequestHandlers = {
+    Speed = PatipanStudio.Movement.Apply,
+    BombNow = PatipanStudio.Progress.BuyBestBomb,
+    UpgradeNow = PatipanStudio.Progress.BuyUpgrades,
+    AreaNow = PatipanStudio.Progress.BuyNextArea,
+    LuckNow = PatipanStudio.Progress.BuyLuck,
+    HatchNow = PatipanStudio.Pets.Hatch,
+    ClaimNow = PatipanStudio.Claim.All,
+    EquipPetsNow = PatipanStudio.Pets.EquipBest,
 
     SellNow = function()
-        local session = xDTaraZ:Session()
-        xDTaraZ.Mine.Collect(session)
-        xDTaraZ.Mine.Sell(session)
-        xDTaraZ:Notify("Sold all blocks")
+        local session = PatipanStudio:Session()
+        PatipanStudio.Mine.Collect(session)
+        PatipanStudio.Mine.Sell(session)
+        PatipanStudio:Notify("Sold all blocks")
     end,
     RebirthNow = function()
-        xDTaraZ:Notify(xDTaraZ.Progress.Rebirth() and "Rebirthed" or "Level too low to rebirth")
+        PatipanStudio:Notify(PatipanStudio.Progress.Rebirth() and "Rebirthed" or "Level too low to rebirth")
     end,
     SellPetsNow = function()
-        xDTaraZ:Notify(("Sold %d pets"):format(xDTaraZ.Pets.SellExtras()))
+        PatipanStudio:Notify(("Sold %d pets"):format(PatipanStudio.Pets.SellExtras()))
     end,
     CollectNow = function()
-        xDTaraZ:Notify(("Collected %d drops"):format(xDTaraZ.Mine.Collect(xDTaraZ:Session())))
+        PatipanStudio:Notify(("Collected %d drops"):format(PatipanStudio.Mine.Collect(PatipanStudio:Session())))
     end,
 }
 
 ---Runs one round of a job; a toggle that keeps failing for Config.FailWindow seconds is switched off and queued for the UI to report.
 ---@param key string  State.Opt flag of the feature, or a plain label for jobs without one
-function xDTaraZ.Scheduler.Run(key, fn)
+function PatipanStudio.Scheduler.Run(key, fn)
     local ok, err = pcall(fn)
     local failures = State.Failures
     if ok then
@@ -967,111 +893,111 @@ end
 
 ---@param key string  State field holding last run time
 ---@return boolean    true once per interval
-function xDTaraZ.Scheduler.Due(key, interval)
+function PatipanStudio.Scheduler.Due(key, interval)
     local now = os.clock()
     if now - State[key] < interval then return false end
     State[key] = now
     return true
 end
 
-function xDTaraZ.Scheduler.Request(name, handler)
+function PatipanStudio.Scheduler.Request(name, handler)
     local ok, err = pcall(handler)
     if ok then return end
     warn("[TNTMining]", name, err)
-    xDTaraZ:Notify(("%s failed: %s"):format(name, tostring(err):match("[^\n]*")))
+    PatipanStudio:Notify(("%s failed: %s"):format(name, tostring(err):match("[^\n]*")))
 end
 
-function xDTaraZ.Scheduler.Summarize()
-    local session = xDTaraZ:Session()
-    local fmt = xDTaraZ.Format
+function PatipanStudio.Scheduler.Summarize()
+    local session = PatipanStudio:Session()
+    local fmt = PatipanStudio.Format
     State.Summary = ("Level %d · Rebirth %d · Damage %s\nMoney %s · Shards %d\nMoney/min %s"):format(
         session.Level, session.Rebirths, fmt(session.Damage),
         fmt(session.Money), session.EggShards,
-        fmt(xDTaraZ.Mine.EarnRate()))
+        fmt(PatipanStudio.Mine.EarnRate()))
 end
 
-xDTaraZ.Scheduler.PurchaseJobs = {
-    { "AutoBomb", xDTaraZ.Progress.BuyBestBomb },
-    { "AutoUpgrade", xDTaraZ.Progress.BuyUpgrades },
-    { "AutoArea", xDTaraZ.Progress.BuyNextArea },
-    { "AutoLuck", xDTaraZ.Progress.BuyLuck },
-    { "AutoEquipPets", xDTaraZ.Pets.EquipBest },
-    { "AutoSellPets", xDTaraZ.Pets.SellExtras },
+PatipanStudio.Scheduler.PurchaseJobs = {
+    { "AutoBomb", PatipanStudio.Progress.BuyBestBomb },
+    { "AutoUpgrade", PatipanStudio.Progress.BuyUpgrades },
+    { "AutoArea", PatipanStudio.Progress.BuyNextArea },
+    { "AutoLuck", PatipanStudio.Progress.BuyLuck },
+    { "AutoEquipPets", PatipanStudio.Pets.EquipBest },
+    { "AutoSellPets", PatipanStudio.Pets.SellExtras },
     { "SecretAlert", function()
-        if GameLib.MineState.IsLoaded() then xDTaraZ.Mine.ScanSecrets() end
+        if GameLib.MineState.IsLoaded() then PatipanStudio.Mine.ScanSecrets() end
     end },
 }
 
-function xDTaraZ.Scheduler.Purchases()
-    for _, job in ipairs(xDTaraZ.Scheduler.PurchaseJobs) do
-        if State.Opt[job[1]] then xDTaraZ.Scheduler.Run(job[1], job[2]) end
+function PatipanStudio.Scheduler.Purchases()
+    for _, job in ipairs(PatipanStudio.Scheduler.PurchaseJobs) do
+        if State.Opt[job[1]] then PatipanStudio.Scheduler.Run(job[1], job[2]) end
     end
 end
 
-function xDTaraZ.Scheduler.CollectDrops()
-    xDTaraZ.Mine.Collect(xDTaraZ:Session())
+function PatipanStudio.Scheduler.CollectDrops()
+    PatipanStudio.Mine.Collect(PatipanStudio:Session())
 end
 
-function xDTaraZ.Scheduler.Step()
+function PatipanStudio.Scheduler.Step()
     local opt = State.Opt
-    xDTaraZ.Scheduler.Run("Summary", xDTaraZ.Scheduler.Summarize)
+    PatipanStudio.Scheduler.Run("Summary", PatipanStudio.Scheduler.Summarize)
 
-    for name, handler in pairs(xDTaraZ.Scheduler.RequestHandlers) do
+    for name, handler in pairs(PatipanStudio.Scheduler.RequestHandlers) do
         if State.Requests[name] then
             State.Requests[name] = nil
-            xDTaraZ.Scheduler.Request(name, handler)
+            PatipanStudio.Scheduler.Request(name, handler)
         end
     end
 
-    if opt.AutoRebirth then xDTaraZ.Scheduler.Run("AutoRebirth", xDTaraZ.Progress.Rebirth) end
-    if xDTaraZ.Scheduler.Due("LastPurchase", Config.PurchaseInterval) then xDTaraZ.Scheduler.Purchases() end
-    if opt.AutoHatch and xDTaraZ.Scheduler.Due("LastHatch", Config.HatchInterval) then xDTaraZ.Scheduler.Run("AutoHatch", xDTaraZ.Pets.Hatch) end
-    if opt.AutoClaim and xDTaraZ.Scheduler.Due("LastClaim", Config.ClaimInterval) then xDTaraZ.Scheduler.Run("AutoClaim", xDTaraZ.Claim.All) end
+    if opt.AutoRebirth then PatipanStudio.Scheduler.Run("AutoRebirth", PatipanStudio.Progress.Rebirth) end
+    if PatipanStudio.Scheduler.Due("LastPurchase", Config.PurchaseInterval) then PatipanStudio.Scheduler.Purchases() end
+    if opt.AutoHatch and PatipanStudio.Scheduler.Due("LastHatch", Config.HatchInterval) then PatipanStudio.Scheduler.Run("AutoHatch", PatipanStudio.Pets.Hatch) end
+    if opt.AutoClaim and PatipanStudio.Scheduler.Due("LastClaim", Config.ClaimInterval) then PatipanStudio.Scheduler.Run("AutoClaim", PatipanStudio.Claim.All) end
 
     if opt.AutoMine then
-        xDTaraZ.Scheduler.Run("AutoMine", xDTaraZ.Mine.Cycle)
+        PatipanStudio.Scheduler.Run("AutoMine", PatipanStudio.Mine.Cycle)
         return
     end
 
-    if State.MineOrigin then xDTaraZ.Scheduler.Run("MineReturn", xDTaraZ.Mine.ReturnHome) end
+    if State.MineOrigin then PatipanStudio.Scheduler.Run("MineReturn", PatipanStudio.Mine.ReturnHome) end
 
     State.Status = "Idle"
-    if opt.AutoCollect then xDTaraZ.Scheduler.Run("AutoCollect", xDTaraZ.Scheduler.CollectDrops) end
+    if opt.AutoCollect then PatipanStudio.Scheduler.Run("AutoCollect", PatipanStudio.Scheduler.CollectDrops) end
 end
 
-function xDTaraZ.Scheduler.Boot()
-    xDTaraZ.Movement.Bind()
-    xDTaraZ.Client.Bind()
+function PatipanStudio.Scheduler.Boot()
+    PatipanStudio.Movement.Bind()
+    PatipanStudio.Client.Bind()
 
     task.spawn(function()
         while State.Alive do
             if not State.Busy then
                 State.Busy = true
-                xDTaraZ.Scheduler.Step()
+                PatipanStudio.Scheduler.Step()
                 State.Busy = false
             end
             task.wait(Config.TickDelay)
         end
 
-        if State.MineOrigin then xDTaraZ.Scheduler.Run("MineReturn", xDTaraZ.Mine.ReturnHome) end
+        if State.MineOrigin then PatipanStudio.Scheduler.Run("MineReturn", PatipanStudio.Mine.ReturnHome) end
     end)
 end
 
-function xDTaraZ.Scheduler.Stop()
+function PatipanStudio.Scheduler.Stop()
     State.Alive = false
     State.Opt.AutoClick = false
 
     for _, conn in ipairs(State.Connections) do conn:Disconnect() end
     table.clear(State.Connections)
 
-    if State.Opt.LowGraphics then xDTaraZ.Client.SetLowGraphics(false) end
+    if State.Opt.LowGraphics then PatipanStudio.Client.SetLowGraphics(false) end
 
-    local hum = xDTaraZ:Humanoid()
+    local hum = PatipanStudio:Humanoid()
     if hum and State.Opt.SpeedOn and GameLib.Upgrades and GameLib.Upgrades.WalkSpeed then hum.WalkSpeed = GameLib.Upgrades.WalkSpeed.BaseValue end
 end
 
 local function BuildInterface()
-    local Library = xDTaraZ.Util.LoadLibrary()
+    local Library = PatipanStudio.Util.LoadLibrary()
     if not Library then return end
     pcall(MarioBanner.Step, "UI library")
     local Options = Library.Options
@@ -1108,7 +1034,7 @@ local function BuildInterface()
 
     local function BlockMissing()
         if not GameLib.Ready then return end
-        for idx, needs in pairs(xDTaraZ.GameLib.Missing()) do
+        for idx, needs in pairs(PatipanStudio.GameLib.Missing()) do
             warn("[TNTMining]", idx, "blocked, missing:", table.concat(needs, ", "))
             Library.Compat.Block(idx, T("Not available after a game update", "ใช้ไม่ได้หลังเกมอัปเดต"))
         end
@@ -1180,7 +1106,7 @@ local function BuildInterface()
         local mineBox = tab:AddLeftGroupbox(T("Auto Mine", "ขุดอัตโนมัติ"), "bomb")
         Feature(mineBox, "AutoMine", T("Auto Mine", "ขุดอัตโนมัติ"), T("Blasts the most valuable spots in the mine and picks up every drop", "ระเบิดจุดที่มีค่าที่สุดในเหมืองแล้วเก็บของดรอปทั้งหมด"))
         local areaChoices = { "Best" }
-        for _, areaName in ipairs(xDTaraZ.AreaOrder) do table.insert(areaChoices, areaName) end
+        for _, areaName in ipairs(PatipanStudio.AreaOrder) do table.insert(areaChoices, areaName) end
         mineBox:AddDropdown("MineArea", {
             Text = T("Mine Area", "พื้นที่ขุด"),
             Description = T("Best = strongest area your damage can handle", "Best = พื้นที่ดีสุดที่ดาเมจตอนนี้ขุดไหว"),
@@ -1214,7 +1140,7 @@ local function BuildInterface()
 
         local trainBox = tab:AddLeftGroupbox(T("Damage & Rebirth", "ดาเมจและรีเบิร์ธ"), "star")
         Feature(trainBox, "AutoClick", T("Auto Click", "คลิกอัตโนมัติ"), T("Trains damage at the fastest speed the game allows", "เพิ่มดาเมจเร็วสุดเท่าที่เกมยอม"), function(value)
-            if value then xDTaraZ.Progress.StartClicking() end
+            if value then PatipanStudio.Progress.StartClicking() end
         end)
         Feature(trainBox, "AutoRebirth", T("Auto Rebirth", "รีเบิร์ธอัตโนมัติ"), T("Rebirths as soon as your level is high enough", "รีเบิร์ธทันทีเมื่อเลเวลถึง"))
         trainBox:AddButton({ Text = T("Rebirth Now", "รีเบิร์ธเดี๋ยวนี้"), Func = Request("RebirthNow") })
@@ -1238,7 +1164,7 @@ local function BuildInterface()
         end
         upgradeBox:AddDropdown("Upgrades", {
             Text = T("Upgrades To Buy", "อัปเกรดที่จะซื้อ"),
-            Values = xDTaraZ.UpgradeNames,
+            Values = PatipanStudio.UpgradeNames,
             Multi = true,
             Default = upgradeDefault,
             Callback = function(selected) opt.Upgrades = selected end,
@@ -1307,17 +1233,17 @@ local function BuildInterface()
         local tab = window:AddSettingsTab()
         local sessionBox = tab:AddRightGroupbox(T("Session", "เซสชัน"), "gear")
         Toggle(sessionBox, "AutoRejoin", T("Auto Rejoin", "เข้าเกมใหม่อัตโนมัติ"), T("Rejoins by itself after a disconnect", "หลุดแล้วเข้าเกมใหม่เอง"))
-        Toggle(sessionBox, "LowGraphics", T("FPS Boost", "เพิ่ม FPS"), T("Turns off 3D rendering to save CPU and GPU", "ปิดการแสดงผล 3D ประหยัด CPU/GPU"), xDTaraZ.Client.SetLowGraphics)
+        Toggle(sessionBox, "LowGraphics", T("FPS Boost", "เพิ่ม FPS"), T("Turns off 3D rendering to save CPU and GPU", "ปิดการแสดงผล 3D ประหยัด CPU/GPU"), PatipanStudio.Client.SetLowGraphics)
     end
 
     local function BuildTabs()
         local window = Library.Window
-        local _, labels = xDTaraZ.Try(BuildMain, window)
+        local _, labels = PatipanStudio.Try(BuildMain, window)
         for _, build in ipairs({ BuildMining, BuildUpgrades, BuildPets, BuildPlayer, BuildSettings }) do
-            xDTaraZ.Try(build, window)
+            PatipanStudio.Try(build, window)
         end
-        xDTaraZ.Try(BlockWithoutGameData)
-        xDTaraZ.Try(BlockMissing)
+        PatipanStudio.Try(BlockWithoutGameData)
+        PatipanStudio.Try(BlockMissing)
 
         Library:Every(1, function()
             ReportHalts()
@@ -1326,11 +1252,11 @@ local function BuildInterface()
             end
             if type(labels) ~= "table" then return end
             labels.Summary:SetText(State.Summary)
-            labels.Run:SetText(("%s\nBombs %d · Earned %s"):format(State.Status, State.Bombs, xDTaraZ.Format(State.Earned)))
+            labels.Run:SetText(("%s\nBombs %d · Earned %s"):format(State.Status, State.Bombs, PatipanStudio.Format(State.Earned)))
         end)
     end
 
-    Library:OnUnload(xDTaraZ.Scheduler.Stop)
+    Library:OnUnload(PatipanStudio.Scheduler.Stop)
     local function UnloadHub()
         Library:Unload()
     end
@@ -1341,16 +1267,16 @@ local function BuildInterface()
 
     Library:CreateWindow({
         Title = "PatipanStudio",
-        SubTitle = "TNT Mining by xDTaraZ",
+        SubTitle = "TNT Mining by PatipanStudio",
         MenuKey = Enum.KeyCode.LeftControl,
         ConfigFolder = Config.SaveFolder,
         Language = "Auto",
         Theme = "Overworld",
         OnUnlocked = function()
             BuildTabs()
-            xDTaraZ.Try(xDTaraZ.Scheduler.Boot)
+            PatipanStudio.Try(PatipanStudio.Scheduler.Boot)
             Notify("Loaded", "Success")
-            xDTaraZ.Try(Library.LoadAutoloadConfig, Library)
+            PatipanStudio.Try(Library.LoadAutoloadConfig, Library)
         end,
     })
 end

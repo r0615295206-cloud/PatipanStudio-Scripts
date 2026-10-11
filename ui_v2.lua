@@ -15,8 +15,8 @@ local LocalPlayer = Players.LocalPlayer
 
 local Library = {
     Version = "2.0",
-    Author = "xDTaraZ",
-    Credit = "PatipanStudio UI V2 by xDTaraZ · discord.gg/FHVfmeSceA",
+    Author = "PatipanStudio",
+    Credit = "PatipanStudio UI V2 by PatipanStudio · discord.gg/FHVfmeSceA",
     Options = {},
     Toggles = {},
     Unloaded = false,
@@ -24,13 +24,13 @@ local Library = {
 }
 
 local Config = {
-    GuiAttribute = "MarioHubUIV2",
-    Root = "mariohub",
-    AssetDir = "mariohub/assets",
-    ConfigRoot = "mariohub/configs",
-    KeyCache = "mariohub/key.txt",
-    DefaultAssets = { logo = "https://raw.githubusercontent.com/xDTaraZz/Roblox-Scripts/main/logo.png" },
-    FontDir = "mariohub/fonts",
+    GuiAttribute = "PatipanStudioUIV2",
+    Root = "patipanstudio",
+    AssetDir = "patipanstudio/assets",
+    ConfigRoot = "patipanstudio/configs",
+    KeyCache = "patipanstudio/key.txt",
+    DefaultAssets = { logo = "https://raw.githubusercontent.com/r0615295206-cloud/PatipanStudio-Scripts/main/logo.png" },
+    FontDir = "patipanstudio/fonts",
     HttpTimeout = 8,
     AssetWait = 0.25,
     FontTimeout = 20,
@@ -62,15 +62,15 @@ local Config = {
         },
     },
     Window = {
-        Width = 820, Height = 560, MinWidth = 520, MinHeight = 360,
+        Width = 940, Height = 620, MinWidth = 520, MinHeight = 360,
         TouchMinWidth = 320, TouchMinHeight = 260,
-        Topbar = 56, Sidebar = 196, SidebarCompact = 64, Header = 62, Ground = 24, UserCard = 58,
+        Topbar = 64, Sidebar = 220, SidebarCompact = 64, Header = 62, Ground = 4, UserCard = 58,
         TabBar = 60, TabBarMax = 4, TwoColumnMin = 540, Margin = 24, TouchMargin = 10,
-        Radius = 12, Stroke = 3, Shadow = 6,
+        Radius = 16, Stroke = 1, Shadow = 2,
     },
-    Group = { PadX = 12, PadY = 10, Shadow = 4, Radius = 12, Stroke = 2 },
-    Gap = { X = 8, Y = 6, Column = 12 },
-    Page = { Pad = 14, ScrollBar = 6 },
+    Group = { PadX = 12, PadY = 10, Shadow = 1, Radius = 12, Stroke = 1 },
+    Gap = { X = 10, Y = 8, Column = 16 },
+    Page = { Pad = 18, ScrollBar = 3 },
     Dropdown = { MaxVisible = 7, SearchThreshold = 8, MinWidth = 170 },
     ColorPicker = { Field = 150, Hue = 14 },
     Notify = { Width = 300, TouchWidth = 260, Duration = 4, Gap = 8 },
@@ -107,13 +107,13 @@ local Config = {
     TooltipDelay = 0.45,
     TitleWaveInterval = 9,
     ScaleRange = { Min = 0.7, Max = 1.4 },
-    Particles = { Count = 10, MinTime = 7, MaxTime = 13 },
+    Particles = { Count = 0, MinTime = 7, MaxTime = 13 },
     MouseNames = {
         [Enum.UserInputType.MouseButton1] = "MB1",
         [Enum.UserInputType.MouseButton2] = "MB2",
         [Enum.UserInputType.MouseButton3] = "MB3",
     },
-    TitleColors = { "Accent", "Coin", "Good", "Info" },
+    TitleColors = { "Accent", "Accent", "Accent", "Accent" },
 }
 
 local Themes = { Order = { "Overworld", "Light", "Dark", "Underground", "Castle", "Star Road" } }
@@ -229,6 +229,23 @@ do
     })
 end
 
+-- PatipanStudio visual system: original API preserved.
+do
+    local colors = {Backdrop = "100D17", BackdropAlt = "171220", Topbar = "171220", TopbarText = "F5F0FF", Sidebar = "120F1A", SidebarAlt = "1B1526", SidebarText = "EDE5FA", SidebarMuted = "A49AB3", TabActive = "342447", TabActiveText = "E4CDFF", Panel = "1C1626", PanelHeader = "241B30", Element = "292033", Hover = "372943", Pressed = "21192B", Outline = "493557", Shadow = "08060D", Text = "F1EBFA", SubText = "BFB2CF", Muted = "91859F", Track = "3A2F46", Accent = "B796F6", AccentDark = "8057BF", AccentText = "130D1C", OnAccent = "130D1C", Grass = "241B30", GrassDark = "1B1526", Brick = "241B30", BrickDark = "1B1526", Cloud = "C7ACF5", Glow = "B796F6", Ink = "140D1C", HeroInk = "140D1C", Coin = "D9BB86", CoinDark = "AC8C56", Good = "80C8AB", GoodDark = "477E69", Info = "9CBDEB", Blue = "9CBDEB", BlueDark = "5C7EA9", Warn = "E3BA80", Bad = "E897AA", Danger = "E897AA", Risky = "E3BA80"}
+    for name, palette in pairs(Themes) do
+        if name ~= "Order" and type(palette) == "table" then
+            for token, hex in pairs(colors) do
+                palette[token] = Color3.fromRGB(tonumber(hex:sub(1,2),16), tonumber(hex:sub(3,4),16), tonumber(hex:sub(5,6),16))
+            end
+            palette.CloudAlpha = 1
+            palette.Decor = "None"
+            palette.Logo = "logo"
+        end
+    end
+    Themes.PatipanStudio = Themes.Dark
+    Themes.Order = {"PatipanStudio"}
+end
+
 local State = {
     Gui = nil,
     Stage = nil,
@@ -238,7 +255,7 @@ local State = {
     Drag = nil,
     Binding = nil,
     MenuKey = "LeftControl",
-    ThemeName = "Overworld",
+    ThemeName = "PatipanStudio",
     Language = "EN",
     UserScale = 1,
     Touch = false,
@@ -343,7 +360,7 @@ local Palette = {}
 local Intro = {}
 local KeyGate = {}
 local Decor = {}
-local Particles = { Pool = {}, Enabled = true }
+local Particles = { Pool = {}, Enabled = false }
 local Keybinds = {}
 local Configs = { Folder = Config.ConfigRoot .. "/default" }
 local Settings = {}
@@ -821,8 +838,8 @@ function Lang.Set(code)
 end
 
 Fonts.Latin = {
-    Display = Enum.Font.LuckiestGuy, Body = Enum.Font.FredokaOne, Desc = Enum.Font.BuilderSansMedium,
-    Strong = Enum.Font.BuilderSansBold, Logo = Enum.Font.LuckiestGuy, Glyph = Enum.Font.BuilderSansBold,
+    Display = Enum.Font.GothamBold, Body = Enum.Font.GothamMedium, Desc = Enum.Font.BuilderSansMedium,
+    Strong = Enum.Font.BuilderSansBold, Logo = Enum.Font.GothamBold, Glyph = Enum.Font.BuilderSansBold,
 }
 Fonts.ThaiWeights = { Display = Enum.FontWeight.SemiBold, Body = Enum.FontWeight.Medium, Desc = Enum.FontWeight.Regular, Strong = Enum.FontWeight.SemiBold }
 Fonts.ThaiFallback = { Display = Enum.Font.BuilderSansBold, Body = Enum.Font.BuilderSansBold, Desc = Enum.Font.BuilderSansMedium, Strong = Enum.Font.BuilderSansBold }
@@ -3473,14 +3490,14 @@ end
 ---@return boolean                          false when the art was rejected
 function Sprite.Register(name, rows, palette)
     if type(name) ~= "string" or name == "" or type(rows) ~= "table" or #rows == 0 then
-        warn("[MarioHubUI] AddIcon: need a name and a list of rows")
+        warn("[PatipanStudioUI] AddIcon: need a name and a list of rows")
         return false
     end
     name = name:lower()
     local scoped = {}
     for char, color in pairs(palette or {}) do
         if type(char) ~= "string" or #char ~= 1 or typeof(color) ~= "Color3" then
-            warn("[MarioHubUI] AddIcon " .. name .. ": palette entries must be one char = Color3")
+            warn("[PatipanStudioUI] AddIcon " .. name .. ": palette entries must be one char = Color3")
             return false
         end
         scoped[char] = color
@@ -3488,12 +3505,12 @@ function Sprite.Register(name, rows, palette)
     local width = type(rows[1]) == "string" and #rows[1] or 0
     for index, line in ipairs(rows) do
         if type(line) ~= "string" or #line ~= width or width == 0 then
-            warn(("[MarioHubUI] AddIcon %s: row %d is %s wide, expected %d"):format(name, index, type(line) == "string" and #line or "not", width))
+            warn(("[PatipanStudioUI] AddIcon %s: row %d is %s wide, expected %d"):format(name, index, type(line) == "string" and #line or "not", width))
             return false
         end
         for char in line:gmatch(".") do
             if char ~= "." and not scoped[char] and not Sprite.Palette[char] then
-                warn(("[MarioHubUI] AddIcon %s: unknown color '%s' on row %d"):format(name, char, index))
+                warn(("[PatipanStudioUI] AddIcon %s: unknown color '%s' on row %d"):format(name, char, index))
                 return false
             end
         end
@@ -3859,12 +3876,12 @@ function Draw.Emblem(parent, size)
     Draw.Corner(ring, UDim.new(1, 0))
     Theme.Bind(ring, { BackgroundColor3 = "White" })
     local letter = Draw.Text({
-        Text = "M",
+        Text = "PS",
         Size = UDim2.fromScale(1, 1),
         TextXAlignment = Enum.TextXAlignment.Center,
         Position = UDim2.fromOffset(0, 1),
         Parent = ring,
-    }, "Logo", math.floor(size * 0.5), "Accent")
+    }, "Logo", math.floor(size * 0.32), "Accent")
     letter.TextScaled = false
     Assets.Later(pending, emblem)
     return emblem
@@ -9935,7 +9952,7 @@ Config.Overlay = {
     QuickBar = { Width = 136, Height = { Desktop = 36, Tablet = 44, Phone = 48 }, Gap = 8, Lamp = 10, Sync = 0.25 },
     Watermark = { Height = 30, Every = 0.5, Gap = 10, PadX = 12, Coin = 18 },
     KeybindList = { Width = 220, Header = 30, Row = 24, Every = 0.25, Max = 12 },
-    Store = "mariohub/overlay.json", SaveDelay = 1,
+    Store = "patipanstudio/overlay.json", SaveDelay = 1,
 }
 
 Lang.Strings.OK = { EN = "OK", TH = "ตกลง" }
@@ -15455,11 +15472,11 @@ end
 
 function Gui.ClearPrevious(parent)
     local env = type(getgenv) == "function" and getgenv() or nil
-    if env and type(env.MarioHub) == "table" and env.MarioHub ~= Library and not env.MarioHub.Unloaded then
-        Util.Try(env.MarioHub.Unload, env.MarioHub)
+    if env and type(env.PatipanStudio) == "table" and env.PatipanStudio ~= Library and not env.PatipanStudio.Unloaded then
+        Util.Try(env.PatipanStudio.Unload, env.PatipanStudio)
     end
     if env then
-        env.MarioHub = Library
+        env.PatipanStudio = Library
     end
     for _, child in ipairs(parent:GetChildren()) do
         if child:GetAttribute(Config.GuiAttribute) then
@@ -15475,7 +15492,7 @@ function Gui.Setup()
     local parent = Util.GuiParent()
     Gui.ClearPrevious(parent)
     State.Gui = Draw.New("ScreenGui", {
-        Name = "MarioHub",
+        Name = "PatipanStudio",
         ResetOnSpawn = false,
         IgnoreGuiInset = true,
         ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
@@ -15947,13 +15964,13 @@ function Gui.Teardown()
         State.Gui, State.Stage = nil, nil
     end
     local env = type(getgenv) == "function" and getgenv() or nil
-    if env and env.MarioHub == Library then
-        env.MarioHub = nil
+    if env and env.PatipanStudio == Library then
+        env.PatipanStudio = nil
     end
 end
 
 ---@author xDTaraZ  Mario Hub UI V2
-Kit.Lib = { Config = { LogFolder = "mariohub/logs", RetryBase = 0.5, RetryMax = 8, FindTimeout = 5 } }
+Kit.Lib = { Config = { LogFolder = "patipanstudio/logs", RetryBase = 0.5, RetryMax = 8, FindTimeout = 5 } }
 Library.Lib = Kit.Lib
 
 Kit.Lib.Maid = {}
@@ -16457,7 +16474,7 @@ Kit.Modules = {}
 Kit.Config = {
     ProbeTimeout = 1,
     InvokeTimeout = 8,
-    ProbeFile = "mariohub/.kitprobe",
+    ProbeFile = "patipanstudio/.kitprobe",
     RenderStep = "MarioKitRender",
     MaxJobErrors = 5,
     JobTimeout = 30,

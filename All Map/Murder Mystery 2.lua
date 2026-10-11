@@ -23,83 +23,9 @@ do
 end
 
 function MarioBanner.Show()
-    local ok, executor = pcall(identifyexecutor)
-    if not ok or type(executor) ~= "string" then executor = "Unknown" end
-    local rule = string.rep("=", 54)
-    MarioBanner.Print(table.concat({
-        "",
-        [[
-                                                                     @%@
-                                                                    @*-#@
-                                          @@@@@@@@@@@@@          @@#+.:-*%@@      @@
-                                   @@@@@%##***********##%@@@@@   @*--:-==+*@@@@#*+==+*%@@
-                              @@@@#+=+==---==++++++++++++**+++#@@@@@%==+@@@@#:.......:::=%@@
-                          @@%#+---::-=++++++++++************+***++#%@%+@@@#:..-+*****+-:::+%@
-                      @@@#=-::.:-==++++++++++*************************#@@+::=*-:.:+-::-+:.:=#@
-                    @@%-:...:-===+++++**#################****************%%*+::::+*++::-+..:=#@
-                 @@%*-:...:--==++*########**+==--===+**#######************+#%+::-*==-:::=-::=+@@
-               @@%+=-::---===+*###%#+-:...................:=+#####***********#@+++==----==:-+*@@
-             @@%++=-======+*###%+:............................::+####**********#@*+=----=---**@@
-            @%=++=++++++*####=:...................................:+###**********%@==--==--+**@@
-          @@*+++++++++*###*:........................................:-*##**********%*==+--=**@@@
-         @%+++++++++*##%+:............................................::*##*********%%+--=##%@+%@
-       @@#+++++++++###*:.....-+==+*#-......................:**+**#+:....:=###********%%+*##%@*:+@@
-      @@*++++++++*###:......-+:.:-=*#*-..................:+*--+**#%*:.....:+##********#@#%%+:.:--+#@
-     @@+++++++++*##+:......-*::-=++++*##:...............=#=-++****#%*:.....:-##********#@@@%+=-++#@@
-    @@+=-=+++++*##+.......:*-:==++++++*##+............-*+-=+*******#%+:.....:-##********#@  @#=#@@
-    @*=:.=++++*##-.......:*=:=++++++++*+*##=........:**==+**********##=:.....::*#********%@  @#@
-   @#+-.-++*+*##=........*+-++++++*********##-....:+*==+*************#%-:.....:-**********%@
-  @@++-=++***##+........*+-++++++***********#%*::=#+-+****************#%-:.....:=**********@@
- @@*++=++***###........+*-+++++***************###+-=+*****************###-:.....:+*********%@
- @%++=+*****#%:.......=*-++++*******************==+********************#%*-:....:-#********#@@
-@@**+++****##+.......=*=+++*********************************************#%+::....:+*********@@
-@%**++*****##-......=#=++**********#%#********************%%*************#%+:....:-#********%@
-@%**++*****#*:.....-*=++**********#%%%#*****************#%%%**************#%=:....-********##@@
-@#**++*****#*:....:*++************%%%%%%#*************#%%%%%#**************##-:...-+*******#*@@
-@#**+******#+:...:#++************#%%%@@%%##*********#%%%%%@%#**************#%#-:..:+*+*****#*@@
-@#**+******#+:..:#+=************#%%%%%*%%%##*******%%%%%%#%%##**************#%#::.-+*+*****#*@@
-@#*********#+:.:+*=*************%%%%%+==*%%###***#%%%%%#++*%##***************#%*::-+*+*****#*@@
-@%*#*******#*:.+*=*************%%%%%*=----*%###%%%%%%#+====*###**************##%+--*++****###@@
-@%*#********#-:####***********#%%%%#=-::.::=###%%%%#+==--:::####************#%%%#==*+*****###@@
-@@##********#+:#%%%%#********#%%%%%=--:....::=%%%%+==--::..:-%###********#%%%%%%#=#++*****##%@
-@@###********#-=#%%%%%%##****%%%%%*=-:.......::-==---::.....:+###*****##%%%%%%%#++#++****###@@
- @%###*******##::=+%%%%%%%##%%%%%#=-:...........:::::........:####*#%%%%%%%%%*+=+*+=*****##%@
- @@###********#+:.:-=*%%%%%%%%%%%+--:.........................=###%%%%%%%%*+====*=.=****###@@
-  @@###********#+:..::-=*%%%%%%%*=-:..:::-------------::::...::*#%%%%%%*+==---=*+-=+***###%@
-   @%###*******#%#*+-..::-=#%@@%#**++==----------------===+++**#%@@@#+===---+*#*++****####@@
-    @%###**#%#=::-=+##*##+-:...:::-=+**---*###*=--++++=--=++++=--:::-=+#%**#-:..:=#%##%##@@
-    @@%#%#+:...:-=++=:..::=*####+#=:..=@#%:....%@*....*%%#...:--=*##+------=+=:::::-=#%%@@
-     @@%*=--::::-*::::::-%=...:%@#:...:@@#.....%@+....=@@=.........:*#=-----=+=:::-==++%@@
-  @@%+--+==--:::-#=-::::-%+....+%%-....%@#....:@@+....+@@:...:%%....-@*---==+*+:::-=+++*=+#@@
- @%-:-==*+==-:::-+*--:::-*#:...........*@#....:@@+....+@%..........-%%+---==+*=::-=+++#*=-:-*@@
- @@#+===+*+==-::-=*=--::-=%-......:....+@%:....:-....:#@*....=+:...-%#=--==+**-:--=++#*+=-=*%@
-   @@#*=++#+=-:::-+*------#+....+@%....-@@#:.......::*@@+....+#=.:::=%+-===+#+-:-=++***++*%@@
-     @@#+++*==-::-=*=-----+%:...-@@-::-=@%%@#+=--==*%@%%=:::::::::::#%+===+**----=++#**#%@@
-     @@*-=+*+=-::-=*+=----=%#+*#%@%@@@@@#+-=*%%@@@%#*==*@@%%%##*+*#@@*====+#+-:-=++***++%@
-    @@*--=+++===++*#*=------#%%#+=-----===============----==+*#%%%#+=-===+*#*+++=++**+==*@@
-    @%=:-==+***%%@@@#=-=====++*##%%%@@@@@@@@@@%%@@@@@@@@@%%%##**++=======+*@@@@%#*+#+=--=#@
-    @*:---==+*###%@@@#*#%%@%%%%%%######*****++++++++***######%%%%%%%%%%#*#%@@@####**+=---+@@
-   @@+--=**#%@@@@@  @@@%%%%%%%#*******************************####%%%%%%@@@  @@@@@%#**=--+%@
-    @@%%@@@@@          @@@@%%%%%%###**********************####%%%%%%%@@@          @@@@@%%%@@
-      @@                  @@@@@%%%%%%%%%###############%%%%%%%%%@@@@@                  @@@
-                               @@@@@@%%%%%%%%%%%%%%%%%%%%%%@@@@@
-                                    @@@@@@@@@@@@@@@@@@@@@@@
-]],
-        [[
-  __  __    _    ____  ___ ___    _   _ _   _ ____
- |  \/  |  / \  |  _ \|_ _/ _ \  | | | | | | | __ )
- | |\/| | / _ \ | |_) || | | | | | |_| | | | |  _ \
- | |  | |/ ___ \|  _ < | | |_| | |  _  | |_| | |_) |
- |_|  |_/_/   \_\_| \_\___\___/  |_| |_|\___/|____/
-]],
-        rule,
-        "   MURDER MYSTERY 2  //  by xDTaraZ  //  discord.gg/FHVfmeSceA",
-        "   executor: " .. executor .. "   //   player: " .. game:GetService("Players").LocalPlayer.Name,
-        rule,
-    }, "\n"))
+    MarioBanner.Print("[PS] PatipanStudio | UI customized by PatipanStudio")
 end
 
----@param label string  what just finished loading
 function MarioBanner.Step(label)
     local now = os.clock()
     MarioBanner.Done = math.min(MarioBanner.Done + 1, MarioBanner.Total)
@@ -138,18 +64,18 @@ local Lighting = game:GetService("Lighting")
 
 local LocalPlayer = Players.LocalPlayer
 
-local xDTaraZ = setmetatable({}, {
+local PatipanStudio = setmetatable({}, {
     __newindex = function(self, key, value)
         rawset(self, key, type(value) == "function" and LPH_JIT(value) or value)
     end,
 })
 
-xDTaraZ.Config = {
+PatipanStudio.Config = {
     Discord = "https://discord.gg/FHVfmeSceA",
     UpdateLog = {
         { "2026-10-03", "Classic PatipanStudio UI is back\nBetter executor support\nImproved Farming, Combat & Movement" },
     },
-    UiSource = "https://raw.githubusercontent.com/xDTaraZz/Roblox-Scripts/refs/heads/main/ui.lua",
+    UiSource = "https://raw.githubusercontent.com/r0615295206-cloud/PatipanStudio-Scripts/refs/heads/main/ui.lua",
     SaveFolder = "Murder Mystery 2",
     LoadTimeout = 10,
     AlertTries = 20,
@@ -201,9 +127,9 @@ xDTaraZ.Config = {
     },
 }
 
-local Config = xDTaraZ.Config
+local Config = PatipanStudio.Config
 
-xDTaraZ.State = {
+PatipanStudio.State = {
     Alive = true,
     Conns = {},
     Roles = {},
@@ -266,13 +192,13 @@ xDTaraZ.State = {
     },
 }
 
-local State = xDTaraZ.State
+local State = PatipanStudio.State
 
 for _, name in ipairs({ "Util", "Round", "Sheriff", "Murderer", "Troll", "Survive", "Kaitun", "Farm", "Aim", "Skin", "Teleport", "Movement", "Esp", "Visual", "Session", "Scheduler" }) do
-    xDTaraZ[name] = {}
+    PatipanStudio[name] = {}
 end
 
-function xDTaraZ.Util.Try(fn, ...)
+function PatipanStudio.Util.Try(fn, ...)
     local ok, err = pcall(fn, ...)
     if not ok then
         warn("[MM2]", err)
@@ -281,7 +207,7 @@ function xDTaraZ.Util.Try(fn, ...)
 end
 
 ---@param text string  shown as a Roblox notification, works before the menu exists
-function xDTaraZ.Util.Alert(text)
+function PatipanStudio.Util.Alert(text)
     warn("[MM2] " .. text)
     task.spawn(function()
         local starterGui = game:GetService("StarterGui")
@@ -295,7 +221,7 @@ function xDTaraZ.Util.Alert(text)
 end
 
 ---@return string?  body, nil when every way to fetch failed
-function xDTaraZ.Util.HttpGet(url)
+function PatipanStudio.Util.HttpGet(url)
     local ok, body = pcall(game.HttpGet, game, url)
     if ok and type(body) == "string" then
         return body
@@ -313,31 +239,31 @@ function xDTaraZ.Util.HttpGet(url)
 end
 
 ---@return table?  UI library, nil after telling the player why
-function xDTaraZ.Util.LoadLibrary()
-    local source = xDTaraZ.Util.HttpGet(Config.UiSource)
+function PatipanStudio.Util.LoadLibrary()
+    local source = PatipanStudio.Util.HttpGet(Config.UiSource)
     if not source or not source:sub(-64):find("return Library%s*$") then
-        xDTaraZ.Util.Alert("Could not download the menu. Check your connection and run it again.")
+        PatipanStudio.Util.Alert("Could not download the menu. Check your connection and run it again.")
         return nil
     end
     local chunk, err = loadstring(source)
     if not chunk then
-        xDTaraZ.Util.Alert("The menu failed to load on this executor: " .. tostring(err))
+        PatipanStudio.Util.Alert("The menu failed to load on this executor: " .. tostring(err))
         return nil
     end
     local ok, library = pcall(chunk)
     if not ok or type(library) ~= "table" then
-        xDTaraZ.Util.Alert("The menu failed to load on this executor: " .. tostring(library))
+        PatipanStudio.Util.Alert("The menu failed to load on this executor: " .. tostring(library))
         return nil
     end
     if type(library.Compat) ~= "table" then
-        xDTaraZ.Util.Alert("The menu is out of date. Wait a few minutes and run the script again.")
+        PatipanStudio.Util.Alert("The menu is out of date. Wait a few minutes and run the script again.")
         return nil
     end
     return library
 end
 
 ---@param instance Instance  parented to gethui, then CoreGui, then PlayerGui
-function xDTaraZ.Util.Mount(instance)
+function PatipanStudio.Util.Mount(instance)
     local ok, hui = pcall(gethui)
     if ok and typeof(hui) == "Instance" and pcall(function() instance.Parent = hui end) then
         return
@@ -348,8 +274,8 @@ function xDTaraZ.Util.Mount(instance)
     instance.Parent = LocalPlayer:FindFirstChildOfClass("PlayerGui") or LocalPlayer:WaitForChild("PlayerGui", Config.LoadTimeout)
 end
 
-xDTaraZ.GameLib = {}
-local GameLib = xDTaraZ.GameLib
+PatipanStudio.GameLib = {}
+local GameLib = PatipanStudio.GameLib
 
 ---@param class string  RemoteFunction or BaseRemoteEvent
 ---@return Instance?    remote in its usual folder, else the first with that name anywhere in ReplicatedStorage
@@ -383,29 +309,29 @@ function GameLib.Missing(idx)
     return nil
 end
 
-function xDTaraZ.Util.Connect(signal, fn)
+function PatipanStudio.Util.Connect(signal, fn)
     local conn = signal:Connect(fn)
     table.insert(State.Conns, conn)
     return conn
 end
 
-function xDTaraZ.Util.Root(player)
+function PatipanStudio.Util.Root(player)
     local character = (player or LocalPlayer).Character
     return character and character:FindFirstChild("HumanoidRootPart")
 end
 
-function xDTaraZ.Util.Humanoid(player)
+function PatipanStudio.Util.Humanoid(player)
     local character = (player or LocalPlayer).Character
     return character and character:FindFirstChildOfClass("Humanoid")
 end
 
-function xDTaraZ.Util.Tool(player, name)
+function PatipanStudio.Util.Tool(player, name)
     local character = player.Character
     local backpack = player:FindFirstChild("Backpack")
     return (character and character:FindFirstChild(name)) or (backpack and backpack:FindFirstChild(name))
 end
 
-function xDTaraZ.Round.RefreshRoles()
+function PatipanStudio.Round.RefreshRoles()
     if os.clock() - State.LastRoleFetch < Config.RoleRefresh then
         return
     end
@@ -418,30 +344,30 @@ function xDTaraZ.Round.RefreshRoles()
 end
 
 ---@return string?  role, falls back to the tools in their backpack
-function xDTaraZ.Round.RoleOf(player)
+function PatipanStudio.Round.RoleOf(player)
     local entry = State.Roles[player.Name]
     if entry and not entry.Dead and entry.Role then
         return entry.Role
     end
-    if xDTaraZ.Util.Tool(player, "Knife") then
+    if PatipanStudio.Util.Tool(player, "Knife") then
         return "Murderer"
     end
-    if xDTaraZ.Util.Tool(player, "Gun") then
+    if PatipanStudio.Util.Tool(player, "Gun") then
         return "Sheriff"
     end
     return entry and entry.Dead and "Dead" or "Innocent"
 end
 
-function xDTaraZ.Round.FindByRole(role)
+function PatipanStudio.Round.FindByRole(role)
     for _, player in ipairs(Players:GetPlayers()) do
-        if player ~= LocalPlayer and xDTaraZ.Round.RoleOf(player) == role and xDTaraZ.Util.Root(player) then
+        if player ~= LocalPlayer and PatipanStudio.Round.RoleOf(player) == role and PatipanStudio.Util.Root(player) then
             return player
         end
     end
     return nil
 end
 
-function xDTaraZ.Round.Map()
+function PatipanStudio.Round.Map()
     for _, child in ipairs(workspace:GetChildren()) do
         if child.Name ~= Config.LobbyName and child:IsA("Model") and child:FindFirstChild("CoinContainer") then
             return child
@@ -451,7 +377,7 @@ function xDTaraZ.Round.Map()
 end
 
 ---@return Model?  lobby by its usual name, else any workspace model named like a lobby
-function xDTaraZ.Round.Lobby()
+function PatipanStudio.Round.Lobby()
     local lobby = workspace:FindFirstChild(Config.LobbyName)
     if lobby then return lobby end
     for _, child in ipairs(workspace:GetChildren()) do
@@ -460,29 +386,29 @@ function xDTaraZ.Round.Lobby()
     return nil
 end
 
-function xDTaraZ.Round.IAmPlaying()
+function PatipanStudio.Round.IAmPlaying()
     local entry = State.Roles[LocalPlayer.Name]
-    local humanoid = xDTaraZ.Util.Humanoid()
-    return xDTaraZ.Round.Map() ~= nil and humanoid ~= nil and humanoid.Health > 0 and entry ~= nil and not entry.Dead
+    local humanoid = PatipanStudio.Util.Humanoid()
+    return PatipanStudio.Round.Map() ~= nil and humanoid ~= nil and humanoid.Health > 0 and entry ~= nil and not entry.Dead
 end
 
-function xDTaraZ.Round.GunDrop()
-    local map = xDTaraZ.Round.Map()
+function PatipanStudio.Round.GunDrop()
+    local map = PatipanStudio.Round.Map()
     local drop = (map and map:FindFirstChild("GunDrop", true)) or workspace:FindFirstChild("GunDrop")
     return drop
 end
 
-function xDTaraZ.Movement.SetNoclip(enabled)
+function PatipanStudio.Movement.SetNoclip(enabled)
     if State.NoclipConn then
         State.NoclipConn:Disconnect()
         State.NoclipConn = nil
     end
     if not enabled then
-        xDTaraZ.Movement.RestoreCollision()
+        PatipanStudio.Movement.RestoreCollision()
         return
     end
     local saved = State.NoclipSaved
-    State.NoclipConn = xDTaraZ.Util.Connect(RunService.Stepped, function()
+    State.NoclipConn = PatipanStudio.Util.Connect(RunService.Stepped, function()
         local character = LocalPlayer.Character
         if not character then return end
         for _, part in ipairs(character:GetChildren()) do
@@ -495,19 +421,19 @@ function xDTaraZ.Movement.SetNoclip(enabled)
     end)
 end
 
-function xDTaraZ.Movement.RestoreCollision()
+function PatipanStudio.Movement.RestoreCollision()
     for part, canCollide in pairs(State.NoclipSaved) do
         if part.Parent then part.CanCollide = canCollide end
     end
     table.clear(State.NoclipSaved)
 end
 
-function xDTaraZ.Movement.RefreshNoclip()
-    xDTaraZ.Movement.SetNoclip(State.Opt.Noclip or State.FarmBusy)
+function PatipanStudio.Movement.RefreshNoclip()
+    PatipanStudio.Movement.SetNoclip(State.Opt.Noclip or State.FarmBusy)
 end
 
-function xDTaraZ.Movement.Apply()
-    local humanoid = xDTaraZ.Util.Humanoid()
+function PatipanStudio.Movement.Apply()
+    local humanoid = PatipanStudio.Util.Humanoid()
     if not humanoid then
         return
     end
@@ -521,30 +447,30 @@ function xDTaraZ.Movement.Apply()
     end
 end
 
-function xDTaraZ.Movement.RestoreSpeed()
-    local humanoid = xDTaraZ.Util.Humanoid()
+function PatipanStudio.Movement.RestoreSpeed()
+    local humanoid = PatipanStudio.Util.Humanoid()
     if humanoid then
         humanoid.WalkSpeed = Config.SpeedDefault
     end
 end
 
-function xDTaraZ.Movement.RestoreJump()
-    local humanoid = xDTaraZ.Util.Humanoid()
+function PatipanStudio.Movement.RestoreJump()
+    local humanoid = PatipanStudio.Util.Humanoid()
     if humanoid then
         humanoid.JumpPower = Config.JumpDefault
     end
 end
 
-function xDTaraZ.Movement.InitInfJump()
-    xDTaraZ.Util.Connect(UserInputService.JumpRequest, function()
-        local humanoid = xDTaraZ.Util.Humanoid()
+function PatipanStudio.Movement.InitInfJump()
+    PatipanStudio.Util.Connect(UserInputService.JumpRequest, function()
+        local humanoid = PatipanStudio.Util.Humanoid()
         if State.Opt.InfJump and humanoid then
             humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
         end
     end)
 end
 
-function xDTaraZ.Movement.SetFly(enabled)
+function PatipanStudio.Movement.SetFly(enabled)
     if State.FlyConn then
         State.FlyConn:Disconnect()
         State.FlyConn = nil
@@ -553,7 +479,7 @@ function xDTaraZ.Movement.SetFly(enabled)
         State.FlyVelocity:Destroy()
         State.FlyVelocity = nil
     end
-    local humanoid = xDTaraZ.Util.Humanoid()
+    local humanoid = PatipanStudio.Util.Humanoid()
     if humanoid then
         humanoid.PlatformStand = false
     end
@@ -564,8 +490,8 @@ function xDTaraZ.Movement.SetFly(enabled)
     mover.MaxForce = Vector3.one * 1e9
     mover.Velocity = Vector3.zero
     State.FlyVelocity = mover
-    State.FlyConn = xDTaraZ.Util.Connect(RunService.RenderStepped, function()
-        local root, hum = xDTaraZ.Util.Root(), xDTaraZ.Util.Humanoid()
+    State.FlyConn = PatipanStudio.Util.Connect(RunService.RenderStepped, function()
+        local root, hum = PatipanStudio.Util.Root(), PatipanStudio.Util.Humanoid()
         if not root or not hum then
             return
         end
@@ -576,48 +502,48 @@ function xDTaraZ.Movement.SetFly(enabled)
     end)
 end
 
-function xDTaraZ.Util.Busy()
+function PatipanStudio.Util.Busy()
     return State.ActionBusy and os.clock() - State.BusySince < Config.BusyTimeout
 end
 
-function xDTaraZ.Util.SetBusy(busy)
+function PatipanStudio.Util.SetBusy(busy)
     State.ActionBusy = busy
     State.BusySince = os.clock()
 end
 
 ---@return any  result of action, character moved back after
-function xDTaraZ.Util.WarpAndReturn(targetCFrame, action)
-    local root = xDTaraZ.Util.Root()
-    if not root or not targetCFrame or xDTaraZ.Util.Busy() then
+function PatipanStudio.Util.WarpAndReturn(targetCFrame, action)
+    local root = PatipanStudio.Util.Root()
+    if not root or not targetCFrame or PatipanStudio.Util.Busy() then
         return false
     end
-    xDTaraZ.Util.SetBusy(true)
+    PatipanStudio.Util.SetBusy(true)
     local home = root.CFrame
-    local ok = xDTaraZ.Util.Try(function()
+    local ok = PatipanStudio.Util.Try(function()
         root.CFrame = targetCFrame
         root.AssemblyLinearVelocity = Vector3.zero
         action()
     end)
-    local current = xDTaraZ.Util.Root()
+    local current = PatipanStudio.Util.Root()
     if current then
         current.CFrame = home
     end
-    xDTaraZ.Util.SetBusy(false)
+    PatipanStudio.Util.SetBusy(false)
     return ok
 end
 
-function xDTaraZ.Sheriff.Gun()
-    return xDTaraZ.Util.Tool(LocalPlayer, "Gun")
+function PatipanStudio.Sheriff.Gun()
+    return PatipanStudio.Util.Tool(LocalPlayer, "Gun")
 end
 
-function xDTaraZ.Sheriff.Equip(tool)
-    local humanoid = xDTaraZ.Util.Humanoid()
+function PatipanStudio.Sheriff.Equip(tool)
+    local humanoid = PatipanStudio.Util.Humanoid()
     if humanoid and tool.Parent ~= LocalPlayer.Character then
         humanoid:EquipTool(tool)
     end
 end
 
-function xDTaraZ.Sheriff.ClearStand(target, targetRoot)
+function PatipanStudio.Sheriff.ClearStand(target, targetRoot)
     local params = RaycastParams.new()
     params.FilterType = Enum.RaycastFilterType.Exclude
     params.FilterDescendantsInstances = { LocalPlayer.Character, target.Character }
@@ -630,41 +556,41 @@ function xDTaraZ.Sheriff.ClearStand(target, targetRoot)
     return CFrame.lookAt((targetRoot.CFrame * CFrame.new(Config.ShootStands[1])).Position, targetRoot.Position)
 end
 
-function xDTaraZ.Sheriff.ShootTarget(target)
-    local gun, targetRoot = xDTaraZ.Sheriff.Gun(), xDTaraZ.Util.Root(target)
+function PatipanStudio.Sheriff.ShootTarget(target)
+    local gun, targetRoot = PatipanStudio.Sheriff.Gun(), PatipanStudio.Util.Root(target)
     if not gun or not targetRoot or os.clock() - State.LastShoot < Config.ShootCooldown then
         return false
     end
     State.LastShoot = os.clock()
-    xDTaraZ.Sheriff.Equip(gun)
-    return xDTaraZ.Util.WarpAndReturn(xDTaraZ.Sheriff.ClearStand(target, targetRoot), function()
+    PatipanStudio.Sheriff.Equip(gun)
+    return PatipanStudio.Util.WarpAndReturn(PatipanStudio.Sheriff.ClearStand(target, targetRoot), function()
         task.wait(Config.ShootSettle)
-        local root = xDTaraZ.Util.Root()
+        local root = PatipanStudio.Util.Root()
         local attachment = root and root:FindFirstChild("GunRaycastAttachment")
-        local aimRoot = xDTaraZ.Util.Root(target) or targetRoot
+        local aimRoot = PatipanStudio.Util.Root(target) or targetRoot
         gun.Shoot:FireServer(attachment and attachment.WorldCFrame or root.CFrame, aimRoot.CFrame)
         task.wait(Config.ShootReturn)
     end)
 end
 
-function xDTaraZ.Util.IsDead(player)
-    local humanoid = xDTaraZ.Util.Humanoid(player)
+function PatipanStudio.Util.IsDead(player)
+    local humanoid = PatipanStudio.Util.Humanoid(player)
     return not humanoid or humanoid.Health <= 0
 end
 
-function xDTaraZ.Sheriff.ShootMurderer()
-    xDTaraZ.Round.RefreshRoles()
-    local murderer = xDTaraZ.Round.FindByRole("Murderer")
+function PatipanStudio.Sheriff.ShootMurderer()
+    PatipanStudio.Round.RefreshRoles()
+    local murderer = PatipanStudio.Round.FindByRole("Murderer")
     if not murderer then
         return false, "No murderer found"
     end
     for _ = 1, Config.ShootAttempts do
-        if not xDTaraZ.Sheriff.Gun() then
+        if not PatipanStudio.Sheriff.Gun() then
             break
         end
-        xDTaraZ.Sheriff.ShootTarget(murderer)
+        PatipanStudio.Sheriff.ShootTarget(murderer)
         task.wait(Config.ShootConfirm)
-        if xDTaraZ.Util.IsDead(murderer) then
+        if PatipanStudio.Util.IsDead(murderer) then
             return true, murderer.Name
         end
         task.wait(math.max(0, Config.ShootCooldown - Config.ShootConfirm))
@@ -672,29 +598,29 @@ function xDTaraZ.Sheriff.ShootMurderer()
     return false, murderer.Name .. " survived"
 end
 
-function xDTaraZ.Sheriff.AutoShootStep()
-    if not State.Opt.AutoShoot or State.ShootBusy or not xDTaraZ.Sheriff.Gun() or not xDTaraZ.Round.IAmPlaying() then
+function PatipanStudio.Sheriff.AutoShootStep()
+    if not State.Opt.AutoShoot or State.ShootBusy or not PatipanStudio.Sheriff.Gun() or not PatipanStudio.Round.IAmPlaying() then
         return
     end
     State.ShootBusy = true
     task.spawn(function()
-        xDTaraZ.Util.Try(xDTaraZ.Sheriff.ShootMurderer)
+        PatipanStudio.Util.Try(PatipanStudio.Sheriff.ShootMurderer)
         State.ShootBusy = false
     end)
 end
 
-function xDTaraZ.Sheriff.GrabGun()
-    local drop = xDTaraZ.Round.GunDrop()
-    if not drop or xDTaraZ.Sheriff.Gun() or not xDTaraZ.Round.IAmPlaying() then
+function PatipanStudio.Sheriff.GrabGun()
+    local drop = PatipanStudio.Round.GunDrop()
+    if not drop or PatipanStudio.Sheriff.Gun() or not PatipanStudio.Round.IAmPlaying() then
         return false
     end
     local part = drop:IsA("BasePart") and drop or drop:FindFirstChildWhichIsA("BasePart", true)
     if not part then
         return false
     end
-    return xDTaraZ.Util.WarpAndReturn(part.CFrame, function()
-        local root = xDTaraZ.Util.Root()
-        if root and xDTaraZ.Library.Compat.Caps.Touch then
+    return PatipanStudio.Util.WarpAndReturn(part.CFrame, function()
+        local root = PatipanStudio.Util.Root()
+        if root and PatipanStudio.Library.Compat.Caps.Touch then
             firetouchinterest(root, part, 0)
             firetouchinterest(root, part, 1)
         end
@@ -702,90 +628,90 @@ function xDTaraZ.Sheriff.GrabGun()
     end)
 end
 
-function xDTaraZ.Sheriff.AutoGrabStep()
-    if State.Opt.AutoGrabGun and xDTaraZ.Round.RoleOf(LocalPlayer) ~= "Murderer" and xDTaraZ.Round.GunDrop() then
-        task.spawn(xDTaraZ.Sheriff.GrabGun)
+function PatipanStudio.Sheriff.AutoGrabStep()
+    if State.Opt.AutoGrabGun and PatipanStudio.Round.RoleOf(LocalPlayer) ~= "Murderer" and PatipanStudio.Round.GunDrop() then
+        task.spawn(PatipanStudio.Sheriff.GrabGun)
     end
 end
 
-function xDTaraZ.Murderer.Knife()
-    return xDTaraZ.Util.Tool(LocalPlayer, "Knife")
+function PatipanStudio.Murderer.Knife()
+    return PatipanStudio.Util.Tool(LocalPlayer, "Knife")
 end
 
-function xDTaraZ.Murderer.Stab(target)
-    local knife, targetRoot = xDTaraZ.Murderer.Knife(), xDTaraZ.Util.Root(target)
+function PatipanStudio.Murderer.Stab(target)
+    local knife, targetRoot = PatipanStudio.Murderer.Knife(), PatipanStudio.Util.Root(target)
     if not knife or not targetRoot then
         return false
     end
-    xDTaraZ.Sheriff.Equip(knife)
+    PatipanStudio.Sheriff.Equip(knife)
     local events = knife:FindFirstChild("Events")
     if not events then
         return false
     end
     local stand = targetRoot.CFrame * CFrame.new(0, 0, Config.StabOffset)
-    return xDTaraZ.Util.WarpAndReturn(stand, function()
+    return PatipanStudio.Util.WarpAndReturn(stand, function()
         events.KnifeStabbed:FireServer()
         task.wait()
-        local aimRoot = xDTaraZ.Util.Root(target) or targetRoot
+        local aimRoot = PatipanStudio.Util.Root(target) or targetRoot
         events.HandleTouched:FireServer(aimRoot)
         task.wait(Config.StabCooldown)
     end)
 end
 
-function xDTaraZ.Murderer.Victims()
+function PatipanStudio.Murderer.Victims()
     local victims = {}
     for _, player in ipairs(Players:GetPlayers()) do
-        local humanoid = xDTaraZ.Util.Humanoid(player)
+        local humanoid = PatipanStudio.Util.Humanoid(player)
         local entry = State.Roles[player.Name]
         local inRound = entry == nil or not entry.Dead
-        if player ~= LocalPlayer and humanoid and humanoid.Health > 0 and inRound and xDTaraZ.Util.Root(player) then
+        if player ~= LocalPlayer and humanoid and humanoid.Health > 0 and inRound and PatipanStudio.Util.Root(player) then
             table.insert(victims, player)
         end
     end
     table.sort(victims, function(a, b)
-        return (Config.VictimPriority[xDTaraZ.Round.RoleOf(a)] or 3) < (Config.VictimPriority[xDTaraZ.Round.RoleOf(b)] or 3)
+        return (Config.VictimPriority[PatipanStudio.Round.RoleOf(a)] or 3) < (Config.VictimPriority[PatipanStudio.Round.RoleOf(b)] or 3)
     end)
     return victims
 end
 
-function xDTaraZ.Murderer.KillAll()
-    if not xDTaraZ.Murderer.Knife() then
+function PatipanStudio.Murderer.KillAll()
+    if not PatipanStudio.Murderer.Knife() then
         return 0
     end
     local kills = 0
-    for _, victim in ipairs(xDTaraZ.Murderer.Victims()) do
-        if not State.Alive or not xDTaraZ.Murderer.Knife() then
+    for _, victim in ipairs(PatipanStudio.Murderer.Victims()) do
+        if not State.Alive or not PatipanStudio.Murderer.Knife() then
             break
         end
-        if xDTaraZ.Murderer.Stab(victim) then
+        if PatipanStudio.Murderer.Stab(victim) then
             kills = kills + 1
         end
     end
     return kills
 end
 
-function xDTaraZ.Murderer.AutoKillStep()
-    if not State.Opt.AutoKillAll or State.KillBusy or not xDTaraZ.Murderer.Knife() or not xDTaraZ.Round.IAmPlaying() then
+function PatipanStudio.Murderer.AutoKillStep()
+    if not State.Opt.AutoKillAll or State.KillBusy or not PatipanStudio.Murderer.Knife() or not PatipanStudio.Round.IAmPlaying() then
         return
     end
     State.KillBusy = true
     task.spawn(function()
-        xDTaraZ.Util.Try(xDTaraZ.Murderer.KillAll)
+        PatipanStudio.Util.Try(PatipanStudio.Murderer.KillAll)
         State.KillBusy = false
     end)
 end
 
-function xDTaraZ.Murderer.KillAuraStep()
-    local knife, root = xDTaraZ.Murderer.Knife(), xDTaraZ.Util.Root()
+function PatipanStudio.Murderer.KillAuraStep()
+    local knife, root = PatipanStudio.Murderer.Knife(), PatipanStudio.Util.Root()
     if not State.Opt.KillAura or not knife or not root or os.clock() - State.LastStab < Config.StabCooldown then
         return
     end
     local events = knife:FindFirstChild("Events")
-    for _, victim in ipairs(xDTaraZ.Murderer.Victims()) do
-        local victimRoot = xDTaraZ.Util.Root(victim)
+    for _, victim in ipairs(PatipanStudio.Murderer.Victims()) do
+        local victimRoot = PatipanStudio.Util.Root(victim)
         if events and victimRoot and (victimRoot.Position - root.Position).Magnitude <= Config.KillAuraRange then
             State.LastStab = os.clock()
-            xDTaraZ.Sheriff.Equip(knife)
+            PatipanStudio.Sheriff.Equip(knife)
             events.KnifeStabbed:FireServer()
             events.HandleTouched:FireServer(victimRoot)
             return
@@ -793,10 +719,10 @@ function xDTaraZ.Murderer.KillAuraStep()
     end
 end
 
-function xDTaraZ.Murderer.NearestVictimRoot(origin)
+function PatipanStudio.Murderer.NearestVictimRoot(origin)
     local best, bestDistance
-    for _, victim in ipairs(xDTaraZ.Murderer.Victims()) do
-        local victimRoot = xDTaraZ.Util.Root(victim)
+    for _, victim in ipairs(PatipanStudio.Murderer.Victims()) do
+        local victimRoot = PatipanStudio.Util.Root(victim)
         local distance = victimRoot and (victimRoot.Position - origin).Magnitude
         if distance and (not bestDistance or distance < bestDistance) then
             best, bestDistance = victimRoot, distance
@@ -806,36 +732,36 @@ function xDTaraZ.Murderer.NearestVictimRoot(origin)
 end
 
 ---Hooked only while Silent Aim or Knife Throw Aim is on, the original goes back when both are off.
-function xDTaraZ.Sheriff.SyncAimHook()
+function PatipanStudio.Sheriff.SyncAimHook()
     local wanted = State.Alive and (State.Opt.SilentAim or State.Opt.KnifeAim)
     if wanted and not State.Hook then
-        xDTaraZ.Util.Try(xDTaraZ.Sheriff.InstallAimHook)
+        PatipanStudio.Util.Try(PatipanStudio.Sheriff.InstallAimHook)
     elseif not wanted and State.Hook then
         local restore = State.Hook
         State.Hook = nil
-        xDTaraZ.Util.Try(restore)
+        PatipanStudio.Util.Try(restore)
     end
 end
 
-function xDTaraZ.Sheriff.InstallAimHook()
-    if not xDTaraZ.Library.Compat.Has({ "Namecall", "CheckCaller" }) then return end
+function PatipanStudio.Sheriff.InstallAimHook()
+    if not PatipanStudio.Library.Compat.Has({ "Namecall", "CheckCaller" }) then return end
     local original, restore
-    original, restore = xDTaraZ.Library.Compat.HookMeta(game, "__namecall", function(self, ...)
+    original, restore = PatipanStudio.Library.Compat.HookMeta(game, "__namecall", function(self, ...)
         if not State.Alive or getnamecallmethod() ~= "FireServer" or checkcaller() then
             return original(self, ...)
         end
         local parent = self.Parent
         local opt = State.Opt
         if opt.SilentAim and self.Name == "Shoot" and parent and parent.Name == "Gun" then
-            local murderer = xDTaraZ.Round.FindByRole("Murderer")
-            local murdererRoot = murderer and xDTaraZ.Util.Root(murderer)
+            local murderer = PatipanStudio.Round.FindByRole("Murderer")
+            local murdererRoot = murderer and PatipanStudio.Util.Root(murderer)
             if murdererRoot then
                 local origin = ...
                 return original(self, origin, murdererRoot.CFrame)
             end
         elseif opt.KnifeAim and self.Name == "KnifeThrown" and parent and parent.Name == "Events" then
             local origin = ...
-            local victimRoot = xDTaraZ.Murderer.NearestVictimRoot(origin.Position)
+            local victimRoot = PatipanStudio.Murderer.NearestVictimRoot(origin.Position)
             if victimRoot then
                 return original(self, origin, victimRoot.Position)
             end
@@ -845,8 +771,8 @@ function xDTaraZ.Sheriff.InstallAimHook()
     State.Hook = restore
 end
 
-function xDTaraZ.Survive.SafestSpot(threatPosition)
-    local map = xDTaraZ.Round.Map()
+function PatipanStudio.Survive.SafestSpot(threatPosition)
+    local map = PatipanStudio.Round.Map()
     local best, bestDistance
     for _, coin in ipairs(map and map.CoinContainer:GetChildren() or {}) do
         if coin:IsA("BasePart") then
@@ -859,17 +785,17 @@ function xDTaraZ.Survive.SafestSpot(threatPosition)
     return best and CFrame.new(best.Position + Vector3.new(0, 3, 0))
 end
 
-function xDTaraZ.Survive.DodgeStep()
-    local root = xDTaraZ.Util.Root()
-    local murderer = xDTaraZ.Round.FindByRole("Murderer")
-    local threat = murderer and xDTaraZ.Util.Root(murderer)
-    if not State.Opt.AutoDodge or not root or not threat or xDTaraZ.Murderer.Knife() or xDTaraZ.Util.Busy() then
+function PatipanStudio.Survive.DodgeStep()
+    local root = PatipanStudio.Util.Root()
+    local murderer = PatipanStudio.Round.FindByRole("Murderer")
+    local threat = murderer and PatipanStudio.Util.Root(murderer)
+    if not State.Opt.AutoDodge or not root or not threat or PatipanStudio.Murderer.Knife() or PatipanStudio.Util.Busy() then
         return
     end
     if os.clock() - State.LastDodge < Config.DodgeCooldown or (threat.Position - root.Position).Magnitude > Config.DodgeRange then
         return
     end
-    local spot = xDTaraZ.Survive.SafestSpot(threat.Position)
+    local spot = PatipanStudio.Survive.SafestSpot(threat.Position)
     if spot then
         State.LastDodge = os.clock()
         root.CFrame = spot
@@ -877,21 +803,21 @@ function xDTaraZ.Survive.DodgeStep()
     end
 end
 
-function xDTaraZ.Kaitun.Step()
-    if not State.Opt.Kaitun or not xDTaraZ.Round.IAmPlaying() then
+function PatipanStudio.Kaitun.Step()
+    if not State.Opt.Kaitun or not PatipanStudio.Round.IAmPlaying() then
         return
     end
     local opt = State.Opt
-    opt.AutoKillAll = xDTaraZ.Murderer.Knife() ~= nil
-    opt.AutoShoot = xDTaraZ.Sheriff.Gun() ~= nil
+    opt.AutoKillAll = PatipanStudio.Murderer.Knife() ~= nil
+    opt.AutoShoot = PatipanStudio.Sheriff.Gun() ~= nil
     opt.AutoGrabGun = true
     opt.AutoDodge = true
     opt.AutoFarm = true
 end
 
-function xDTaraZ.Farm.NearestCoin(map, origin)
-    local murderer = not xDTaraZ.Murderer.Knife() and xDTaraZ.Round.FindByRole("Murderer")
-    local threat = murderer and xDTaraZ.Util.Root(murderer)
+function PatipanStudio.Farm.NearestCoin(map, origin)
+    local murderer = not PatipanStudio.Murderer.Knife() and PatipanStudio.Round.FindByRole("Murderer")
+    local threat = murderer and PatipanStudio.Util.Root(murderer)
     local best, bestDistance
     for _, coin in ipairs(map.CoinContainer:GetChildren()) do
         local visual = coin:FindFirstChild("CoinVisual")
@@ -908,15 +834,15 @@ function xDTaraZ.Farm.NearestCoin(map, origin)
     return best
 end
 
-function xDTaraZ.Farm.BagFull()
+function PatipanStudio.Farm.BagFull()
     return State.Bag.Max > 0 and State.Bag.Current >= State.Bag.Max
 end
 
-function xDTaraZ.Farm.CanRun()
-    return State.Alive and State.Opt.AutoFarm and xDTaraZ.Round.IAmPlaying() and not xDTaraZ.Farm.BagFull()
+function PatipanStudio.Farm.CanRun()
+    return State.Alive and State.Opt.AutoFarm and PatipanStudio.Round.IAmPlaying() and not PatipanStudio.Farm.BagFull()
 end
 
-function xDTaraZ.Farm.AttachMover(root)
+function PatipanStudio.Farm.AttachMover(root)
     local attachment = Instance.new("Attachment")
     attachment.Parent = root
     local mover = Instance.new("LinearVelocity")
@@ -929,7 +855,7 @@ function xDTaraZ.Farm.AttachMover(root)
     return mover
 end
 
-function xDTaraZ.Farm.DetachMover()
+function PatipanStudio.Farm.DetachMover()
     local mover = State.FarmMover
     if mover then
         mover.Velocity:Destroy()
@@ -938,14 +864,14 @@ function xDTaraZ.Farm.DetachMover()
     end
 end
 
-function xDTaraZ.Farm.GlideTo(position)
-    local root = xDTaraZ.Util.Root()
+function PatipanStudio.Farm.GlideTo(position)
+    local root = PatipanStudio.Util.Root()
     local mover = State.FarmMover
     if not root or not mover or mover.Velocity.Parent ~= root then
-        xDTaraZ.Farm.DetachMover()
-        mover = root and { Velocity = xDTaraZ.Farm.AttachMover(root) }
+        PatipanStudio.Farm.DetachMover()
+        mover = root and { Velocity = PatipanStudio.Farm.AttachMover(root) }
     end
-    while mover and xDTaraZ.Farm.CanRun() and root.Parent do
+    while mover and PatipanStudio.Farm.CanRun() and root.Parent do
         local delta = position - root.Position
         if delta.Magnitude <= Config.FarmArrive then
             break
@@ -958,18 +884,18 @@ function xDTaraZ.Farm.GlideTo(position)
     end
 end
 
-function xDTaraZ.Farm.Run()
-    local root = xDTaraZ.Util.Root()
+function PatipanStudio.Farm.Run()
+    local root = PatipanStudio.Util.Root()
     if root then
-        xDTaraZ.Farm.AttachMover(root)
+        PatipanStudio.Farm.AttachMover(root)
     end
-    xDTaraZ.Movement.RefreshNoclip()
+    PatipanStudio.Movement.RefreshNoclip()
     State.FarmHome = root and root.CFrame
-    while xDTaraZ.Farm.CanRun() do
-        local map, hrp = xDTaraZ.Round.Map(), xDTaraZ.Util.Root()
-        local coin = map and hrp and xDTaraZ.Farm.NearestCoin(map, hrp.Position)
-        if coin and not xDTaraZ.Util.Busy() then
-            xDTaraZ.Farm.GlideTo(coin.Position)
+    while PatipanStudio.Farm.CanRun() do
+        local map, hrp = PatipanStudio.Round.Map(), PatipanStudio.Util.Root()
+        local coin = map and hrp and PatipanStudio.Farm.NearestCoin(map, hrp.Position)
+        if coin and not PatipanStudio.Util.Busy() then
+            PatipanStudio.Farm.GlideTo(coin.Position)
             task.wait(Config.FarmSettle)
             State.SkippedCoins[coin] = os.clock()
         else
@@ -983,8 +909,8 @@ function xDTaraZ.Farm.Run()
 end
 
 ---Leaves the character standing on something: back to where the farm started when there is no ground below.
-function xDTaraZ.Farm.Settle()
-    local root, home = xDTaraZ.Util.Root(), State.FarmHome
+function PatipanStudio.Farm.Settle()
+    local root, home = PatipanStudio.Util.Root(), State.FarmHome
     State.FarmHome = nil
     if not root then return end
     root.AssemblyLinearVelocity = Vector3.zero
@@ -996,44 +922,44 @@ function xDTaraZ.Farm.Settle()
     root.CFrame = home
 end
 
-function xDTaraZ.Farm.Step()
-    if State.FarmBusy or not xDTaraZ.Farm.CanRun() then return end
+function PatipanStudio.Farm.Step()
+    if State.FarmBusy or not PatipanStudio.Farm.CanRun() then return end
     State.FarmBusy = true
     task.spawn(function()
-        local ok = xDTaraZ.Util.Try(xDTaraZ.Farm.Run)
-        xDTaraZ.Farm.DetachMover()
-        xDTaraZ.Farm.Settle()
+        local ok = PatipanStudio.Util.Try(PatipanStudio.Farm.Run)
+        PatipanStudio.Farm.DetachMover()
+        PatipanStudio.Farm.Settle()
         State.FarmBusy = false
-        xDTaraZ.Movement.RefreshNoclip()
+        PatipanStudio.Movement.RefreshNoclip()
 
-        local humanoid = xDTaraZ.Util.Humanoid()
-        if ok and humanoid and State.Opt.ResetWhenFull and xDTaraZ.Farm.BagFull() then
+        local humanoid = PatipanStudio.Util.Humanoid()
+        if ok and humanoid and State.Opt.ResetWhenFull and PatipanStudio.Farm.BagFull() then
             humanoid.Health = 0
         end
     end)
 end
 
-function xDTaraZ.Farm.InitBagTracking()
+function PatipanStudio.Farm.InitBagTracking()
     if GameLib.CoinCollected then
-        xDTaraZ.Util.Connect(GameLib.CoinCollected.OnClientEvent, function(_, current, maximum)
+        PatipanStudio.Util.Connect(GameLib.CoinCollected.OnClientEvent, function(_, current, maximum)
             State.Bag.Current = tonumber(current) or 0
             State.Bag.Max = tonumber(maximum) or 0
         end)
     end
     if GameLib.CoinsStarted then
-        xDTaraZ.Util.Connect(GameLib.CoinsStarted.OnClientEvent, function()
+        PatipanStudio.Util.Connect(GameLib.CoinsStarted.OnClientEvent, function()
             State.Bag.Current, State.Bag.Max = 0, 0
             table.clear(State.SkippedCoins)
         end)
     end
     if not GameLib.RoundStart then return end
-    xDTaraZ.Util.Connect(GameLib.RoundStart.OnClientEvent, function()
+    PatipanStudio.Util.Connect(GameLib.RoundStart.OnClientEvent, function()
         State.Bag.Current, State.Bag.Max = 0, 0
         table.clear(State.Roles)
     end)
 end
 
-function xDTaraZ.Movement.AntiFlingStep()
+function PatipanStudio.Movement.AntiFlingStep()
     if not State.Opt.AntiFling then
         return
     end
@@ -1047,26 +973,26 @@ function xDTaraZ.Movement.AntiFlingStep()
             end
         end
     end
-    local root = xDTaraZ.Util.Root()
-    if root and not xDTaraZ.Util.Busy() and not State.Opt.Fly and root.AssemblyLinearVelocity.Magnitude > Config.FlingVelocityCap then
+    local root = PatipanStudio.Util.Root()
+    if root and not PatipanStudio.Util.Busy() and not State.Opt.Fly and root.AssemblyLinearVelocity.Magnitude > Config.FlingVelocityCap then
         root.AssemblyLinearVelocity = Vector3.zero
         root.AssemblyAngularVelocity = Vector3.zero
     end
 end
 
 ---@return Player?  next victim with the knife, otherwise the murderer
-function xDTaraZ.Aim.Target()
-    if xDTaraZ.Murderer.Knife() then
-        return xDTaraZ.Murderer.Victims()[1]
+function PatipanStudio.Aim.Target()
+    if PatipanStudio.Murderer.Knife() then
+        return PatipanStudio.Murderer.Victims()[1]
     end
-    return xDTaraZ.Round.FindByRole("Murderer")
+    return PatipanStudio.Round.FindByRole("Murderer")
 end
 
-function xDTaraZ.Aim.Step(dt)
+function PatipanStudio.Aim.Step(dt)
     if not State.Opt.Aimbot then
         return
     end
-    local target = xDTaraZ.Aim.Target()
+    local target = PatipanStudio.Aim.Target()
     local head = target and target.Character and target.Character:FindFirstChild("Head")
     if not head then
         return
@@ -1077,7 +1003,7 @@ function xDTaraZ.Aim.Step(dt)
     camera.CFrame = camera.CFrame:Lerp(goal, math.clamp(alpha, 0, 1))
 end
 
-function xDTaraZ.Visual.ClearXRay()
+function PatipanStudio.Visual.ClearXRay()
     for part, original in pairs(State.XRayParts) do
         if part.Parent then
             part.Transparency = original
@@ -1087,18 +1013,18 @@ function xDTaraZ.Visual.ClearXRay()
     State.XRayMap = nil
 end
 
-function xDTaraZ.Visual.XRayStep()
+function PatipanStudio.Visual.XRayStep()
     if not State.Opt.XRay then
         if State.XRayMap then
-            xDTaraZ.Visual.ClearXRay()
+            PatipanStudio.Visual.ClearXRay()
         end
         return
     end
-    local map = xDTaraZ.Round.Map() or xDTaraZ.Round.Lobby()
+    local map = PatipanStudio.Round.Map() or PatipanStudio.Round.Lobby()
     if not map or State.XRayMap == map then
         return
     end
-    xDTaraZ.Visual.ClearXRay()
+    PatipanStudio.Visual.ClearXRay()
     State.XRayMap = map
     local coins = map:FindFirstChild("CoinContainer")
     for _, part in ipairs(map:GetDescendants()) do
@@ -1109,14 +1035,14 @@ function xDTaraZ.Visual.XRayStep()
     end
 end
 
-function xDTaraZ.Skin.MeshOf(tool)
+function PatipanStudio.Skin.MeshOf(tool)
     local handle = tool and tool:FindFirstChild("Handle")
     return handle and handle:FindFirstChildWhichIsA("SpecialMesh")
 end
 
-function xDTaraZ.Skin.Copy(sourceName, weaponName)
+function PatipanStudio.Skin.Copy(sourceName, weaponName)
     local source = sourceName and Players:FindFirstChild(sourceName)
-    local mesh = source and xDTaraZ.Skin.MeshOf(xDTaraZ.Util.Tool(source, weaponName))
+    local mesh = source and PatipanStudio.Skin.MeshOf(PatipanStudio.Util.Tool(source, weaponName))
     if not mesh then
         return false
     end
@@ -1124,34 +1050,34 @@ function xDTaraZ.Skin.Copy(sourceName, weaponName)
     return true
 end
 
-function xDTaraZ.Skin.ApplyStep()
+function PatipanStudio.Skin.ApplyStep()
     for weaponName, look in pairs(State.Skins) do
-        local mesh = xDTaraZ.Skin.MeshOf(xDTaraZ.Util.Tool(LocalPlayer, weaponName))
+        local mesh = PatipanStudio.Skin.MeshOf(PatipanStudio.Util.Tool(LocalPlayer, weaponName))
         if mesh and mesh.MeshId ~= look.MeshId then
             mesh.MeshId, mesh.TextureId, mesh.Scale = look.MeshId, look.TextureId, look.Scale
         end
     end
 end
 
-function xDTaraZ.Troll.Target()
+function PatipanStudio.Troll.Target()
     return State.Opt.TrollTarget and Players:FindFirstChild(State.Opt.TrollTarget)
 end
 
-function xDTaraZ.Troll.Fling(target)
-    local root, targetRoot = xDTaraZ.Util.Root(), xDTaraZ.Util.Root(target)
-    if not root or not targetRoot or xDTaraZ.Util.Busy() then
+function PatipanStudio.Troll.Fling(target)
+    local root, targetRoot = PatipanStudio.Util.Root(), PatipanStudio.Util.Root(target)
+    if not root or not targetRoot or PatipanStudio.Util.Busy() then
         return false
     end
-    xDTaraZ.Util.SetBusy(true)
+    PatipanStudio.Util.SetBusy(true)
     local home = root.CFrame
     local spin = Instance.new("BodyAngularVelocity")
     spin.MaxTorque = Vector3.one * math.huge
     spin.AngularVelocity = Vector3.new(0, Config.FlingForce, 0)
     spin.Parent = root
-    xDTaraZ.Movement.SetNoclip(true)
+    PatipanStudio.Movement.SetNoclip(true)
     local started = os.clock()
     while os.clock() - started < Config.FlingTime do
-        local currentTarget = xDTaraZ.Util.Root(target)
+        local currentTarget = PatipanStudio.Util.Root(target)
         if not currentTarget or not root.Parent then
             break
         end
@@ -1165,28 +1091,28 @@ function xDTaraZ.Troll.Fling(target)
         root.AssemblyLinearVelocity = Vector3.zero
         root.CFrame = home
     end
-    xDTaraZ.Util.SetBusy(false)
-    xDTaraZ.Movement.RefreshNoclip()
+    PatipanStudio.Util.SetBusy(false)
+    PatipanStudio.Movement.RefreshNoclip()
     return true
 end
 
-function xDTaraZ.Troll.Spectate(target)
-    local humanoid = target and xDTaraZ.Util.Humanoid(target) or xDTaraZ.Util.Humanoid()
+function PatipanStudio.Troll.Spectate(target)
+    local humanoid = target and PatipanStudio.Util.Humanoid(target) or PatipanStudio.Util.Humanoid()
     if humanoid then
         workspace.CurrentCamera.CameraSubject = humanoid
     end
 end
 
-function xDTaraZ.Troll.StickStep()
+function PatipanStudio.Troll.StickStep()
     local target = State.StickTarget and Players:FindFirstChild(State.StickTarget)
-    local root, targetRoot = xDTaraZ.Util.Root(), target and xDTaraZ.Util.Root(target)
-    if root and targetRoot and not xDTaraZ.Util.Busy() then
+    local root, targetRoot = PatipanStudio.Util.Root(), target and PatipanStudio.Util.Root(target)
+    if root and targetRoot and not PatipanStudio.Util.Busy() then
         root.CFrame = targetRoot.CFrame * CFrame.new(0, 0, 2)
     end
 end
 
-function xDTaraZ.Teleport.To(cframe)
-    local root = xDTaraZ.Util.Root()
+function PatipanStudio.Teleport.To(cframe)
+    local root = PatipanStudio.Util.Root()
     if root and cframe then
         root.CFrame = cframe + Vector3.new(0, 3, 0)
         return true
@@ -1194,47 +1120,47 @@ function xDTaraZ.Teleport.To(cframe)
     return false
 end
 
-function xDTaraZ.Teleport.ToPlayer(name)
+function PatipanStudio.Teleport.ToPlayer(name)
     local player = name and Players:FindFirstChild(name)
-    local root = player and xDTaraZ.Util.Root(player)
-    return xDTaraZ.Teleport.To(root and root.CFrame)
+    local root = player and PatipanStudio.Util.Root(player)
+    return PatipanStudio.Teleport.To(root and root.CFrame)
 end
 
-function xDTaraZ.Teleport.ToLobby()
-    local lobby = xDTaraZ.Round.Lobby()
+function PatipanStudio.Teleport.ToLobby()
+    local lobby = PatipanStudio.Round.Lobby()
     local spawnPart = lobby and (lobby:FindFirstChild("Spawns", true) or lobby:FindFirstChildWhichIsA("SpawnLocation", true))
     local part = spawnPart and (spawnPart:IsA("BasePart") and spawnPart or spawnPart:FindFirstChildWhichIsA("BasePart"))
     if not part and lobby then
         part = lobby:FindFirstChildWhichIsA("BasePart", true)
     end
-    return xDTaraZ.Teleport.To(part and part.CFrame)
+    return PatipanStudio.Teleport.To(part and part.CFrame)
 end
 
-function xDTaraZ.Teleport.ToMap()
-    local map = xDTaraZ.Round.Map()
+function PatipanStudio.Teleport.ToMap()
+    local map = PatipanStudio.Round.Map()
     local spawns = map and map:FindFirstChild("Spawns")
     local part = spawns and spawns:FindFirstChildWhichIsA("BasePart") or (map and map.CoinContainer:FindFirstChildWhichIsA("BasePart"))
-    return xDTaraZ.Teleport.To(part and part.CFrame)
+    return PatipanStudio.Teleport.To(part and part.CFrame)
 end
 
-function xDTaraZ.Esp.Init()
-    xDTaraZ.Esp.Folder = Instance.new("Folder")
-    xDTaraZ.Esp.Folder.Name = HttpService:GenerateGUID(false)
-    xDTaraZ.Util.Mount(xDTaraZ.Esp.Folder)
+function PatipanStudio.Esp.Init()
+    PatipanStudio.Esp.Folder = Instance.new("Folder")
+    PatipanStudio.Esp.Folder.Name = HttpService:GenerateGUID(false)
+    PatipanStudio.Util.Mount(PatipanStudio.Esp.Folder)
 end
 
-function xDTaraZ.Esp.MakeHighlight(adornee, color)
+function PatipanStudio.Esp.MakeHighlight(adornee, color)
     local highlight = Instance.new("Highlight")
     highlight.FillColor = color
     highlight.OutlineColor = color
     highlight.FillTransparency = 0.65
     highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
     highlight.Adornee = adornee
-    highlight.Parent = xDTaraZ.Esp.Folder
+    highlight.Parent = PatipanStudio.Esp.Folder
     return highlight
 end
 
-function xDTaraZ.Esp.MakeLabel(adornee, color)
+function PatipanStudio.Esp.MakeLabel(adornee, color)
     local gui = Instance.new("BillboardGui")
     gui.Size = UDim2.fromOffset(180, 36)
     gui.StudsOffset = Vector3.new(0, 3.5, 0)
@@ -1248,33 +1174,33 @@ function xDTaraZ.Esp.MakeLabel(adornee, color)
     label.Font = Enum.Font.GothamBold
     label.TextSize = 13
     label.Parent = gui
-    gui.Parent = xDTaraZ.Esp.Folder
+    gui.Parent = PatipanStudio.Esp.Folder
     return gui, label
 end
 
-function xDTaraZ.Esp.DropEntry(entry)
+function PatipanStudio.Esp.DropEntry(entry)
     if entry then
         entry.Highlight:Destroy()
         entry.Gui:Destroy()
     end
 end
 
-function xDTaraZ.Esp.RefreshPlayers()
+function PatipanStudio.Esp.RefreshPlayers()
     local entries = State.Esp.Players
-    local myRoot = xDTaraZ.Util.Root()
+    local myRoot = PatipanStudio.Util.Root()
     for _, player in ipairs(Players:GetPlayers()) do
-        local character, root = player.Character, xDTaraZ.Util.Root(player)
+        local character, root = player.Character, PatipanStudio.Util.Root(player)
         local entry = entries[player]
-        local role = xDTaraZ.Round.RoleOf(player)
+        local role = PatipanStudio.Round.RoleOf(player)
         local visible = State.Opt.EspPlayers and player ~= LocalPlayer and character and root and role ~= "Dead"
         if not visible then
-            xDTaraZ.Esp.DropEntry(entry)
+            PatipanStudio.Esp.DropEntry(entry)
             entries[player] = nil
         else
             if not entry or entry.Character ~= character then
-                xDTaraZ.Esp.DropEntry(entry)
-                local gui, label = xDTaraZ.Esp.MakeLabel(root, Color3.new(1, 1, 1))
-                entry = { Character = character, Highlight = xDTaraZ.Esp.MakeHighlight(character, Color3.new(1, 1, 1)), Gui = gui, Label = label }
+                PatipanStudio.Esp.DropEntry(entry)
+                local gui, label = PatipanStudio.Esp.MakeLabel(root, Color3.new(1, 1, 1))
+                entry = { Character = character, Highlight = PatipanStudio.Esp.MakeHighlight(character, Color3.new(1, 1, 1)), Gui = gui, Label = label }
                 entries[player] = entry
             end
             local color = Config.Colors[role] or Config.Colors.Innocent
@@ -1285,36 +1211,36 @@ function xDTaraZ.Esp.RefreshPlayers()
     end
     for player, entry in pairs(entries) do
         if not player.Parent then
-            xDTaraZ.Esp.DropEntry(entry)
+            PatipanStudio.Esp.DropEntry(entry)
             entries[player] = nil
         end
     end
 end
 
-function xDTaraZ.Esp.RefreshGun()
-    local drop = State.Opt.EspGun and xDTaraZ.Round.GunDrop()
+function PatipanStudio.Esp.RefreshGun()
+    local drop = State.Opt.EspGun and PatipanStudio.Round.GunDrop()
     local entry = State.Esp.Gun
     if entry and entry.Adornee == drop then
         return
     end
-    xDTaraZ.Esp.DropEntry(entry)
+    PatipanStudio.Esp.DropEntry(entry)
     State.Esp.Gun = nil
     if drop then
-        local gui, label = xDTaraZ.Esp.MakeLabel(drop, Config.Colors.Gun)
+        local gui, label = PatipanStudio.Esp.MakeLabel(drop, Config.Colors.Gun)
         label.Text = "GUN DROP"
-        State.Esp.Gun = { Adornee = drop, Highlight = xDTaraZ.Esp.MakeHighlight(drop, Config.Colors.Gun), Gui = gui }
+        State.Esp.Gun = { Adornee = drop, Highlight = PatipanStudio.Esp.MakeHighlight(drop, Config.Colors.Gun), Gui = gui }
     end
 end
 
-function xDTaraZ.Esp.Destroy()
-    if xDTaraZ.Esp.Folder then
-        xDTaraZ.Esp.Folder:Destroy()
+function PatipanStudio.Esp.Destroy()
+    if PatipanStudio.Esp.Folder then
+        PatipanStudio.Esp.Folder:Destroy()
     end
     table.clear(State.Esp.Players)
     State.Esp.Gun = nil
 end
 
-function xDTaraZ.Visual.SetFullbright(enabled)
+function PatipanStudio.Visual.SetFullbright(enabled)
     if enabled and not State.LightingDefaults then
         State.LightingDefaults = { Ambient = Lighting.Ambient, Brightness = Lighting.Brightness, ClockTime = Lighting.ClockTime, FogEnd = Lighting.FogEnd, GlobalShadows = Lighting.GlobalShadows }
         Lighting.Ambient = Color3.new(1, 1, 1)
@@ -1330,20 +1256,20 @@ function xDTaraZ.Visual.SetFullbright(enabled)
     end
 end
 
-function xDTaraZ.Session.RedeemCode(code)
+function PatipanStudio.Session.RedeemCode(code)
     local remote = GameLib.RedeemCode
     if not remote then return "The code box was not found in this game version" end
     local ok, message = pcall(remote.InvokeServer, remote, code)
     return ok and tostring(message) or "Request failed"
 end
 
-function xDTaraZ.Session.Rejoin()
+function PatipanStudio.Session.Rejoin()
     TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer)
 end
 
-function xDTaraZ.Session.Hop()
+function PatipanStudio.Session.Hop()
     local url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100", game.PlaceId)
-    local body = xDTaraZ.Util.HttpGet(url)
+    local body = PatipanStudio.Util.HttpGet(url)
     local ok, servers = pcall(HttpService.JSONDecode, HttpService, body or "")
     if not ok or type(servers) ~= "table" then
         return
@@ -1356,8 +1282,8 @@ function xDTaraZ.Session.Hop()
     end
 end
 
-function xDTaraZ.Session.InitAntiAfk()
-    xDTaraZ.Util.Connect(LocalPlayer.Idled, function()
+function PatipanStudio.Session.InitAntiAfk()
+    PatipanStudio.Util.Connect(LocalPlayer.Idled, function()
         if State.Opt.AntiAfk then
             VirtualUser:CaptureController()
             VirtualUser:ClickButton2(Vector2.new())
@@ -1365,50 +1291,50 @@ function xDTaraZ.Session.InitAntiAfk()
     end)
 end
 
-function xDTaraZ.Session.InitRoleNotify(notify)
+function PatipanStudio.Session.InitRoleNotify(notify)
     if not GameLib.RoundStart then return end
-    xDTaraZ.Util.Connect(GameLib.RoundStart.OnClientEvent, function()
+    PatipanStudio.Util.Connect(GameLib.RoundStart.OnClientEvent, function()
         task.wait(2)
         State.LastRoleFetch = 0
-        xDTaraZ.Round.RefreshRoles()
+        PatipanStudio.Round.RefreshRoles()
         if not State.Opt.RoleNotify then
             return
         end
-        local murderer, sheriff = xDTaraZ.Round.FindByRole("Murderer"), xDTaraZ.Round.FindByRole("Sheriff")
-        notify(string.format("Murderer: %s | Sheriff: %s | You: %s", murderer and murderer.Name or "?", sheriff and sheriff.Name or "?", xDTaraZ.Round.RoleOf(LocalPlayer)))
+        local murderer, sheriff = PatipanStudio.Round.FindByRole("Murderer"), PatipanStudio.Round.FindByRole("Sheriff")
+        notify(string.format("Murderer: %s | Sheriff: %s | You: %s", murderer and murderer.Name or "?", sheriff and sheriff.Name or "?", PatipanStudio.Round.RoleOf(LocalPlayer)))
     end)
 end
 
-xDTaraZ.Scheduler.Jobs = {
+PatipanStudio.Scheduler.Jobs = {
     Tick = {
-        { "Roles", xDTaraZ.Round.RefreshRoles },
-        { "Auto Win", xDTaraZ.Kaitun.Step, "Kaitun" },
-        { "Auto Farm", xDTaraZ.Farm.Step, "AutoFarm" },
-        { "X-Ray", xDTaraZ.Visual.XRayStep, "XRay" },
-        { "Skins", xDTaraZ.Skin.ApplyStep },
-        { "Movement", xDTaraZ.Movement.Apply, { "SpeedOn", "JumpOn" } },
-        { "Auto Grab Gun", xDTaraZ.Sheriff.AutoGrabStep, "AutoGrabGun" },
-        { "Auto Shoot", xDTaraZ.Sheriff.AutoShootStep, "AutoShoot" },
-        { "Auto Kill All", xDTaraZ.Murderer.AutoKillStep, "AutoKillAll" },
-        { "Role ESP", xDTaraZ.Esp.RefreshPlayers, "EspPlayers" },
-        { "Gun ESP", xDTaraZ.Esp.RefreshGun, "EspGun" },
+        { "Roles", PatipanStudio.Round.RefreshRoles },
+        { "Auto Win", PatipanStudio.Kaitun.Step, "Kaitun" },
+        { "Auto Farm", PatipanStudio.Farm.Step, "AutoFarm" },
+        { "X-Ray", PatipanStudio.Visual.XRayStep, "XRay" },
+        { "Skins", PatipanStudio.Skin.ApplyStep },
+        { "Movement", PatipanStudio.Movement.Apply, { "SpeedOn", "JumpOn" } },
+        { "Auto Grab Gun", PatipanStudio.Sheriff.AutoGrabStep, "AutoGrabGun" },
+        { "Auto Shoot", PatipanStudio.Sheriff.AutoShootStep, "AutoShoot" },
+        { "Auto Kill All", PatipanStudio.Murderer.AutoKillStep, "AutoKillAll" },
+        { "Role ESP", PatipanStudio.Esp.RefreshPlayers, "EspPlayers" },
+        { "Gun ESP", PatipanStudio.Esp.RefreshGun, "EspGun" },
     },
-    Stepped = { { "Anti Fling", xDTaraZ.Movement.AntiFlingStep, "AntiFling" } },
-    Render = { { "Aimbot", xDTaraZ.Aim.Step, "Aimbot" } },
+    Stepped = { { "Anti Fling", PatipanStudio.Movement.AntiFlingStep, "AntiFling" } },
+    Render = { { "Aimbot", PatipanStudio.Aim.Step, "Aimbot" } },
     Heartbeat = {
-        { "Kill Aura", xDTaraZ.Murderer.KillAuraStep, "KillAura" },
-        { "Auto Dodge", xDTaraZ.Survive.DodgeStep, "AutoDodge" },
-        { "Stick To Player", xDTaraZ.Troll.StickStep, "StickTo" },
+        { "Kill Aura", PatipanStudio.Murderer.KillAuraStep, "KillAura" },
+        { "Auto Dodge", PatipanStudio.Survive.DodgeStep, "AutoDodge" },
+        { "Stick To Player", PatipanStudio.Troll.StickStep, "StickTo" },
     },
 }
 
 ---@param job table  { label, step, toggle idx or list }
 ---@return table     toggles of the job that are on
-function xDTaraZ.Scheduler.OnToggles(job)
+function PatipanStudio.Scheduler.OnToggles(job)
     local on = {}
-    if not xDTaraZ.Library or job[3] == nil then return on end
+    if not PatipanStudio.Library or job[3] == nil then return on end
     for _, idx in ipairs(type(job[3]) == "table" and job[3] or { job[3] }) do
-        local toggle = xDTaraZ.Library.Toggles[idx]
+        local toggle = PatipanStudio.Library.Toggles[idx]
         if toggle and toggle.Value then
             on[#on + 1] = toggle
         end
@@ -1417,10 +1343,10 @@ function xDTaraZ.Scheduler.OnToggles(job)
 end
 
 ---Queues the job's toggles to be switched off by the UI pump (their callbacks restore the game state); a job with none on rests until one turns on.
-function xDTaraZ.Scheduler.Halt(job, err)
+function PatipanStudio.Scheduler.Halt(job, err)
     local reason = tostring(err):match("^[^\n]*")
     job.Streak = nil
-    if #xDTaraZ.Scheduler.OnToggles(job) == 0 then
+    if #PatipanStudio.Scheduler.OnToggles(job) == 0 then
         job.Stopped = true
         warn("[MM2] " .. job[1] .. " paused until turned on:", reason)
         return
@@ -1432,10 +1358,10 @@ function xDTaraZ.Scheduler.Halt(job, err)
 end
 
 ---@param job table  { label, step, toggle idx or list }; toggle jobs halt after Config.JobFailLimit errors spanning Config.JobFailWindow seconds
-function xDTaraZ.Scheduler.Run(job, ...)
+function PatipanStudio.Scheduler.Run(job, ...)
     if job.Halting then return end
     if job.Stopped then
-        if #xDTaraZ.Scheduler.OnToggles(job) == 0 then return end
+        if #PatipanStudio.Scheduler.OnToggles(job) == 0 then return end
         job.Stopped = nil
     end
 
@@ -1453,66 +1379,66 @@ function xDTaraZ.Scheduler.Run(job, ...)
     end
     streak.count += 1
     if job[3] == nil or streak.count < Config.JobFailLimit or os.clock() - streak.since < Config.JobFailWindow then return end
-    xDTaraZ.Scheduler.Halt(job, err)
+    PatipanStudio.Scheduler.Halt(job, err)
 end
 
-function xDTaraZ.Scheduler.RunLane(lane, ...)
-    for _, job in ipairs(xDTaraZ.Scheduler.Jobs[lane]) do
-        xDTaraZ.Scheduler.Run(job, ...)
+function PatipanStudio.Scheduler.RunLane(lane, ...)
+    for _, job in ipairs(PatipanStudio.Scheduler.Jobs[lane]) do
+        PatipanStudio.Scheduler.Run(job, ...)
     end
 end
 
-function xDTaraZ.Scheduler.Boot(notify)
-    xDTaraZ.Esp.Init()
-    xDTaraZ.Farm.InitBagTracking()
-    xDTaraZ.Util.Connect(RunService.Stepped, function()
-        xDTaraZ.Scheduler.RunLane("Stepped")
+function PatipanStudio.Scheduler.Boot(notify)
+    PatipanStudio.Esp.Init()
+    PatipanStudio.Farm.InitBagTracking()
+    PatipanStudio.Util.Connect(RunService.Stepped, function()
+        PatipanStudio.Scheduler.RunLane("Stepped")
     end)
-    xDTaraZ.Movement.InitInfJump()
-    xDTaraZ.Session.InitAntiAfk()
-    xDTaraZ.Session.InitRoleNotify(notify)
-    xDTaraZ.Util.Connect(RunService.RenderStepped, function(dt)
-        xDTaraZ.Scheduler.RunLane("Render", dt)
+    PatipanStudio.Movement.InitInfJump()
+    PatipanStudio.Session.InitAntiAfk()
+    PatipanStudio.Session.InitRoleNotify(notify)
+    PatipanStudio.Util.Connect(RunService.RenderStepped, function(dt)
+        PatipanStudio.Scheduler.RunLane("Render", dt)
     end)
-    xDTaraZ.Util.Connect(RunService.Heartbeat, function()
-        xDTaraZ.Scheduler.RunLane("Heartbeat")
+    PatipanStudio.Util.Connect(RunService.Heartbeat, function()
+        PatipanStudio.Scheduler.RunLane("Heartbeat")
     end)
     task.spawn(function()
         while State.Alive do
-            xDTaraZ.Scheduler.RunLane("Tick")
+            PatipanStudio.Scheduler.RunLane("Tick")
             task.wait(Config.TickDelay)
         end
     end)
 end
 
-function xDTaraZ.Scheduler.Stop()
+function PatipanStudio.Scheduler.Stop()
     State.Alive = false
     getgenv().MurderMystery2Unload = nil
-    xDTaraZ.Sheriff.SyncAimHook()
+    PatipanStudio.Sheriff.SyncAimHook()
     State.StickTarget = nil
-    xDTaraZ.Movement.SetFly(false)
-    xDTaraZ.Movement.SetNoclip(false)
+    PatipanStudio.Movement.SetFly(false)
+    PatipanStudio.Movement.SetNoclip(false)
     for _, conn in ipairs(State.Conns) do
         conn:Disconnect()
     end
     table.clear(State.Conns)
     if State.Opt.SpeedOn then
-        xDTaraZ.Movement.RestoreSpeed()
+        PatipanStudio.Movement.RestoreSpeed()
     end
     if State.Opt.JumpOn then
-        xDTaraZ.Movement.RestoreJump()
+        PatipanStudio.Movement.RestoreJump()
     end
-    xDTaraZ.Troll.Spectate(nil)
-    xDTaraZ.Visual.SetFullbright(false)
-    xDTaraZ.Visual.ClearXRay()
-    xDTaraZ.Farm.DetachMover()
-    xDTaraZ.Esp.Destroy()
+    PatipanStudio.Troll.Spectate(nil)
+    PatipanStudio.Visual.SetFullbright(false)
+    PatipanStudio.Visual.ClearXRay()
+    PatipanStudio.Farm.DetachMover()
+    PatipanStudio.Esp.Destroy()
 end
 
 local function BuildInterface()
-    local Library = xDTaraZ.Util.LoadLibrary()
+    local Library = PatipanStudio.Util.LoadLibrary()
     if not Library then return false end
-    xDTaraZ.Library = Library
+    PatipanStudio.Library = Library
     pcall(MarioBanner.Step, "UI library")
     local T = function(en, th) return Library:T(en, th) end
     local opt = State.Opt
@@ -1531,7 +1457,7 @@ local function BuildInterface()
     local function AimHookBind(idx)
         return function(value)
             opt[idx] = value
-            xDTaraZ.Sheriff.SyncAimHook()
+            PatipanStudio.Sheriff.SyncAimHook()
         end
     end
 
@@ -1543,7 +1469,7 @@ local function BuildInterface()
     end
 
     local function FlingAsync(target)
-        if target then task.spawn(xDTaraZ.Troll.Fling, target) end
+        if target then task.spawn(PatipanStudio.Troll.Fling, target) end
     end
 
     local function BuildCombatTab(window)
@@ -1565,7 +1491,7 @@ local function BuildInterface()
             Callback = Bind("AutoShoot"),
         }):AddKeyPicker("AutoShootKey", { Default = "None", Mode = "Toggle" })
         gunBox:AddButton({ Text = T("Shoot Murderer Now", "ยิงฆาตกรเดี๋ยวนี้"), Style = "Primary", Func = function()
-            local ok, detail = xDTaraZ.Sheriff.ShootMurderer()
+            local ok, detail = PatipanStudio.Sheriff.ShootMurderer()
             Notify(ok and ("Shot " .. tostring(detail)) or tostring(detail or "You need the gun"), ok and "Success" or "Warning")
         end })
         gunBox:AddToggle("AutoGrabGun", {
@@ -1575,7 +1501,7 @@ local function BuildInterface()
             Callback = Bind("AutoGrabGun"),
         }):AddKeyPicker("AutoGrabGunKey", { Default = "None", Mode = "Toggle" })
         gunBox:AddButton({ Text = T("Grab Gun Now", "เก็บปืนเดี๋ยวนี้"), Func = function()
-            local got = xDTaraZ.Sheriff.GrabGun()
+            local got = PatipanStudio.Sheriff.GrabGun()
             Notify(got and "Gun grabbed" or "No gun on the ground", got and "Success" or "Warning")
         end })
 
@@ -1589,7 +1515,7 @@ local function BuildInterface()
         }):AddKeyPicker("AutoKillAllKey", { Default = "None", Mode = "Toggle" })
         knifeBox:AddButton({ Text = T("Kill All Now", "ฆ่าทุกคนเดี๋ยวนี้"), Style = "Primary", Func = function()
             task.spawn(function()
-                Notify(string.format("Killed %d players", xDTaraZ.Murderer.KillAll()))
+                Notify(string.format("Killed %d players", PatipanStudio.Murderer.KillAll()))
             end)
         end })
         knifeBox:AddToggle("KillAura", {
@@ -1650,13 +1576,13 @@ local function BuildInterface()
         local tab = window:AddTab(T("Teleport", "วาร์ป"), "globe", T("Map, lobby and players", "แมพ ล็อบบี้ และผู้เล่น"))
 
         local placeBox = tab:AddLeftGroupbox(T("Places", "สถานที่"))
-        placeBox:AddButton({ Text = T("Lobby", "ล็อบบี้"), Func = xDTaraZ.Teleport.ToLobby }):AddButton({ Text = T("Map", "แมพ"), Func = xDTaraZ.Teleport.ToMap })
+        placeBox:AddButton({ Text = T("Lobby", "ล็อบบี้"), Func = PatipanStudio.Teleport.ToLobby }):AddButton({ Text = T("Map", "แมพ"), Func = PatipanStudio.Teleport.ToMap })
         placeBox:AddButton({ Text = T("To Murderer", "ไปหาฆาตกร"), Func = function()
-            local target = xDTaraZ.Round.FindByRole("Murderer")
-            xDTaraZ.Teleport.ToPlayer(target and target.Name)
+            local target = PatipanStudio.Round.FindByRole("Murderer")
+            PatipanStudio.Teleport.ToPlayer(target and target.Name)
         end }):AddButton({ Text = T("To Sheriff", "ไปหานายอำเภอ"), Func = function()
-            local target = xDTaraZ.Round.FindByRole("Sheriff")
-            xDTaraZ.Teleport.ToPlayer(target and target.Name)
+            local target = PatipanStudio.Round.FindByRole("Sheriff")
+            PatipanStudio.Teleport.ToPlayer(target and target.Name)
         end })
 
         local playerBox = tab:AddRightGroupbox(T("Players", "ผู้เล่น"))
@@ -1667,7 +1593,7 @@ local function BuildInterface()
             Callback = Bind("TeleportTarget"),
         })
         playerBox:AddButton({ Text = T("Teleport", "วาร์ป"), Style = "Primary", Func = function()
-            xDTaraZ.Teleport.ToPlayer(Picked("TeleportTarget"))
+            PatipanStudio.Teleport.ToPlayer(Picked("TeleportTarget"))
         end })
     end
 
@@ -1683,20 +1609,20 @@ local function BuildInterface()
                 opt.TrollTarget = value
                 local stick, spectate = Library.Options.StickTo, Library.Options.Spectate
                 if stick and stick.Value then State.StickTarget = value end
-                if spectate and spectate.Value then xDTaraZ.Troll.Spectate(xDTaraZ.Troll.Target()) end
+                if spectate and spectate.Value then PatipanStudio.Troll.Spectate(PatipanStudio.Troll.Target()) end
             end,
         })
         box:AddButton({ Text = T("Fling", "ดีดกระเด็น"), Style = "Primary", Func = function()
             Picked("TrollTarget")
-            FlingAsync(xDTaraZ.Troll.Target())
+            FlingAsync(PatipanStudio.Troll.Target())
         end }):AddButton({ Text = T("Fling Murderer", "ดีดฆาตกร"), Func = function()
-            FlingAsync(xDTaraZ.Round.FindByRole("Murderer"))
+            FlingAsync(PatipanStudio.Round.FindByRole("Murderer"))
         end })
         box:AddButton({ Text = T("Fling Everyone", "ดีดทุกคน"), Style = "Warning", DoubleClick = true, Func = function()
             task.spawn(function()
                 for _, player in ipairs(Players:GetPlayers()) do
-                    if player == LocalPlayer or not xDTaraZ.Util.Root(player) then continue end
-                    xDTaraZ.Troll.Fling(player)
+                    if player == LocalPlayer or not PatipanStudio.Util.Root(player) then continue end
+                    PatipanStudio.Troll.Fling(player)
                 end
             end)
         end })
@@ -1715,7 +1641,7 @@ local function BuildInterface()
             Default = false,
             Callback = function(value)
                 Picked("TrollTarget")
-                xDTaraZ.Troll.Spectate(value and xDTaraZ.Troll.Target() or nil)
+                PatipanStudio.Troll.Spectate(value and PatipanStudio.Troll.Target() or nil)
             end,
         })
     end
@@ -1730,7 +1656,7 @@ local function BuildInterface()
             Callback = function(value)
                 opt.SpeedOn = value
                 if not value then
-                    xDTaraZ.Movement.RestoreSpeed()
+                    PatipanStudio.Movement.RestoreSpeed()
                 end
             end,
         })
@@ -1746,7 +1672,7 @@ local function BuildInterface()
             Callback = function(value)
                 opt.JumpOn = value
                 if not value then
-                    xDTaraZ.Movement.RestoreJump()
+                    PatipanStudio.Movement.RestoreJump()
                 end
             end,
         })
@@ -1770,7 +1696,7 @@ local function BuildInterface()
             Default = false,
             Callback = function(value)
                 opt.Noclip = value
-                xDTaraZ.Movement.RefreshNoclip()
+                PatipanStudio.Movement.RefreshNoclip()
             end,
         }):AddKeyPicker("NoclipKey", { Default = "None", Mode = "Toggle" })
         extraBox:AddToggle("Fly", {
@@ -1779,7 +1705,7 @@ local function BuildInterface()
             Default = false,
             Callback = function(value)
                 opt.Fly = value
-                xDTaraZ.Movement.SetFly(value)
+                PatipanStudio.Movement.SetFly(value)
             end,
         }):AddKeyPicker("FlyKey", { Default = "None", Mode = "Toggle" })
     end
@@ -1818,7 +1744,7 @@ local function BuildInterface()
             Default = false,
             Callback = function(value)
                 opt.Fullbright = value
-                xDTaraZ.Visual.SetFullbright(value)
+                PatipanStudio.Visual.SetFullbright(value)
             end,
         })
 
@@ -1830,10 +1756,10 @@ local function BuildInterface()
             Callback = Bind("SkinSource"),
         })
         skinBox:AddButton({ Text = T("Copy Knife", "ก๊อปมีด"), Style = "Primary", Func = function()
-            local ok = xDTaraZ.Skin.Copy(Picked("SkinSource"), "Knife")
+            local ok = PatipanStudio.Skin.Copy(Picked("SkinSource"), "Knife")
             Notify(ok and "Knife skin applied" or "That player has no knife loaded", ok and "Success" or "Warning")
         end }):AddButton({ Text = T("Copy Gun", "ก๊อปปืน"), Func = function()
-            local ok = xDTaraZ.Skin.Copy(Picked("SkinSource"), "Gun")
+            local ok = PatipanStudio.Skin.Copy(Picked("SkinSource"), "Gun")
             Notify(ok and "Gun skin applied" or "That player has no gun loaded", ok and "Success" or "Warning")
         end })
         skinBox:AddButton({ Text = T("Reset Skins", "รีเซ็ตสกิน"), Func = function()
@@ -1896,8 +1822,8 @@ local function BuildInterface()
             Default = false,
             Callback = Bind("AntiAfk"),
         })
-        box:AddButton({ Text = T("Rejoin", "เข้าเซิร์ฟเดิมใหม่"), DoubleClick = true, Func = xDTaraZ.Session.Rejoin })
-            :AddButton({ Text = T("Server Hop", "ย้ายเซิร์ฟ"), DoubleClick = true, Func = xDTaraZ.Session.Hop })
+        box:AddButton({ Text = T("Rejoin", "เข้าเซิร์ฟเดิมใหม่"), DoubleClick = true, Func = PatipanStudio.Session.Rejoin })
+            :AddButton({ Text = T("Server Hop", "ย้ายเซิร์ฟ"), DoubleClick = true, Func = PatipanStudio.Session.Hop })
         box:AddButton({ Text = T("Panic - All Off", "ฉุกเฉิน ปิดทั้งหมด"), Style = "Danger", Func = function()
             for _, toggle in pairs(Library.Toggles) do
                 if toggle.Value == true then toggle:SetValue(false) end
@@ -1917,7 +1843,7 @@ local function BuildInterface()
         })
         codeBox:AddButton({ Text = T("Redeem", "ใช้โค้ด"), Style = "Primary", Func = function()
             if codeText == "" then return end
-            Notify(xDTaraZ.Session.RedeemCode(codeText))
+            Notify(PatipanStudio.Session.RedeemCode(codeText))
         end })
     end
 
@@ -1925,7 +1851,7 @@ local function BuildInterface()
         while #State.Halted > 0 do
             local halt = table.remove(State.Halted, 1)
             local job = halt[1]
-            for _, toggle in ipairs(xDTaraZ.Scheduler.OnToggles(job)) do
+            for _, toggle in ipairs(PatipanStudio.Scheduler.OnToggles(job)) do
                 toggle:SetValue(false)
             end
             job.Halting = nil
@@ -1941,10 +1867,10 @@ local function BuildInterface()
     end
 
     local function RefreshRound()
-        local running = xDTaraZ.Round.Map() ~= nil
-        local murderer = running and xDTaraZ.Round.FindByRole("Murderer")
-        local sheriff = running and (xDTaraZ.Round.FindByRole("Sheriff") or xDTaraZ.Round.FindByRole("Hero"))
-        local role = xDTaraZ.Round.IAmPlaying() and tostring(xDTaraZ.Round.RoleOf(LocalPlayer)) or "Lobby"
+        local running = PatipanStudio.Round.Map() ~= nil
+        local murderer = running and PatipanStudio.Round.FindByRole("Murderer")
+        local sheriff = running and (PatipanStudio.Round.FindByRole("Sheriff") or PatipanStudio.Round.FindByRole("Hero"))
+        local role = PatipanStudio.Round.IAmPlaying() and tostring(PatipanStudio.Round.RoleOf(LocalPlayer)) or "Lobby"
         local current, capacity = running and State.Bag.Current or 0, running and State.Bag.Max or 0
         Show("Role", "You: " .. role)
         Show("Murderer", "Murderer: " .. (murderer and murderer.Name or "?"))
@@ -1981,36 +1907,36 @@ local function BuildInterface()
     local function BuildTabs()
         local window = Library.Window
         window:AddTabSection(T("Game", "เกม"))
-        xDTaraZ.Util.Try(BuildFarmTab, window)
-        xDTaraZ.Util.Try(BuildCombatTab, window)
-        xDTaraZ.Util.Try(BuildTeleportTab, window)
-        xDTaraZ.Util.Try(BuildTrollTab, window)
+        PatipanStudio.Util.Try(BuildFarmTab, window)
+        PatipanStudio.Util.Try(BuildCombatTab, window)
+        PatipanStudio.Util.Try(BuildTeleportTab, window)
+        PatipanStudio.Util.Try(BuildTrollTab, window)
         window:AddTabSection(T("Other", "อื่นๆ"))
-        xDTaraZ.Util.Try(BuildPlayerTab, window)
-        xDTaraZ.Util.Try(BuildVisualTab, window)
-        xDTaraZ.Util.Try(BuildMiscTab, window)
-        xDTaraZ.Util.Try(window.AddSettingsTab, window)
-        xDTaraZ.Util.Try(GateRemotes)
-        xDTaraZ.Util.Try(StartLive)
+        PatipanStudio.Util.Try(BuildPlayerTab, window)
+        PatipanStudio.Util.Try(BuildVisualTab, window)
+        PatipanStudio.Util.Try(BuildMiscTab, window)
+        PatipanStudio.Util.Try(window.AddSettingsTab, window)
+        PatipanStudio.Util.Try(GateRemotes)
+        PatipanStudio.Util.Try(StartLive)
     end
 
-    Library:OnUnload(xDTaraZ.Scheduler.Stop)
+    Library:OnUnload(PatipanStudio.Scheduler.Stop)
     getgenv().MurderMystery2Unload = function()
         Library:Unload()
     end
 
     Library:CreateWindow({
         Title = "PatipanStudio",
-        SubTitle = "Murder Mystery 2 by xDTaraZ",
+        SubTitle = "Murder Mystery 2 by PatipanStudio",
         MenuKey = Enum.KeyCode.LeftControl,
         ConfigFolder = Config.SaveFolder,
         Language = "Auto",
         Theme = "Overworld",
         OnUnlocked = function()
             BuildTabs()
-            xDTaraZ.Util.Try(xDTaraZ.Scheduler.Boot, Notify)
+            PatipanStudio.Util.Try(PatipanStudio.Scheduler.Boot, Notify)
             Notify("Loaded")
-            xDTaraZ.Util.Try(Library.LoadAutoloadConfig, Library)
+            PatipanStudio.Util.Try(Library.LoadAutoloadConfig, Library)
         end,
     })
     return true
